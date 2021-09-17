@@ -56,7 +56,7 @@ export default class SignUp extends React.Component {
 
   render() {
     return (
-      <div class="login-window">
+      <div className="login-window">
         <div className="login-form">
           <h2>Sign Up</h2>
           <form onSubmit={this.onSubmit} noValidate className="login-form">

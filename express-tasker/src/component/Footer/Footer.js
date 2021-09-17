@@ -1,6 +1,7 @@
 import React from "react";
 import "./Footer.css";
 import { Link } from "react-router-dom";
+import expressTaskerLogo from "./ExpressTaskerLogo.png";
 
 const Footer = () => {
   return (
@@ -22,7 +23,7 @@ const Footer = () => {
         </div>
         <div className="logo-image-footer">
           <Link to="/">
-            <img width={145} src="#" />
+            <img src={expressTaskerLogo} />
           </Link>
         </div>
         <div className="footer-right-links">

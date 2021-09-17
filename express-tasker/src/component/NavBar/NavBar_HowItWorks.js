@@ -3,7 +3,7 @@ import "./NavBar.css";
 // import Googlemap from "../Googlemap/Googlemap";
 // import Autocompletesearch from "../Googlemap/Autocompletesearch";
 import { Link } from "react-router-dom";
-import './HowItWorks.css';
+import "./HowItWorks.css";
 
 const NavBar_HowItWorks = () => {
   return (
@@ -12,12 +12,7 @@ const NavBar_HowItWorks = () => {
 
       <div className="how-it-works-container">
         <div className="how-it-works-one-container">
-          <div className="step-1-image">
-            <img
-              src="https://assets.taskrabbit.com/v3/assets/static/homepage/how_it_works/step_1-59268ae9c0bf23d365715d3d974a0947.svg"
-              alt="step-1"
-            />
-          </div>
+          <div className="step-1-image"></div>
           <div className="how-it-works-one-text">
             <h2>1</h2>
             <h3>Describe the task</h3>
@@ -39,21 +34,11 @@ const NavBar_HowItWorks = () => {
               them right in the app.
             </p>
           </div>
-          <div className="step-1-image">
-            <img
-              src="https://assets.taskrabbit.com/v3/assets/static/homepage/how_it_works/step_2-13d469cb04809cde3793a6bf2f6e8005.svg"
-              alt="step-2"
-            />
-          </div>
+          <div className="step-1-image"></div>
         </div>
 
         <div className="how-it-works-one-container">
-          <div className="step-1-image">
-            <img
-              src="https://assets.taskrabbit.com/v3/assets/static/homepage/how_it_works/step_3-fd7acee425e988dcc42adda5a79423dd.svg"
-              alt="list"
-            />
-          </div>
+          <div className="step-1-image"></div>
           <div className="how-it-works-one-text">
             <h2>3</h2>
             <h3>Get it done</h3>
