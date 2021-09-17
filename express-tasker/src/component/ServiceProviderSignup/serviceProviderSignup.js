@@ -99,12 +99,12 @@ export default class Signup extends Component {
   render() {
     return (
 
-        <div className="wrapper">
-        <div className="form-wrapper">
+      <div class="login-window">
+      <div className="login-form">
           <h2>Become a Service Provider</h2>
-          <form onSubmit={this.onSubmit} noValidate>
-            <div className="form-group"> 
-            <label>Username: </label>
+          <form onSubmit={this.onSubmit} noValidate className="login-form">
+            <div className="email"> 
+            <label>Username </label>
             <input  type="text"
                 required
                 className="form-control"
@@ -112,8 +112,8 @@ export default class Signup extends Component {
                 onChange={this.onChangeUsername}
                 />
             </div>
-            <div className="form-group"> 
-            <label>Skill: </label>
+            <div className="email"> 
+            <label>Select Skill </label>
             <select ref="userInput"
                 required
                 className="form-control"
@@ -129,8 +129,8 @@ export default class Signup extends Component {
                 }
             </select>
             </div>
-            <div className="form-group"> 
-            <label>Location: </label>
+            <div className="email"> 
+            <label>Location </label>
             <input  type="text"
                 required
                 className="form-control"
@@ -138,8 +138,8 @@ export default class Signup extends Component {
                 onChange={this.onChangeLocation}
                 />
             </div>
-            <div className="form-group"> 
-            <label>Description: </label>
+            <div className="email"> 
+            <label>Description </label>
             <input  type="text"
                 required
                 className="form-control"
@@ -147,8 +147,8 @@ export default class Signup extends Component {
                 onChange={this.onChangeDescription}
                 />
             </div>
-            <div className="form-group">
-            <label>Email: </label>
+            <div className="email">
+            <label>Email </label>
             <input 
                 type="text" 
                 className="form-control"
@@ -156,8 +156,8 @@ export default class Signup extends Component {
                 onChange={this.onChangeEmail}
                 />
             </div>
-            <div className="form-group">
-            <label>Password: </label>
+            <div className="password">
+            <label>Password </label>
             <input 
                 type="text" 
                 className="form-control"
@@ -167,7 +167,7 @@ export default class Signup extends Component {
             </div>
             
             <div className="submit">
-              <button type="submit">Register Me</button>
+              <button type="submit" className="login-submit-button">Register Me</button>
             </div>
             
           </form>

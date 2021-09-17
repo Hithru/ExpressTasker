@@ -1,10 +1,22 @@
 const router = require("express").Router();
 const SkillVerification = require("../models/skillVerification.model");
+const multer=require("multer");
 
-router.route("/send").post((req, res) => {
+const storage = multer.diskStorage({
+  destination: (req,file,callback)=>{
+    callback(null,"C:/Users/shami/ExpressTaskerNew/ExpressTasker/express-tasker/public/uploads");
+  },
+  filename: (req,file,callback)=>{
+    callback(null,file.originalname);
+  }
+})
+
+const uploads= multer({storage:storage});
+
+router.route("/send").post(uploads.single("attachments"),(req, res) => {
   const skills = req.body.skills;
   const confirmedFrom = req.body.confirmedFrom;
-  const attachments = req.body.attachments;
+  const attachments = req.file.originalname;
 
   const newSkillVerificationRequest= new SkillVerification({
     skills,
