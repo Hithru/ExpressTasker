@@ -7,9 +7,6 @@ import expressTaskerLogo from "./ExpressTaskerLogo.png";
 
 class NavBar extends Component {
   render() {
-    const { user, taskType } = this.props;
-    console.log("user after render", user);
-    console.log("taskType", this.props.taskType);
     return (
       <nav>
         <div className="navBar">
@@ -39,9 +36,9 @@ class NavBar extends Component {
             </Link> */}
 
             <div className="login-container">
-              <button className="login" onClick={this.login}>
-                Log in
-              </button>
+              <Link to="/">
+                <button className="login">Log in</button>
+              </Link>
             </div>
           </div>
         </div>

@@ -7,15 +7,15 @@ const LandingPage_Reviews = () => {
       <h1>Real People, Real Tasks</h1>
       <div className="inner-review-container">
         <div className="reviews">
-          <img src="Images/sean.jpg" alt="" />
+          <img src="Images/Mahela.jpg" alt="" />
           <div className="review-text">
             <p>
               Using ExpressTaker to have a new bookcase built was a great
-              choice! Rick did wonderful work with a job that was much bigger
+              choice! Sanuja did wonderful work with a job that was much bigger
               than we anticipated.
             </p>
-            <h6>Sean Paul</h6>
-            <p>Kandy </p>
+            <h6>Mahela Prasanna</h6>
+            <p>Galle</p>
           </div>
         </div>
 
