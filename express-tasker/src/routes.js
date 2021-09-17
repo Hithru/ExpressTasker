@@ -7,6 +7,7 @@ import CustomerSignup from "./component/CustomerSignup/customerSignup";
 import ServiceProviderSignup from "./component/ServiceProviderSignup/serviceProviderSignup";
 import Search from "./component/Search/Search";
 import SkillVerification from "./component/SkillVerification/skillVerification";
+import Login from "./component/Login/login";
 
 export default (
   <Switch>
@@ -17,16 +18,13 @@ export default (
       exact
       component={ServiceProviderSignup}
     />
-    <Route
-      path="/search"
-      exact
-      component={Search}
-    />
+    <Route path="/search" exact component={Search} />
     <Route
       path="/skill-verification-request"
       exact
       component={SkillVerification}
     />
     <Route path="/how-it-works" component={NavBar_HowItWorks} />
+    <Route path="/login" component={Login} />
   </Switch>
 );

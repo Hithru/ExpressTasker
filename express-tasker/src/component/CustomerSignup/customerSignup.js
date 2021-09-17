@@ -58,10 +58,10 @@ export default class SignUp extends React.Component {
   render() {
     return (
       <div>
-        <div className="login-window">
-          <div className="login-form">
+        <div className="signup-window">
+          <div className="signup-form">
             <h2>Sign Up</h2>
-            <form onSubmit={this.onSubmit} noValidate className="login-form">
+            <form onSubmit={this.onSubmit} noValidate className="signup-form">
               <div className="email">
                 <label>Full Name</label>
                 <input
@@ -87,7 +87,7 @@ export default class SignUp extends React.Component {
                 />
               </div>
               <div className="submit">
-                <button className="login-submit-button">Register Me</button>
+                <button className="singup-submit-button">Register Me</button>
               </div>
             </form>
           </div>

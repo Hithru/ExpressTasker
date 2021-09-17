@@ -36,7 +36,7 @@ class NavBar extends Component {
             </Link> */}
 
             <div className="login-container">
-              <Link to="/">
+              <Link to="/login">
                 <button className="login">Log in</button>
               </Link>
             </div>

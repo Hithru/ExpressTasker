@@ -13,9 +13,12 @@ router.post("/signup", async (req, res) => {
 
   const { error } = schema.validate(req.body);
   if (error) return res.status(400).send(error.details[0].message);
+  console.log("validation pass");
 
   let customer = await Customer.findOne({ email: req.body.email });
+
   if (customer) return res.status(400).send("User already registered.");
+  console.log("user exist pass");
 
   const username = req.body.username;
   const email = req.body.email;

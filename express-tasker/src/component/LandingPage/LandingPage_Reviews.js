@@ -48,7 +48,7 @@ const LandingPage_Reviews = () => {
           <img src="Images/Hithru.jpg" alt="" />
           <div className="review-text">
             <p>
-              ExpressTaker makes moving into your new apartment a 1 hr job
+              ExpressTasker makes moving into your new apartment a 1 hr job
               instead of 1 day job! Moving was seamless!
             </p>
             <h6>Hithru De Alwis</h6>

@@ -1,4 +1,4 @@
-.login-window {
+.signup-window {
   font-family: "Montserrat", sans-serif;
   height: 100%;
   margin-top: 60px;
@@ -9,7 +9,7 @@
   align-items: center;
   flex-direction: column;
 }
-.login-window h2 {
+.signup-window h2 {
   margin-top: 20px;
   width: 80%;
   font-size: 35px;
@@ -17,7 +17,7 @@
   text-align: center;
   padding-bottom: 20px;
 }
-.login-form {
+.signup-form {
   background-color: white;
   display: flex;
   align-items: center;
@@ -28,61 +28,61 @@
   border-radius: 10px;
   margin-bottom: 40px;
 }
-.login-form label {
+.signup-form label {
   display: flex;
   justify-content: flex-start;
   padding-bottom: 10px;
   color: #545e69;
 }
-.login-form h6 {
+.signup-form h6 {
   display: flex;
   justify-content: flex-start;
   font-weight: 500;
   font-size: 20px;
   padding-bottom: 35px;
 }
-.login-name-container {
+.signup-name-container {
   display: flex;
   width: 100%;
   justify-content: space-between;
   padding: 10px 0;
 }
-.login-image-container {
+.signup-image-container {
   display: flex;
   justify-content: space-evenly;
   flex-direction: row;
 }
-.login-image-container {
+.signup-image-container {
   display: flex;
   align-items: center;
   flex-direction: column;
   padding: 15px;
 }
-.login-image-container h5 {
+.signup-image-container h5 {
   font-size: 20px;
   font-weight: 300;
 }
-.login-image-container img {
+.signup-image-container img {
   width: 70px;
   border-radius: 50%;
 }
-.login-name-container h4 {
+.signup-name-container h4 {
   font-size: 30px;
   font-weight: 600;
 }
-.login-name-container h3 {
+.signup-name-container h3 {
   font-size: 30px;
   font-weight: 200;
 }
 
-.login-buttons-container {
+.signup-buttons-container {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
 }
 
-.login-submit-button {
+.signup-submit-button {
   background-color: #00235e;
   color: white;
   display: flex;
@@ -95,7 +95,7 @@
   margin: 20px;
 }
 
-.login-submit-button :hover {
+.signup-submit-button :hover {
   background-color: #f28f00;
   color: white;
   display: flex;
@@ -108,10 +108,10 @@
   margin: 20px;
 }
 
-.login-form p {
+.signup-form p {
   margin: 10px;
 }
-.login-form a {
+.signup-form a {
   text-decoration: none;
   color: #00235e;
   padding: 10px;
