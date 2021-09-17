@@ -12,22 +12,6 @@ import toilet from "./toilet.png";
 import cleaning from "./cleaning.png";
 
 class LandingPage_TaskCards extends Component {
-  constructor() {
-    super();
-    this.state = {};
-  }
-
-  login() {
-    const redirectUri = encodeURIComponent(
-      window.location.origin + "/auth/callback"
-    );
-    window.location = `https://${process.env.REACT_APP_AUTH0_DOMAIN}/authorize/?client_id=${process.env.REACT_APP_AUTH0_CLIENT_ID}&scope=openid%20profile%20email&redirect_uri=${redirectUri}&response_type=code`;
-  }
-
-  setTaskType = (task) => {
-    this.props.updateTaskType(task);
-  };
-
   render() {
     var settings = {
       dots: true,
@@ -46,24 +30,9 @@ class LandingPage_TaskCards extends Component {
               <img src={mounting} alt="" />
             </div>
             <div className="card-button">
-              {this.props.user ? (
-                <Link path to="/clientForm">
-                  <button
-                    onClick={() =>
-                      this.setTaskType({
-                        taskType: "Mounting & Installation",
-                        task: "mounting",
-                      })
-                    }
-                  >
-                    Mounting & Installation
-                  </button>
-                </Link>
-              ) : (
-                <Link to="/">
-                  <button onClick={this.login}>Mounting & Installation</button>
-                </Link>
-              )}
+              <Link to="/">
+                <button onClick={this.login}>Mounting & Installation</button>
+              </Link>
             </div>
           </div>
           <div className="card">
@@ -71,24 +40,9 @@ class LandingPage_TaskCards extends Component {
               <img src={delivery} alt="" />
             </div>
             <div className="card-button">
-              {this.props.user ? (
-                <Link path to="/clientForm">
-                  <button
-                    onClick={() =>
-                      this.setTaskType({
-                        taskType: "Delivery Service",
-                        task: "delivery",
-                      })
-                    }
-                  >
-                    Delivery Service
-                  </button>
-                </Link>
-              ) : (
-                <Link to="/">
-                  <button onClick={this.login}>Delivery Service</button>
-                </Link>
-              )}
+              <Link to="/">
+                <button onClick={this.login}>Delivery Service</button>
+              </Link>
             </div>
           </div>
           <div className="card">
@@ -96,24 +50,9 @@ class LandingPage_TaskCards extends Component {
               <img src={gardening} alt="" />
             </div>
             <div className="card-button">
-              {this.props.user ? (
-                <Link path to="/clientForm">
-                  <button
-                    onClick={() =>
-                      this.setTaskType({
-                        taskType: "Yardwork/Landscaping",
-                        task: "yard",
-                      })
-                    }
-                  >
-                    Yardwork/Landscaping
-                  </button>
-                </Link>
-              ) : (
-                <Link to="/">
-                  <button onClick={this.login}>Landscaping</button>
-                </Link>
-              )}
+              <Link to="/">
+                <button onClick={this.login}>Landscaping</button>
+              </Link>
             </div>
           </div>
           <div className="card">
@@ -121,24 +60,9 @@ class LandingPage_TaskCards extends Component {
               <img src={homeimprove} alt="" />
             </div>
             <div className="card-button">
-              {this.props.user ? (
-                <Link path to="/clientForm">
-                  <button
-                    onClick={() =>
-                      this.setTaskType({
-                        taskType: "Home Improvement",
-                        task: "home",
-                      })
-                    }
-                  >
-                    Home Improvement
-                  </button>
-                </Link>
-              ) : (
-                <Link to="/">
-                  <button onClick={this.login}>Home Improvement</button>
-                </Link>
-              )}
+              <Link to="/">
+                <button onClick={this.login}>Home Improvement</button>
+              </Link>
             </div>
           </div>
           <div className="card">
@@ -146,24 +70,9 @@ class LandingPage_TaskCards extends Component {
               <img src={moving} alt="" />
             </div>
             <div className="card-button">
-              {this.props.user ? (
-                <Link path to="/clientForm">
-                  <button
-                    onClick={() =>
-                      this.setTaskType({
-                        taskType: "Moving & Packing",
-                        task: "moving",
-                      })
-                    }
-                  >
-                    Moving & Packing
-                  </button>
-                </Link>
-              ) : (
-                <Link to="/">
-                  <button onClick={this.login}>Moving & Packing</button>
-                </Link>
-              )}
+              <Link to="/">
+                <button onClick={this.login}>Moving & Packing</button>
+              </Link>
             </div>
           </div>
           <div className="card">
@@ -171,24 +80,9 @@ class LandingPage_TaskCards extends Component {
               <img src={toilet} alt="" />
             </div>
             <div className="card-button">
-              {this.props.user ? (
-                <Link path to="/clientForm">
-                  <button
-                    onClick={() =>
-                      this.setTaskType({
-                        taskType: "Pet Service",
-                        task: "pet",
-                      })
-                    }
-                  >
-                    Pet Service
-                  </button>
-                </Link>
-              ) : (
-                <Link to="/">
-                  <button onClick={this.login}>Pet Service</button>
-                </Link>
-              )}
+              <Link to="/">
+                <button onClick={this.login}>Pet Service</button>
+              </Link>
             </div>
           </div>
           <div className="card">
@@ -196,24 +90,9 @@ class LandingPage_TaskCards extends Component {
               <img src={furniture} alt="" />
             </div>
             <div className="card-button">
-              {this.props.user ? (
-                <Link path to="/clientForm">
-                  <button
-                    onClick={() =>
-                      this.setTaskType({
-                        taskType: "Furniture Assembly",
-                        task: "furniture",
-                      })
-                    }
-                  >
-                    Furniture Assembly
-                  </button>
-                </Link>
-              ) : (
-                <Link to="/">
-                  <button onClick={this.login}>Furniture Assembly</button>
-                </Link>
-              )}
+              <Link to="/">
+                <button onClick={this.login}>Furniture Assembly</button>
+              </Link>
             </div>
           </div>
           <div className="card">
@@ -221,24 +100,9 @@ class LandingPage_TaskCards extends Component {
               <img src={cleaning} alt="" />
             </div>
             <div className="card-button">
-              {this.props.user ? (
-                <Link path to="/clientForm">
-                  <button
-                    onClick={() =>
-                      this.setTaskType({
-                        taskType: "Cleaning Service",
-                        task: "cleaning",
-                      })
-                    }
-                  >
-                    Cleaning Service
-                  </button>
-                </Link>
-              ) : (
-                <Link to="/">
-                  <button onClick={this.login}>Cleaning Service</button>
-                </Link>
-              )}
+              <Link to="/">
+                <button onClick={this.login}>Cleaning Service</button>
+              </Link>
             </div>
           </div>
           <div className="card">
@@ -246,24 +110,9 @@ class LandingPage_TaskCards extends Component {
               <img src={light} alt="" />
             </div>
             <div className="card-button">
-              {this.props.user ? (
-                <Link path to="/clientForm">
-                  <button
-                    onClick={() =>
-                      this.setTaskType({
-                        taskType: "Cooking Service",
-                        task: "cooking",
-                      })
-                    }
-                  >
-                    Cooking Service
-                  </button>
-                </Link>
-              ) : (
-                <Link to="/">
-                  <button onClick={this.login}>Cooking Service</button>
-                </Link>
-              )}
+              <Link to="/">
+                <button onClick={this.login}>Cooking Service</button>
+              </Link>
             </div>
           </div>
         </Slider>

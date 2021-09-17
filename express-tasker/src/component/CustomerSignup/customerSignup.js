@@ -1,6 +1,7 @@
 import React from "react";
 import "./customerSignup.css";
 import axios from "axios";
+import LandingPage_Reviews from "../LandingPage/LandingPage_Reviews";
 
 export default class SignUp extends React.Component {
   constructor(props) {
@@ -56,35 +57,42 @@ export default class SignUp extends React.Component {
 
   render() {
     return (
-      <div className="login-window">
-        <div className="login-form">
-          <h2>Sign Up</h2>
-          <form onSubmit={this.onSubmit} noValidate className="login-form">
-            <div className="email">
-              <label>Full Name</label>
-              <input
-                type="text"
-                name="username"
-                onChange={this.onChangeUsername}
-              />
-            </div>
-            <div className="email">
-              <label>Email</label>
-              <input type="email" name="email" onChange={this.onChangeEmail} />
-            </div>
-            <div className="password">
-              <label>Password</label>
-              <input
-                type="password"
-                name="password"
-                onChange={this.onChangePassword}
-              />
-            </div>
-            <div className="submit">
-              <button className="login-submit-button">Register Me</button>
-            </div>
-          </form>
+      <div>
+        <div className="login-window">
+          <div className="login-form">
+            <h2>Sign Up</h2>
+            <form onSubmit={this.onSubmit} noValidate className="login-form">
+              <div className="email">
+                <label>Full Name</label>
+                <input
+                  type="text"
+                  name="username"
+                  onChange={this.onChangeUsername}
+                />
+              </div>
+              <div className="email">
+                <label>Email</label>
+                <input
+                  type="email"
+                  name="email"
+                  onChange={this.onChangeEmail}
+                />
+              </div>
+              <div className="password">
+                <label>Password</label>
+                <input
+                  type="password"
+                  name="password"
+                  onChange={this.onChangePassword}
+                />
+              </div>
+              <div className="submit">
+                <button className="login-submit-button">Register Me</button>
+              </div>
+            </form>
+          </div>
         </div>
+        <LandingPage_Reviews />
       </div>
     );
   }
