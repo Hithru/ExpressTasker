@@ -1,4 +1,4 @@
-.LandingPage-component {
+LandingPage-component {
   color: #242a30;
 }
 
@@ -88,7 +88,7 @@ header button:hover {
 
 .TaskCards-component {
   width: 100%;
-  background-color: #bcc8dd ;
+  background-color: #bcc8dd;
 
   /* margin-bottom: 50px; */
   justify-content: center;
@@ -108,7 +108,7 @@ header button:hover {
   margin: 10px;
   font-size: 30px;
   font-weight: bold;
-  color:#02112a;
+  color: #02112a;
 }
 
 .slick-slider button {
@@ -161,11 +161,12 @@ header button:hover {
   background: #00235e;
   color: #f28f00;
   margin-top: 30px;
-  height: 40px;
+  height: auto;
   width: 150px;
   border-radius: 5px;
   margin-bottom: 50px;
-  border: solid 3px #f28f00;;
+  border: solid 3px #f28f00;
+  text-align: center;
 }
 
 .card button:hover {
