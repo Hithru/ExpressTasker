@@ -1,7 +1,6 @@
 import React from "react";
 import "./NavBar.css";
-// import Googlemap from "../Googlemap/Googlemap";
-// import Autocompletesearch from "../Googlemap/Autocompletesearch";
+
 import { Link } from "react-router-dom";
 import "./HowItWorks.css";
 
@@ -12,14 +11,13 @@ const NavBar_HowItWorks = () => {
 
       <div className="how-it-works-container">
         <div className="how-it-works-one-container">
-          <div className="step-1-image"></div>
           <div className="how-it-works-one-text">
             <h2>1</h2>
             <h3>Describe the task</h3>
             <p>
               Choose from a variety of home services and select the day and time
-              you'd like a qualified Tasker to show up. Give us the details and
-              we'll find you the help.
+              you'd like a qualified Serive Provider to show up. Give us the
+              details and we'll find you the help.
             </p>
           </div>
         </div>
@@ -29,29 +27,35 @@ const NavBar_HowItWorks = () => {
             <h2>2</h2>
             <h3>Get matched</h3>
             <p>
-              Select from a list of qualified and fully vetted Taskers for the
-              job. Choose Taskers by their hourly rate and start chatting with
-              them right in the app.
+              Select from a list of qualified and fully vetted Serive Providers
+              for the job. Choose Serive Providers by their hourly rate and
+              start chatting with them right in the app.
             </p>
           </div>
-          <div className="step-1-image"></div>
         </div>
 
         <div className="how-it-works-one-container">
-          <div className="step-1-image"></div>
           <div className="how-it-works-one-text">
             <h2>3</h2>
             <h3>Get it done</h3>
             <p>
-              Just like that, your Tasker arrives and gets the job done. When
-              your task is complete, payment will happen seamlessly and securely
-              through the app.
+              Just like that, your Serive Provider arrives and gets the job
+              done. When your task is complete, payment can done through the app
+              or Cash Payment.
             </p>
           </div>
         </div>
 
-        {/* <Link to="/review">review</Link>
-        <Link to="/confirmation">confirmation</Link> */}
+        <div className="how-it-works-one-container">
+          <div className="how-it-works-one-text">
+            <h2>4</h2>
+            <h3>Review/Rate Each Other</h3>
+            <p>
+              After the work is finish both customer and Service Provider Can
+              Rate and Review Each Other to Give Feedback.
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   );

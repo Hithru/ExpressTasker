@@ -63,6 +63,8 @@ nav li {
   font-size: 14px;
   margin-right: 30px;
   font-weight: bold;
+  text-align: center;
+  line-height: 1em;
 }
 .nav-navigation-container .email-modal-nav button {
   border: none;
