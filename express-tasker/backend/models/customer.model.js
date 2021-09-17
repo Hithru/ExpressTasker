@@ -37,15 +37,4 @@ const customerSchema = new Schema(
 
 const Customer = mongoose.model("Customer", customerSchema);
 
-function validateCustomer(customer) {
-  const schema = {
-    name: Joi.string().min(2).max(50).required(),
-    email: Joi.string().min(5).max(255).required().email(),
-    password: Joi.string().min(5).max(255).required(),
-  };
-
-  return Joi.validate(customer, schema);
-}
-
-module.exports = Customer;
-exports.validate = validateCustomer;
+module.exports.Customer = Customer;

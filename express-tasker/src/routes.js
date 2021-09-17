@@ -5,6 +5,7 @@ import NavBar_HowItWorks from "./component/NavBar/NavBar_HowItWorks";
 //import TaskerProfile from "./component/TaskerProfile/TaskerProfile";
 import CustomerSignup from "./component/CustomerSignup/customerSignup";
 import ServiceProviderSignup from "./component/ServiceProviderSignup/serviceProviderSignup";
+import Search from "./component/Search/Search";
 import SkillVerification from "./component/SkillVerification/skillVerification";
 
 export default (
@@ -15,6 +16,11 @@ export default (
       path="/service-provider-signup"
       exact
       component={ServiceProviderSignup}
+    />
+    <Route
+      path="/search"
+      exact
+      component={Search}
     />
     <Route
       path="/skill-verification-request"
