@@ -13,8 +13,25 @@ export default class SkillVerificationRequest extends Component {
     this.state = {
       skills:'',
       confirmedFrom:'',
-      attachments:''
+      attachments:'',
+      skills:[]
     }
+  }
+
+  
+  componentDidMount() {
+    axios.get('http://localhost:5000/skill')
+      .then(response => {
+        if (response.data.length > 0) {
+          this.setState({
+            skills: response.data.map(skill => skill.skillname),
+            skillname: response.data[0].skillname
+          })
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      })
   }
 
   onChangeSkills(e) {
@@ -31,22 +48,29 @@ export default class SkillVerificationRequest extends Component {
 
   onChangeAttachments(e) {
     this.setState({
-      attachments: e.target.value
+      attachments: e.target.files[0]
     })
   }
 
   onSubmit(e) {
     e.preventDefault();
+
+    const formData= new FormData();
+
+    formData.append("skills",this.state.skills);
+    formData.append("confirmedFrom",this.state.confirmedFrom);
+    formData.append("attachments",this.state.attachments);
+
+    console.log(formData);
    
-    const skillVerification = {
-      skills: this.state.skills,
-      confirmedFrom : this.state.confirmedFrom,
-      attachments : this.state.attachments
-    }
+    // const skillVerification = {
+    //   skills: this.state.skills,
+    //   confirmedFrom : this.state.confirmedFrom,
+    //   attachments : this.state.attachments
+    // }
 
-    console.log(skillVerification);
 
-    axios.post('http://localhost:5000/skillVerification/send', skillVerification)
+    axios.post('http://localhost:5000/skillVerification/send', formData)
       .then(res => console.log(res.data));
 
     window.location = '/';
@@ -55,21 +79,29 @@ export default class SkillVerificationRequest extends Component {
   render() {
     return (
 
-        <div className="wrapper">
-        <div className="form-wrapper">
+      <div class="login-window">
+      <div className="login-form">
           <h2>Skill Verification Request</h2>
-          <form onSubmit={this.onSubmit} noValidate>
-            <div className="form-group"> 
-            <label>Skills: </label>
-            <input  type="text"
+          <form onSubmit={this.onSubmit} encType="multipart/form-data" noValidae className="login-form">
+          <div className="email"> 
+            <label>Choose Skill </label>
+            <select ref="userInput"
                 required
                 className="form-control"
                 value={this.state.skills}
-                onChange={this.onChangeSkills}
-                />
+                onChange={this.onChangeSkill}>
+                {
+                    this.state.skills.map(function(skillname) {
+                    return <option 
+                        key={skillname}
+                        value={skillname}>{skillname}
+                        </option>;
+                    })
+                }
+            </select>
             </div>
-            <div className="form-group"> 
-            <label>Confirmed From: </label>
+            <div className="email"> 
+            <label>Confirmed Company Name </label>
             <input  type="text"
                 required
                 className="form-control"
@@ -77,17 +109,18 @@ export default class SkillVerificationRequest extends Component {
                 onChange={this.onChangeConfirmedFrom}
                 />
             </div>
-            <div className="form-group"> 
-            <label>Attachments: </label>
-            <input  type="text"
+            <div className="email"> 
+            <label htmlFor="file" >Choose Certificates </label>
+            <input  type="file"
                 required
                 className="form-control"
-                value={this.state.attachments}
+                filename="attachments"
+                // value={this.state.attachments}
                 onChange={this.onChangeAttachments}
                 />
             </div>
             <div className="submit">
-              <button type="submit">Send Request</button>
+              <button type="submit" className="login-submit-button">Send Request</button>
             </div>
             
           </form>
