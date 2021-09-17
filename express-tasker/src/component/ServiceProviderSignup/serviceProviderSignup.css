@@ -3,18 +3,18 @@ div {
   font-family: Lato;
 }
 
-.form-group{
+.form-group {
   width: 700px;
   padding: 5px 3px 3px 3px;
 }
 .wrapper {
-  height: 97vh;
+  height: 100%;
   width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: rgb(6, 150, 30);
+  background-color: #00235e;
 }
 
 .form-wrapper {
@@ -74,11 +74,11 @@ button {
   padding: 0.938em;
   border: none;
   border-radius: 4px;
-  background-color: rgb(22, 165, 58);
+  background-color: #00235e;
   color: #fefefe;
 }
 button:hover {
-  background-color: rgb(6, 73, 11);
+  background-color: #f28f00;
   color: #fefefe;
 }
 
