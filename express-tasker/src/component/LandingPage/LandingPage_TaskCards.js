@@ -81,7 +81,7 @@ class LandingPage_TaskCards extends Component {
             </div>
             <div className="card-button">
               <Link to="/">
-                <button onClick={this.login}>Pet Service</button>
+                <button onClick={this.login}>Home Service</button>
               </Link>
             </div>
           </div>
