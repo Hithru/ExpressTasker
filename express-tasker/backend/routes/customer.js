@@ -36,7 +36,9 @@ router.post("/signup", async (req, res) => {
   const salt = await bcrypt.genSalt(10);
   customer.password = await bcrypt.hash(customer.password, salt);
   await customer.save();
-  res.status(200).send("well Done");
+
+  const token = customer.generateAuthToken();
+  res.header("x-auth-token", token).status(200).send("well Done");
 });
 
 module.exports = router;
