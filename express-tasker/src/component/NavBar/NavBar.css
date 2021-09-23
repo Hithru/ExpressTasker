@@ -56,7 +56,7 @@ nav li {
   background: #00235e;
   color: white;
   margin: 5px;
-  width: 80px;
+  width: 150px;
   height: 35px;
   border: solid 0px #00235e;
   border-radius: 5px;
@@ -64,6 +64,7 @@ nav li {
   margin-right: 30px;
   font-weight: bold;
   text-align: center;
+  text-size-adjust: 5px;
   line-height: 1em;
 }
 .nav-navigation-container .email-modal-nav button {
@@ -115,7 +116,7 @@ nav li {
 }
 
 .nav-popover-link {
-  width: 200px; 
+  width: 200px;
   position: relative;
   z-index: 4;
   height: 100%;

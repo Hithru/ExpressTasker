@@ -1,0 +1,119 @@
+.signup-window {
+  font-family: "Montserrat", sans-serif;
+  height: 100%;
+  min-width: 60%;
+  margin-top: 60px;
+  padding-top: 40px;
+  background-color: #f9fafb;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.signup-window h2 {
+  margin-top: 20px;
+  min-width: 80%;
+  font-size: 35px;
+  font-weight: bold;
+  text-align: center;
+  padding-bottom: 20px;
+}
+.signup-form {
+  background-color: white;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 5%;
+  border: 1px solid #dce0e6;
+  min-width: 70%;
+  border-radius: 10px;
+  margin-bottom: 40px;
+}
+.signup-form label {
+  display: flex;
+  justify-content: flex-start;
+  padding-bottom: 10px;
+  color: #545e69;
+}
+.signup-form h6 {
+  display: flex;
+  justify-content: flex-start;
+  font-weight: 500;
+  font-size: 20px;
+  padding-bottom: 35px;
+}
+.signup-name-container {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  padding: 10px 0;
+}
+.signup-image-container {
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: row;
+}
+.signup-image-container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 15px;
+}
+.signup-image-container h5 {
+  font-size: 20px;
+  font-weight: 300;
+}
+.signup-image-container img {
+  width: 70px;
+  border-radius: 50%;
+}
+.signup-name-container h4 {
+  font-size: 30px;
+  font-weight: 600;
+}
+.signup-name-container h3 {
+  font-size: 30px;
+  font-weight: 200;
+}
+
+.signup-buttons-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.signup-submit-button {
+  background-color: #00235e;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 350px;
+  height: 40px;
+  font-size: 20px;
+  border-radius: 5px;
+  margin: 20px;
+}
+
+.signup-submit-button :hover {
+  background-color: #f28f00;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 350px;
+  height: 40px;
+  font-size: 20px;
+  border-radius: 5px;
+  margin: 20px;
+}
+
+.signup-form p {
+  margin: 10px;
+}
+.signup-form a {
+  text-decoration: none;
+  color: #00235e;
+  padding: 10px;
+}

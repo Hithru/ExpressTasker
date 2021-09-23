@@ -7,8 +7,9 @@ import CustomerSignup from "./component/CustomerSignup/customerSignup";
 import ServiceProviderSignup from "./component/ServiceProviderSignup/serviceProviderSignup";
 import Search from "./component/Search/Search";
 import SkillVerification from "./component/SkillVerification/skillVerification";
-import Login from "./component/Login/login";
-
+import CustomerLogin from "./component/CustomerLogin/customerLogin";
+import ServiceProviderLogin from "./component/ServiceProviderLogin/serviceProviderLogin";
+import LogOut from "./component/LogOut/logout";
 export default (
   <Switch>
     <Route exact path="/" component={LandingPage} />
@@ -24,7 +25,9 @@ export default (
       exact
       component={SkillVerification}
     />
+    <Route path="/logout" component={LogOut} />
     <Route path="/how-it-works" component={NavBar_HowItWorks} />
-    <Route path="/login" component={Login} />
+    <Route path="/customer-login" component={CustomerLogin} />
+    <Route path="/service-provider-login" component={ServiceProviderLogin} />
   </Switch>
 );
