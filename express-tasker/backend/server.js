@@ -7,6 +7,7 @@ const skillRouter = require("./routes/skill");
 const serviceProviderRouter = require("./routes/serviceProvider");
 const skillVerificationRouter = require("./routes/skillverifiaction");
 const auth = require("./routes/auth");
+const orderRouter = require("./routes/order");
 require("dotenv").config();
 
 if (!config.get("jwtPrivateKey")) {
@@ -31,6 +32,7 @@ app.use("/serviceProvider", serviceProviderRouter);
 app.use("/skill", skillRouter);
 app.use("/skillVerification", skillVerificationRouter);
 app.use("/auth", auth);
+app.use("/order", orderRouter);
 
 app.listen(port, () => {
   console.log(`Server is running on port: ${port}`);

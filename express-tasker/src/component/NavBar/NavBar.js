@@ -57,6 +57,9 @@ const NavBar = ({ user }) => {
               <NavLink className="nav-item nav-link" to="/search">
                 Search
               </NavLink>
+              <NavLink className="nav-item nav-link" to="/customer-orders">
+                Order
+              </NavLink>
             </React.Fragment>
           )}
           {user && (

@@ -9,6 +9,7 @@ import Search from "./component/Search/Search";
 import SkillVerification from "./component/SkillVerification/skillVerification";
 import CustomerLogin from "./component/CustomerLogin/customerLogin";
 import ServiceProviderLogin from "./component/ServiceProviderLogin/serviceProviderLogin";
+import CustomerOrderTable from "./component/CustomerOrderTable/customerOrderTable";
 import LogOut from "./component/LogOut/logout";
 export default (
   <Switch>
@@ -28,6 +29,7 @@ export default (
     <Route path="/logout" component={LogOut} />
     <Route path="/how-it-works" component={NavBar_HowItWorks} />
     <Route path="/customer-login" component={CustomerLogin} />
+    <Route path="/customer-orders" component={CustomerOrderTable} />
     <Route path="/service-provider-login" component={ServiceProviderLogin} />
   </Switch>
 );
