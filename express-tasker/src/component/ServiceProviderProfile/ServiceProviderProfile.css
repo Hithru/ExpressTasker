@@ -1,399 +1,408 @@
-.tasker-profile {
-  font-family: "Montserrat", sans-serif;
-  width: 100%;
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Balsamiq+Sans&display=swap');
+
+.App{
+  background-color: #ffffff;
+}
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 40vmin;
+  pointer-events: none;
+}
+
+.label{
+  margin-left: 0px;
+}
+
+#success{
+  font-size: 70px;
+  color: #ffdfac;
+  margin-top: 40px;
+  margin-right: 130px;
+  font-family: 'Ubuntu', sans-serif;
+}
+#profile{
+  text-align: left;
+}
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  font-weight: 300;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+#upload{
+ padding: 4px 8px 4px 8px;
+ border-radius: 3px;
+ color: #f1d486;
+ background-color: rgb(14, 25, 92);
+}
+
+#upload:hover{
+  background-color: rgb(10, 18, 66);
+  cursor: pointer;
+}
+
+#uploadName{
+  font-size: 14px;
+}
+
+#input[type="file"]{
+  display: none;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.container-banner{
+  margin-top: 50px;
+}
+
+.username{
+  margin-bottom: 10px;
+  margin-top: 20px;
+}
+
+.header-h1{
+  color: antiquewhite;
+  font-family: 'Roboto Condensed', sans-serif;
+  text-align: center;
+  text-transform: uppercase;
+  /* border-style: solid; */
+  margin:auto;
+  /* border-radius: 15px; */
+  
+
+}
+
+.navbar{
+  background-color: rgb(114, 131, 231);
+  border-radius: 0px;
+  border-style: hidden;
+  padding: 18px; 
+  text-align: center;
+  width: auto;
+  position: sticky;
+  top:0;
+  z-index: 1;
   margin-top: 60px;
 }
 
-.profile-form-container {
-  background-image: url("./taskerbecome.jpg");
-  background-size: cover;
-  height: 700px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-repeat: none;
-}
-.profile-form-container h3 {
-  font-size: 3rem;
-  font-weight: normal;
-  margin-bottom: 1rem;
-}
-.profile-form-container h4 {
-  font-size: 2rem;
-  font-weight: lighter;
-  margin-bottom: 1rem;
-}
-.profile-form-container p {
-  font-size: 1rem;
-}
-.profile-form-container span {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  color: white;
-  text-align: left;
-  width: 50%;
-}
-
-.profile-form-container form {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  margin: 20px;
-  border: 1px solid #242a30;
-  background-color: #e8ebef;
-  padding: 20px;
-  border-radius: 5px;
-  height: 70%;
-}
-
-.profile-form-container form input {
-  font-family: "Montserrat", sans-serif;
-  padding: 0.625em 1em;
-  width: 100%;
+.navbar a{
+  color: rgb(27, 22, 22);
+  text-decoration: none;
+  padding: 10px;
+  font-family: Arial, Helvetica, sans-serif;
+  text-decoration: none;
   color: black;
-  font-size: 15px;
-  margin: 10px 5px;
-  height: 40px;
-  border-radius: 5px;
-  border: 1px solid rgb(181, 181, 181);
+  font-size: 17px;
+  
+
 }
-#root
-  > div
-  > div
-  > div.tasker-profile
-  > div.profile-form-container
-  > form
-  > div
-  > input {
-  width: 517%;
-  margin-left: -138px;
+.navbar a:hover{
+  background-color: #7c7e80;
+  border-style: hidden;
+  border-radius: 5px;
+  color: rgb(255, 254, 253);
 }
 
-.profile-form-container form textarea {
-  font-family: "Montserrat", sans-serif;
-  padding: 0.625em 1em;
-  width: 100%;
-  font-size: 15px;
-  margin: 10px 5px;
-  height: 90px;
-  border-radius: 5px;
-  border: 1px solid rgb(181, 181, 181);
-  resize: none;
+@media screen and (max-width:500px){
+  .navbar{
+      background-color: rgb(255, 246, 246);
+      border-radius: 15px;
+      border-style: hidden;
+      padding: 0px; 
+      margin: auto;
+      text-align: center;
+      display: flex;
+      flex-direction: row;
+      height: 50px;
+      padding-bottom: 14px;
+      
+   }
+   #protofolio-link{
+      padding-right: 5px;
+  }
+
+
+}
+@media screen and (max-width:350px){
+
+  .navbar {
+      color: rgb(27, 22, 22);
+      text-decoration: none;
+      padding: 8px;
+      font-family: Arial, Helvetica, sans-serif;
+      text-decoration: none;
+      color: black;
+      font-size: 17px;
+      display: flex;
+      flex-direction: column;
+      height: 200px;
+      
+    }
 }
 
-.profile-form-container button {
-  font-family: "Montserrat", sans-serif;
-  background-color: #51af33;
-  color: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 40px;
+.container-banner{
+  background-color: #f1f1f1;
+  background-image: url("./cover.jpg");
+  text-align: center;
+  border-style: hidden;
+  border-radius: 0px;
+  font-family: 'Ruda', sans-serif;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+#profilepic{
+  border-radius: 86px;
+  margin: 30px 0 30px 0;
+}
+
+.container-about{
+  border-radius: 0px;
+  border-style: hidden;
+  padding: 30px; 
+  text-align: center;
+}
+
+.container-about>p{
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   font-size: 20px;
-  border-radius: 5px;
+  padding-right: 30px;
+  padding-left: 40px;
+  text-align: left;
+}
+.container-about>h1{
+  font-family: Arial, Helvetica, sans-serif;
 }
 
-.profile-form-container button:hover {
-  font-weight: bold;
-  cursor: pointer;
-}
+.flex-project-container{
 
-.profile-form-container h2 {
-  font-size: 2.5rem;
-  text-align: center;
-  width: 100%;
-  font-weight: 400;
-}
-
-.profile-form-container p {
-  font-weight: 100;
-  font-size: 18px;
-}
-
-/* ==========TASKER SKILL SECTION ==========*/
-.tasker-skill-form {
-  background-color: #f9fafb;
-  color: #242a30;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  width: 100%;
-}
-.tasker-skill-form h2 {
-  margin-top: 40px;
-  width: 70%;
-  font-size: 35px;
-  font-weight: bold;
-  text-align: start;
-}
-
-.tasker-skill-form form {
-  padding: 1rem 1rem 0.5rem;
-  width: 70%;
-  font-size: 1.25em;
-  position: relative;
-  border: 1px solid #dce0e6;
-  background-color: white;
-  display: flex;
-  border-radius: 10px;
-  flex-direction: column;
-  margin: 30px 20px 20px 20px;
-}
-.tasker-skill-form span {
-  border-bottom: 1px solid #dce0e6;
-  width: 100%;
-  padding: 15px;
-  text-align: start;
-}
-.tasker-skill-form h6 {
-  font-size: 22px;
-  font-weight: 100;
-}
-.tasker-skill-form p {
-  margin-top: 20px;
-  font-size: 15px;
-}
-
-.tasker-rate-section section {
-  display: flex;
-  align-items: center;
-  align-self: flex-start;
-}
-
-.tasker-rate-section input {
-  font-family: "Montserrat", sans-serif;
-  text-align: center;
-  border: 1px solid #545e69;
-  color: black;
-  font-size: 16px;
-  width: 60px;
-  border-radius: 5px;
-  height: 30px;
-  width: 60px;
-  margin-left: 5px;
-}
-
-.tasker-rate-section .rate-container h3 {
-  font-size: 16px;
-  margin: 0px 10px 0px 25px;
-}
-.tasker-rate-section .rate-container p {
-  margin: 0;
-  font-size: 16px;
-}
-
-.tasker-rate-hide {
-  width: 100%;
-  opacity: 0.4;
-}
-.tasker-rate-section .rate-container {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-}
-.checkbox-container {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-
-  margin-bottom: 25px;
-}
-.checkbox-container .skills-qualifications {
-  font-weight: bold;
-  font-size: 15px;
-  margin-left: 5px;
-}
-
-.tasker-display-text {
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
-  text-align: left;
-  padding: 20px;
-  border-bottom: 1px solid #dce0e6;
+  justify-content: center;
+
 }
-.tasker-display-text i {
-  padding: 0 10px;
-  cursor: pointer;
-  border: none;
-  color: #51af33;
-  font-size: 16px;
-}
-.tasker-display-text h3 {
-  font-size: 18px;
+.flex-project-container>div{
+  background-color: #f1f1f1;
+  width: 150px;
+  height: 150px;;
+  margin: 10px;
+  text-align: center;
+  line-height: 75px;
+  font-size: 30px;
+  border-style: hidden;
+  border-radius: 30px;
 }
 
-.tasker-display-text p {
-  flex-basis: 100%;
+.flex-project-container img{
+  margin-top: 27px;
 }
 
-.tasker-profile-submit {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding-top: 15px;
+.flex-project-container > div:hover
+{
+transform: scale(1.1);
+
 }
-.submit-button {
-  font-family: "Montserrat", sans-serif;
-  background-color: #51af33;
-  color: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 90%;
-  height: 40px;
+
+.projects{
+  background-color: rgb(255, 255, 255);
+  border-radius: 15px;
+  border-style: hidden;
+  padding: 18px; 
+  text-align: center;
+  
+}
+.projects h1{
+  font-family: 'Ruda', sans-serif;
+}
+
+.projects p{
+  font-family: 'Slabo 27px', serif;
   font-size: 20px;
-  border-radius: 5px;
 }
-.submit-button:hover {
+
+.container{
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-evenly; 
+  flex-wrap: wrap;
+}
+
+.container a{
+  padding-right: 10px;
+  text-decoration: none;
+
+}
+
+.container p{
+  
+  color: black;
+  font-family: 'Slabo 27px', serif;
+}
+
+.container a:hover
+{
+transform: scale(1.1);
+}
+
+.container-1{
+  color: #e7d7a9;
+  text-align: center;
+  font-family: 'Saira Semi Condensed', sans-serif;
+  font-size: 16px;
+  margin-bottom: 70px;
+  background-color: rgb(6, 5, 80);
+  padding: 9px 0 5px 0;
+}
+
+#contactimg{
+  border-style: hidden;
+  background-color: #f5b959;
+  border-radius: 90px;
+  margin: 5px 0 10px 0;
+}
+
+.container-1 > a{
+  padding-left: 5px;
+  font-size: 22px;
+  text-decoration: none;
+}
+span:hover{
+  text-decoration: none;
+  transform: scale(1.5);
+  
+}
+
+#m{
+  margin-bottom: 5px;
+}
+
+#mail{
+  text-decoration: none;
+  color: rgb(155, 186, 223);
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif, sans-serif;
+  font-size: 16px;
   font-weight: bold;
-  cursor: pointer;
+  
 }
 
-.pop-a-roo {
-  transition: all 1s;
-  transform: translate(0, 0);
-  border-bottom: 1px solid #dce0e6;
+#mailmelogo{
+  border-style: hidden;
+  border-radius:5px;
+  width:28px;
+  height:28px;
+  margin: 10px 0 10px 0;
 }
 
-.pop-a-roo section {
-  color: #545e69;
-  text-align: start;
-  border-radius: 10px;
-  padding: 10px 20px 30px 20px;
-  background-color: #f9fafb;
+#skillheader{
+  background-color: rgb(255, 255, 255);
 }
-.pop-a-roo section p {
-  line-height: 1.5;
-}
-.pop-a-roo section ul {
-  padding: 15px 0;
-}
-.pop-a-roo section h4 {
-  text-align: start;
-  color: #242a30;
-  padding-bottom: 0.75rem;
-  margin-bottom: 1.25rem;
-  border-bottom: 1px solid #dce0e6;
-}
+ .skillheader{
+   background-color: #fca311;
+   border-radius: 5px;
+   padding: 5px 0 5px 0;
+   font-family: Arial, Helvetica, sans-serif;
+   margin-left: 27px;
+   margin-right: 27px;
+   color: rgb(250, 249, 245);
+   font-size: 33px;
+ }
 
-.hide-a-roo {
-  display: none;
-}
-/* ============== MEDIAS ============ */
-@media (max-width: 890px) {
-  .tasker-skill-form h2 {
-    width: 90%;
-  }
+ .contact{
+  padding: 5px 0 5px 0;
+ }
 
-  .tasker-skill-form form {
-    width: 90%;
-  }
-  .profile-form-container {
-    padding: 40px 0;
-    flex-direction: column;
-    height: 100%;
-  }
-  .profile-form-container form {
-    height: 100%;
-  }
-  .profile-form-container span {
-    width: 375px;
-  }
-}
+ #contactnav{
+  background-color: #fca311;
+  border-radius: 5px;
+  padding: 5px 0 5px 0;
+  font-family: Arial, Helvetica, sans-serif;
+  margin-left: 27px;
+  margin-right: 27px;
+  color: rgb(250, 249, 245);
+  font-size: 23px;
+ }
 
-@media (max-width: 790px) {
-  .profile-form-container h3 {
-    font-size: 40px;
-  }
-  .profile-form-container h4 {
-    font-size: 28px;
-  }
-}
+ .about{
+   background-color: #fca311;
+   border-radius: 5px;
+   padding: 5px 0 5px 0;
+   margin-bottom: 15px;
+   color: rgb(250, 249, 245);
+   font-size: 33px;
+ }
 
-@media (max-width: 500px) {
-  .tasker-skill-form h2 {
-    width: 95%;
-  }
+ .rate{
+   padding-left: 15px;
+   text-align: left;
+ }
 
-  .tasker-skill-form form {
-    width: 95%;
-  }
-  .profile-form-container span {
-    width: 85%;
-  }
-}
+ .rate2{
+  margin-top: 20px;
+  margin-bottom: 30px;
+  padding-left: 40px;
+  text-align: left;
+ }
 
-@media (max-width: 360px) {
-  #root
-    > div
-    > div
-    > div.tasker-profile
-    > div.profile-form-container
-    > form
-    > div
-    > input {
-    width: 219%;
-    margin-left: -77px;
-  }
-}
-@media (max-width: 411px) {
-  #root
-    > div
-    > div
-    > div.tasker-profile
-    > div.profile-form-container
-    > form
-    > div
-    > input {
-    width: 422%;
-    margin-left: -126px;
-  }
-}
-@media (max-width: 375px) {
-  #root
-    > div
-    > div
-    > div.tasker-profile
-    > div.profile-form-container
-    > form
-    > div
-    > input {
-    width: 262%;
-    margin-left: -92px;
-  }
-}
+ .hrate{
+  font-weight: 700;
+ }
 
-@media (max-width: 320px) {
-  #root
-    > div
-    > div
-    > div.tasker-profile
-    > div.profile-form-container
-    > form
-    > div
-    > input {
-    width: 142%;
-    margin-left: -36px;
-  }
-}
+ #skillverify{
+  min-width: 22%;
+  border-radius: 30px;
+  margin-left: 30px;
+  padding: 9px 0 9px 0;
+  background-color: rgb(6, 6, 129);
+ }
 
-@media (max-width: 375px) {
-  #root
-    > div
-    > div
-    > div.tasker-profile
-    > div.profile-form-container
-    > form
-    > div
-    > input {
-    width: 217%;
-    margin-left: -76px;
-  }
-}
+ #skillverify:hover{
+    background-color: rgb(37, 37, 194);
+    color: rgb(245, 245, 245);
+    font-weight: 400;
+ }
+
+ #edit{
+  min-width: 18%;
+  border-radius: 14px;
+  font-size: 15px;
+  padding: 8px 0 8px 0;
+  margin-top: 0;
+  font-family: 'Balsamiq Sans', cursive;
+  letter-spacing: 0.5px;
+ }
+
+ #edit:hover{
+   background-color: rgb(40, 38, 156);
+ }
+
+ #order{
+  min-width: 26%;
+  border-radius: 14px;
+  font-size: 16px;
+  letter-spacing: 1px;
+  padding: 8px 0 8px 0;
+  margin-top: 0;
+  font-family: 'Balsamiq Sans', cursive;
+  background-color: #6e0a0d;
+ }
+
+ #order:hover{
+   background-color: #a10f14;
+ }

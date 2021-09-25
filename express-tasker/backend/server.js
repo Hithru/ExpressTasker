@@ -1,14 +1,18 @@
 const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
-
+const config = require("config");
 const customerRouter = require("./routes/customer");
 const skillRouter = require("./routes/skill");
 const serviceProviderRouter = require("./routes/serviceProvider");
 const skillVerificationRouter = require("./routes/skillverifiaction");
-
+const auth = require("./routes/auth");
 require("dotenv").config();
 
+if (!config.get("jwtPrivateKey")) {
+  console.error("FATAL ERROR: jwtPrivateKey is not defined.");
+  process.exit(1);
+}
 const app = express();
 const port = process.env.PORT || 5000;
 
@@ -26,6 +30,7 @@ app.use("/customer", customerRouter);
 app.use("/serviceProvider", serviceProviderRouter);
 app.use("/skill", skillRouter);
 app.use("/skillVerification", skillVerificationRouter);
+app.use("/auth", auth);
 
 app.listen(port, () => {
   console.log(`Server is running on port: ${port}`);

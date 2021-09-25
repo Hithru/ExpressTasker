@@ -31,7 +31,7 @@ class NavBar extends Component {
               Become a Service Provider
             </Link>
             {/* 
-            <Link className="nav-link" to="skill-verification-request">
+            <Link className="nav-link" to="/skill-verification-request">
               Skill Verification
             </Link> */}
 

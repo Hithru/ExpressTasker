@@ -1,17 +1,19 @@
 import React, { Component } from "react";
 import "./serviceProviderSignup.css";
 import axios from "axios";
+import validator from "validator";
 
 export default class Signup extends Component {
   constructor(props) {
     super(props);
-
+    
     this.onChangeUsername = this.onChangeUsername.bind(this);
     this.onChangeEmail = this.onChangeEmail.bind(this);
     this.onChangePassword = this.onChangePassword.bind(this);
     this.onChangeLocation = this.onChangeLocation.bind(this);
     this.onChangeDescription = this.onChangeDescription.bind(this);
     this.onChangeSkill = this.onChangeSkill.bind(this);
+    this.onChangeContactNumber = this.onChangeContactNumber.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
 
     this.state = {
@@ -20,10 +22,13 @@ export default class Signup extends Component {
       location: "",
       description: "",
       email: "",
+      contactNumber:"",
       password: "",
       skills: [],
     };
   }
+
+  
 
   componentDidMount() {
     axios
@@ -48,9 +53,9 @@ export default class Signup extends Component {
   }
 
   onChangeEmail(e) {
-    this.setState({
-      email: e.target.value,
-    });
+      this.setState({
+        email: e.target.value,
+      });
   }
 
   onChangePassword(e) {
@@ -67,13 +72,19 @@ export default class Signup extends Component {
 
   onChangeSkill(e) {
     this.setState({
-      skillname: e.target.value,
+      skillname: e.target.value
     });
   }
 
   onChangeDescription(e) {
     this.setState({
       description: e.target.value,
+    });
+  }
+
+  onChangeContactNumber(e) {
+    this.setState({
+      contactNumber: e.target.value,
     });
   }
 
@@ -85,6 +96,7 @@ export default class Signup extends Component {
       skillname: this.state.skillname,
       location: this.state.location,
       description: this.state.description,
+      contactNumber: this.state.contactNumber,
       email: this.state.email,
       password: this.state.password,
     };
@@ -97,6 +109,7 @@ export default class Signup extends Component {
 
     window.location = "/";
   }
+
 
   render() {
     return (
@@ -115,22 +128,23 @@ export default class Signup extends Component {
               />
             </div>
             <div className="email">
-              <label>Select Skill </label>
-              <select
-                ref="userInput"
+              <label>Skills </label>
+              
+              <select ref="userInput"
                 required
+                // multiple={true}
                 className="form-control"
                 value={this.state.skillname}
-                onChange={this.onChangeSkill}
-              >
-                {this.state.skills.map(function (skillname) {
-                  return (
-                    <option key={skillname} value={skillname}>
-                      {skillname}
-                    </option>
-                  );
-                })}
-              </select>
+                onChange={this.onChangeSkill}>
+                {
+                    this.state.skills.map(function(skillname) {
+                    return <option 
+                        key={skillname}
+                        value={skillname}>{skillname}
+                        </option>;
+                    })
+                }
+            </select>
             </div>
             <div className="email">
               <label>Location </label>
@@ -150,6 +164,16 @@ export default class Signup extends Component {
                 className="form-control"
                 value={this.state.description}
                 onChange={this.onChangeDescription}
+              />
+            </div>
+            <div className="email">
+              <label>Contact no </label>
+              <input
+                type="text"
+                required
+                className="form-control"
+                value={this.state.contactNumber}
+                onChange={this.onChangeContactNumber}
               />
             </div>
             <div className="email">

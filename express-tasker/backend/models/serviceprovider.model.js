@@ -1,23 +1,43 @@
 const mongoose = require("mongoose");
+const config = require("config");
+const jwt = require("jsonwebtoken");
 
 const Schema = mongoose.Schema;
 
 const serviceProviderSchema = new Schema(
   {
-    username: { type: String, required: true },
-    skillname: { type: String, required: true },
-    location:{ type: String, required: true },
-    description:{type:String, required:true},
-    review:{ type: String, required: true },
-    rating: { type: Number, required: true },
-    email: { type: String, required: true },
-    password: { type: String, required: true },
+    username: { type: String, required: true ,minlength:5, maxlength:50},
+    skillname: { type: String, required: true  },
+    location: { type: String, required: true },
+    description: { type: String, required: true ,minlength:5, maxlength:3500 },
+    review: { type: String, required: true ,minlength:5, maxlength:50 },
+    rating: { type: Number, required: true ,min:0,max:5 },
+    contactNumber: {type: Number, required: true, minlength:10, maxlength:10},
+    profilePicture: {type: String, required: true},
+    email: { type: String, required: true,minlength:5, maxlength:50 },
+    password: { type: String, required: true ,minlength:5, maxlength:500 },
   },
   {
     timestamps: true,
   }
 );
 
-const ServiceProvider = mongoose.model("ServiceProvider", serviceProviderSchema);
+serviceProviderSchema.methods.generateAuthToken = function () {
+  const token = jwt.sign(
+    {
+      _id: this._id,
+      username: this.username,
+      email: this.email,
+      isServiceProvider: true,
+    },
+    config.get("jwtPrivateKey")
+  );
+  return token;
+};
+
+const ServiceProvider = mongoose.model(
+  "ServiceProvider",
+  serviceProviderSchema
+);
 
 module.exports = ServiceProvider;

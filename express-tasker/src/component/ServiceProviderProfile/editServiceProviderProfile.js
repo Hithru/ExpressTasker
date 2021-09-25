@@ -1,308 +1,151 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
-import "./ServiceProviderProfile.css";
+import "../ServiceProviderSignup/serviceProviderSignup.css";
 import axios from "axios";
-import { Link } from "react-router-dom";
 
-
-class EditServiceProviderProfile extends Component {
+export default class Signup extends Component {
   constructor(props) {
     super(props);
 
+    this.onChangeUsername = this.onChangeUsername.bind(this);
+    this.onChangeLocation = this.onChangeLocation.bind(this);
+    this.onChangeDescription = this.onChangeDescription.bind(this);
+    this.onChangeSkill = this.onChangeSkill.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
+
     this.state = {
-      name: "",
-      email: "",
-      phone: "",
-      place: {},
-      about: "",
-      mounting: false,
-      mountingHourly: null,
-      delivery: false,
-      deliveryHourly: null,
-      yard: false,
-      yardHourly: null,
-      home: false,
-      homeHourly: null,
-      moving: false,
-      movingHourly: null,
-      pet: false,
-      petHourly: null,
-      furniture: false,
-      furnitureHourly: null,
-      cleaning: false,
-      cleaningHourly: null,
-      cooking: false,
-      cookingHourly: null
+      username: "",
+      skillname: "",
+      location: "",
+      description: "",
+      skills: [],
     };
   }
-  componentDidMount() {
-    if (this.props.match.params.tasker_id) {
-      axios
-        .get(`/api/tasker/${this.props.match.params.tasker_id}`)
-        .then(res => {
-          console.log(res.data);
-          return this.props.getProfile(res.data);
-        })
-        .then(() => {
-          this.setState({
-            name: this.props.taskerProfile.tasker_name,
-            email: this.props.taskerProfile.email,
-            phone: this.props.taskerProfile.phone,
-            place: this.props.taskerProfile.location,
-            about: this.props.taskerProfile.about,
-            mounting: this.props.taskerProfile.mounting,
-            mountingHourly: this.props.taskerProfile.mountinghourly,
-            delivery: this.props.taskerProfile.delivery,
-            deliveryHourly: this.props.taskerProfile.deliveryhourly,
-            yard: this.props.taskerProfile.yard,
-            yardHourly: this.props.taskerProfile.yardhourly,
-            home: this.props.taskerProfile.home,
-            homeHourly: this.props.taskerProfile.homehourly,
-            moving: this.props.taskerProfile.moving,
-            movingHourly: this.props.taskerProfile.movinghourly,
-            pet: this.props.taskerProfile.pet,
-            petHourly: this.props.taskerProfile.pethourly,
-            furniture: this.props.taskerProfile.furniture,
-            furnitureHourly: this.props.taskerProfile.furniturehourly,
-            cleaning: this.props.taskerProfile.cleaning,
-            cleaningHourly: this.props.taskerProfile.cleaninghourly,
-            cooking: this.props.taskerProfile.cooking,
-            cookingHourly: this.props.taskerProfile.cookinghourly
-          });
-        })
-        .catch(error => console.log("error in getProfile", error));
-    }
-  }
-  handleInput = event => {
-    this.setState({
-      [event.target.name]: event.target.value
-    });
-  };
-  handleChange = event => {
-    const target = event.target;
-    const value = target.type !== "checkbox" ? target.value : target.checked;
-    const name = target.name;
-    this.setState({
-      [name]: value
-    });
-  };
 
-  onSubmit(event) {
-    event.preventDefault();
+  componentDidMount() {
+    axios
+      .get("http://localhost:5000/skill")
+      .then((response) => {
+        if (response.data.length > 0) {
+          this.setState({
+            skills: response.data.map((skill) => skill.skillname),
+            skillname: response.data[0].skillname,
+          });
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
+
+  onChangeUsername(e) {
+    this.setState({
+      username: e.target.value,
+    });
+  }
+
+  onChangeLocation(e) {
+    this.setState({
+      location: e.target.value,
+    });
+  }
+
+  onChangeSkill(e) {
+    this.setState({
+      skillname: e.target.value
+    });
+  }
+
+  onChangeDescription(e) {
+    this.setState({
+      description: e.target.value,
+    });
+  }
+
+  onSubmit(e) {
+    e.preventDefault();
+
+    const serviceProvider = {
+      username: this.state.username,
+      skillname: this.state.skillname,
+      location: this.state.location,
+      description: this.state.description,
+    };
+
+    console.log(serviceProvider);
+
+    axios
+      .post("http://localhost:5000/serviceProvider/signup", serviceProvider)
+      .then((res) => console.log(res.data));
+
+    window.location = "/";
+  }
+
+
 
   render() {
-    console.log(this.props, "tasker props");
-    console.log(this.props.taskerProfile, "profile");
-    console.log(this.state, "stater");
-    const {
-      tasker_name,
-      email,
-      phone,
-      place,
-      about,
-      mounting,
-      mountingHourly,
-      delivery,
-      deliveryHourly,
-      yard,
-      yardHourly,
-      home,
-      homeHourly,
-      moving,
-      movingHourly,
-      pet,
-      petHourly,
-      furniture,
-      furnitureHourly,
-      cleaning,
-      cleaningHourly,
-      cooking,
-      cookingHourly
-    } = this.state;
-    const { user } = this.props;
-
     return (
-      <div className="tasker-profile">
-        <div className="profile-form-container">
-          <form onSubmit={event => this.onSubmit(event)}>
-            <h2>Your Tasker Profile</h2>
-            <input
-              name="name"
-              value={this.state.name}
-              onChange={event => this.handleInput(event)}
-            />
-
-            <input
-              name="email"
-              value={email}
-              onChange={event => this.handleInput(event)}
-            />
-
-            <input
-              name="phone"
-              value={phone}
-              onChange={event => this.handleInput(event)}
-            />
-            
-            <textarea
-              name="about"
-              value={about}
-              onChange={event => this.handleInput(event)}
-            />
-            <button>Continue</button>
-          </form>
-        </div>
-
-        <div className="tasker-skill-form">
-          <form onSubmit={event => this.onSubmit(event)}>
-            <h2>What is your hourly rate?</h2>
-            <label>
+      <div class="signup-window">
+        <div className="signup-form">
+          <h2>Edit Profile</h2>
+          <form onSubmit={this.onSubmit} noValidate className="signup-form">
+            <div className="email">
+              <label>Username </label>
               <input
-                type="checkbox"
-                name="mounting"
-                checked={mounting}
-                onChange={this.handleChange}
+                type="text"
+                required
+                className="form-control"
+                value={this.state.username}
+                onChange={this.onChangeUsername}
               />
-              Mounting & Installation
+            </div>
+            <div className="email">
+              <label>Skills </label>
+              
+              <select ref="userInput"
+                required
+                // multiple={true}
+                className="form-control"
+                value={this.state.skillname}
+                onChange={this.onChangeSkill}
+                onChange={this.on}>
+                {
+                    this.state.skills.map(function(skillname) {
+                    return <option 
+                        key={skillname}
+                        value={skillname}>{skillname}
+                        </option>;
+                    })
+                }
+            </select>
+            </div>
+            <div className="email">
+              <label>Location </label>
               <input
-                name="mountingHourly"
-                value={mountingHourly}
-                onChange={this.handleChange}
+                type="text"
+                required
+                className="form-control"
+                value={this.state.location}
+                onChange={this.onChangeLocation}
               />
-            </label>
-
-            <label>
+            </div>
+            <div className="email">
+              <label>Description </label>
               <input
-                type="checkbox"
-                name="delivery"
-                checked={delivery}
-                onChange={this.handleChange}
+                type="text"
+                required
+                className="form-control"
+                value={this.state.description}
+                onChange={this.onChangeDescription}
               />
-              Delivery Service
-              <input
-                name="deliveryHourly"
-                value={deliveryHourly}
-                onChange={this.handleChange}
-              />
-            </label>
-
-            <label>
-              <input
-                type="checkbox"
-                name="yard"
-                checked={yard}
-                onChange={this.handleChange}
-              />
-              Yard Work/Landscaping
-              <input
-                name="yardHourly"
-                value={yardHourly}
-                onChange={this.handleChange}
-              />
-            </label>
-
-            <label>
-              <input
-                type="checkbox"
-                name="home"
-                checked={home}
-                onChange={this.handleChange}
-              />
-              Home Improvement
-              <input
-                name="homeHourly"
-                value={homeHourly}
-                onChange={this.handleChange}
-              />
-            </label>
-
-            <label>
-              <input
-                type="checkbox"
-                name="moving"
-                checked={moving}
-                onChange={this.handleChange}
-              />
-              Moving & Packing
-              <input
-                name="movingHourly"
-                value={movingHourly}
-                onChange={this.handleChange}
-              />
-            </label>
-
-            <label>
-              <input
-                type="checkbox"
-                name="pet"
-                checked={pet}
-                onChange={this.handleChange}
-              />
-              Pet Service
-              <input
-                name="petHourly"
-                value={petHourly}
-                onChange={this.handleChange}
-              />
-            </label>
-
-            <label>
-              <input
-                type="checkbox"
-                name="furniture"
-                checked={furniture}
-                onChange={this.handleChange}
-              />
-              Furniture Assembly
-              <input
-                name="furnitureHourly"
-                value={furnitureHourly}
-                onChange={this.handleChange}
-              />
-            </label>
-
-            <label>
-              <input
-                type="checkbox"
-                name="cleaning"
-                checked={cleaning}
-                onChange={this.handleChange}
-              />
-              Cleaning Service
-              <input
-                name="cleaningHourly"
-                value={cleaningHourly}
-                onChange={this.handleChange}
-              />
-            </label>
-
-            <label>
-              <input
-                type="checkbox"
-                name="cooking"
-                checked={cooking}
-                onChange={this.handleChange}
-              />
-              Cooking Service
-              <input
-                name="cookingHourly"
-                value={cookingHourly}
-                onChange={this.handleChange}
-              />
-            </label>
-            <Link to={`/tasker-dashboard`}>
-              <button
-                
-              >
+            </div>
+            <div className="submit">
+              <button type="submit" className="signup-submit-button">
                 Submit
               </button>
-            </Link>
+            </div>
           </form>
         </div>
       </div>
     );
   }
 }
-
-export default EditServiceProviderProfile;

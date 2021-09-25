@@ -6,7 +6,6 @@ import NavBar_HowItWorks from "./component/NavBar/NavBar_HowItWorks";
 import CustomerSignup from "./component/CustomerSignup/customerSignup";
 import ServiceProviderSignup from "./component/ServiceProviderSignup/serviceProviderSignup";
 import ServiceProviderProfile from "./component/ServiceProviderProfile/serviceProviderProfile";
-import ServiceProviderDashboard from "./component/ServiceProviderDashboard/serviceProviderDashboard";
 import EditServiceProviderProfile from"./component/ServiceProviderProfile/editServiceProviderProfile";
 import Search from "./component/Search/Search";
 import SkillVerification from "./component/SkillVerification/skillVerification";
@@ -29,11 +28,6 @@ export default (
       path="/edit-service-provider-profile"
       exact
       component={EditServiceProviderProfile}
-    />
-    <Route
-      path="/service-provider-dashboard"
-      exact
-      component={ServiceProviderDashboard}
     />
     <Route path="/search" exact component={Search} />
     <Route
