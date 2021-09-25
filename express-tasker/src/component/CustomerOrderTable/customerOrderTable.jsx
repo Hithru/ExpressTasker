@@ -2,27 +2,39 @@ import React, { Component } from "react";
 import axios from "axios";
 import auth from "../../services/customerAuth";
 import { getCustomerOrders } from "../../services/orderService";
+import Pagination from "../common/pagination";
+import { paginate } from "../../utils/paginate";
+
 export default class CustomerOrderTable extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      data: [],
+      orders: [],
       user: "",
+      currentPage: 1,
+      pageSize: 2,
     };
   }
 
   async componentDidMount() {
     const user = auth.getCurrentUser();
-    const orders = await getCustomerOrders(user._id);
-    const data = orders.data;
-    this.setState({ user, data });
+    const ordersArray = await getCustomerOrders(user._id);
+    const orders = ordersArray.data;
+    this.setState({ user, orders });
   }
 
+  handlePageChange = (page) => {
+    this.setState({ currentPage: page });
+  };
   render() {
-    const { data } = this.state;
+    const { length: count } = this.state.orders;
+    const { pageSize, currentPage, orders: allOrders } = this.state;
+
+    const orders = paginate(allOrders, currentPage, pageSize);
+
     return (
-      <div class="signup-window">
+      <div className="signup-window">
         <table className="table">
           <thead>
             <tr>
@@ -34,7 +46,7 @@ export default class CustomerOrderTable extends Component {
             </tr>
           </thead>
           <tbody>
-            {data.map((item) => (
+            {orders.map((item) => (
               <tr key={item._id}>
                 <td>{item.serviceProvider_id}</td>
                 <td>{item.status}</td>
@@ -50,6 +62,13 @@ export default class CustomerOrderTable extends Component {
             ))}
             <tr></tr>
           </tbody>
+          <tfoot>
+            <Pagination
+              itemsCount={count}
+              pageSize={this.state.pageSize}
+              onPageChange={this.handlePageChange}
+            />
+          </tfoot>
         </table>
       </div>
     );
