@@ -45,15 +45,16 @@ const NavBar_HowItWorks = () => {
             </p>
           </div>
         </div>
-
-        <div className="how-it-works-one-container">
-          <div className="how-it-works-one-text">
-            <h2>4</h2>
-            <h3>Review/Rate Each Other</h3>
-            <p>
-              After the work is finish both customer and Service Provider Can
-              Rate and Review Each Other to Give Feedback.
-            </p>
+        <div className="last-conatiner">
+          <div className="how-it-works-one-container">
+            <div className="how-it-works-one-text">
+              <h2>4</h2>
+              <h3>Review/Rate Each Other</h3>
+              <p>
+                After the work is finish both customer and Service Provider Can
+                Rate and Review Each Other to Give Feedback.
+              </p>
+            </div>
           </div>
         </div>
       </div>

@@ -26,6 +26,10 @@
   align-items: center;
   flex-direction: column;
 }
+
+.last-conatiner {
+  padding-bottom: 30px;
+}
 .how-it-works-one-container {
   display: flex;
   justify-content: center;

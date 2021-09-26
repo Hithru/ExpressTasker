@@ -11,6 +11,7 @@ import CustomerLogin from "./component/CustomerLogin/customerLogin";
 import ServiceProviderLogin from "./component/ServiceProviderLogin/serviceProviderLogin";
 import CustomerOrderTable from "./component/CustomerOrderTable/customerOrderTable";
 import LogOut from "./component/LogOut/logout";
+import CustomerReview from "./component/Review/customerReview";
 export default (
   <Switch>
     <Route exact path="/" component={LandingPage} />
@@ -31,5 +32,6 @@ export default (
     <Route path="/customer-login" component={CustomerLogin} />
     <Route path="/customer-orders" component={CustomerOrderTable} />
     <Route path="/service-provider-login" component={ServiceProviderLogin} />
+    <Route path="/customer-review" component={CustomerReview} />
   </Switch>
 );
