@@ -6,6 +6,7 @@ const customerRouter = require("./routes/customer");
 const skillRouter = require("./routes/skill");
 const serviceProviderRouter = require("./routes/serviceProvider");
 const skillVerificationRouter = require("./routes/skillverifiaction");
+const searchRouter = require("./routes/search");
 
 require("dotenv").config();
 
@@ -26,6 +27,7 @@ app.use("/customer", customerRouter);
 app.use("/serviceProvider", serviceProviderRouter);
 app.use("/skill", skillRouter);
 app.use("/skillVerification", skillVerificationRouter);
+app.use("/search", searchRouter);
 
 app.listen(port, () => {
   console.log(`Server is running on port: ${port}`);
