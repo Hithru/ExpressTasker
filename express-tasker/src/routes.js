@@ -13,6 +13,8 @@ import CustomerOrderTable from "./component/CustomerOrderTable/customerOrderTabl
 import LogOut from "./component/LogOut/logout";
 import CustomerReview from "./component/Review/customerReview";
 import CreateOrder from "./component/CreateOrder/createOrder";
+import ServiceProviderOrderTable from "./component/ServiceProviderOrderTable/serviceProviderOrderTable";
+
 export default (
   <Switch>
     <Route exact path="/" component={LandingPage} />
@@ -32,6 +34,10 @@ export default (
     <Route path="/how-it-works" component={NavBar_HowItWorks} />
     <Route path="/customer-login" component={CustomerLogin} />
     <Route path="/customer-orders" component={CustomerOrderTable} />
+    <Route
+      path="/service-provider-orders"
+      component={ServiceProviderOrderTable}
+    />
     <Route path="/service-provider-login" component={ServiceProviderLogin} />
     <Route path="/customer-review" component={CustomerReview} />
     <Route path="/create-order" component={CreateOrder} />

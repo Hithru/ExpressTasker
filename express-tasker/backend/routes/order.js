@@ -46,4 +46,38 @@ router.post("/customer", async (req, res) => {
   res.send(orders);
 });
 
+router.post("/serviceProvider", async (req, res) => {
+  console.log(req.body.serviceProvider_id);
+  const orders = await Order.find({
+    serviceProvider_id: req.body.serviceProvider_id,
+  }).sort("-status");
+
+  console.log(orders);
+  res.send(orders);
+});
+
+router.post("/cancel", async (req, res) => {
+  console.log(req.body.order_id);
+  const order = await Order.findByIdAndUpdate(req.body.order_id, {
+    status: "Canceled",
+  });
+
+  if (!order)
+    return res.status(404).send("The movie with the given ID was not found.");
+
+  res.send(order);
+});
+
+router.post("/accept", async (req, res) => {
+  console.log(req.body.order_id);
+  const order = await Order.findByIdAndUpdate(req.body.order_id, {
+    status: "Open",
+  });
+
+  if (!order)
+    return res.status(404).send("The movie with the given ID was not found.");
+
+  res.send(order);
+});
+
 module.exports = router;

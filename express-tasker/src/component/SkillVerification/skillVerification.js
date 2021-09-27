@@ -78,7 +78,7 @@ export default class SkillVerificationRequest extends Component {
 
   render() {
     return (
-      <div class="signup-window">
+      <div className="signup-window">
         <div className="signup-form">
           <h2>Skill Verification Request</h2>
           <form

@@ -100,7 +100,7 @@ export default class Signup extends Component {
 
   render() {
     return (
-      <div class="signup-window">
+      <div className="signup-window">
         <div className="signup-form">
           <h2>Become a Service Provider</h2>
           <form onSubmit={this.onSubmit} noValidate className="signup-form">

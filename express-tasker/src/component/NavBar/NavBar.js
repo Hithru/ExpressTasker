@@ -44,11 +44,14 @@ const NavBar = ({ user }) => {
           )}
           {user && user.isServiceProvider && (
             <React.Fragment>
-              <NavLink className="nav-item nav-link" to="/profile">
-                Orders
-              </NavLink>
-              <NavLink className="nav-item nav-link" to="/profile">
+              <NavLink className="nav-item nav-link" to="#">
                 Messages
+              </NavLink>
+              <NavLink
+                className="nav-item nav-link"
+                to="/service-provider-orders"
+              >
+                Order
               </NavLink>
             </React.Fragment>
           )}
@@ -57,8 +60,11 @@ const NavBar = ({ user }) => {
               <NavLink className="nav-item nav-link" to="/search">
                 Search
               </NavLink>
+              <NavLink className="nav-item nav-link" to="#">
+                Messages
+              </NavLink>
               <NavLink className="nav-item nav-link" to="/customer-orders">
-                Order
+                Orders
               </NavLink>
             </React.Fragment>
           )}

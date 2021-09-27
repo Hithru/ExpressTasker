@@ -9,6 +9,7 @@ router.post("/signup", async (req, res) => {
     username: Joi.string().min(6).required(),
     email: Joi.string().min(6).required().email(),
     password: Joi.string().min(6).required(),
+    location: Joi.string().min(6).required(),
   });
 
   const { error } = schema.validate(req.body);
@@ -23,11 +24,13 @@ router.post("/signup", async (req, res) => {
   const username = req.body.username;
   const email = req.body.email;
   const password = req.body.password;
+  const location = req.body.location;
   const rating = 0;
 
   customer = new Customer({
     username,
     email,
+    location,
     rating,
     password,
   });

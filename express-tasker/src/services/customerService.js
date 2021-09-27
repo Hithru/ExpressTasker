@@ -9,6 +9,7 @@ export function register(user) {
     email: user.email,
     password: user.password,
     username: user.username,
+    location: user.location,
   });
 }
 
