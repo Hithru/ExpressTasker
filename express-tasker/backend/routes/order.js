@@ -7,6 +7,7 @@ const mongoose = require("mongoose");
 const Joi = require("joi");
 
 router.post("/createOrder", async (req, res) => {
+  console.log("data came to backend");
   const schema = Joi.object({
     customer_id: Joi.string().min(6).required(),
     customer_name: Joi.string().min(6).required(),

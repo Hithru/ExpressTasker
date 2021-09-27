@@ -8,8 +8,13 @@ export function getCustomerOrders(customer_id) {
   return http.post(apiEndpoint, body);
 }
 
+const apiCreateEndpoint = apiUrl + "/order/createOrder";
 export function createOrder(order) {
-  return http.post(apiUrl + "order/createOrder", {
+  console.log(order.amount);
+  console.log("data came service");
+  console.log(order);
+
+  return http.post(apiCreateEndpoint, {
     serviceProvider_id: order.serviceProvider_id,
     serviceProvider_name: order.serviceProvider_name,
     customer_name: order.customer_name,
