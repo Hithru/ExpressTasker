@@ -14,6 +14,7 @@ import Rating from "@material-ui/lab/Rating";
 import { Switch } from "@material-ui/core";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
+import auth from "../../services/customerAuth";
 import {
   FormControlLabel,
   Checkbox,
@@ -96,9 +97,6 @@ const useStyles = makeStyles({
 });
 var control_var = 0;
 const Search = () => {
-  const user = {
-    location: "Homagama",
-  };
   const districts = [
     "Ampara",
     "Anuradhapura",
@@ -128,7 +126,7 @@ const Search = () => {
   const classes = useStyles();
   var Element = Scroll.Element;
   var scroller = Scroll.scroller;
-
+  var user = {};
   const [service_providers, setServiceProviders] = useState([]);
   const [location, setLocation] = useState();
   const [search_term, setSearchTerm] = useState("");
@@ -238,6 +236,7 @@ const Search = () => {
   };
 
   useEffect(() => {
+    user = auth.getCurrentUser();
     handleScroll();
   });
   ///////////////////////////////////////////////////////// UI related ////////////////////////////////////////
