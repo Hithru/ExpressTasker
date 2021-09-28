@@ -231,15 +231,11 @@ const Search = () => {
   };
 
   const handleScroll = () => {
-    if (control_var == 0) {
-      scroller.scrollTo("search_results", {
-        smooth: true,
-        duration: 100,
-        offset: -70,
-      });
-      control_var = 1;
-    } else {
-    }
+    scroller.scrollTo("search_results", {
+      smooth: true,
+      duration: 100,
+      offset: -70,
+    });
   };
 
   const getCurrentUserObject = () => {
@@ -260,10 +256,10 @@ const Search = () => {
   };
 
   useEffect(() => {
+    getCurrentUserObject();
     console.log(control_var);
     handleScroll();
     console.log(control_var);
-    getCurrentUserObject();
   });
   ///////////////////////////////////////////////////////// UI related //////////////////////////////////////////////////////
 
