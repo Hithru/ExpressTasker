@@ -14,6 +14,7 @@ import Rating from "@material-ui/lab/Rating";
 import { Switch } from "@material-ui/core";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
+import LinearProgress from "@material-ui/core/LinearProgress";
 import auth from "../../services/customerAuth";
 import {
   FormControlLabel,
@@ -127,6 +128,7 @@ const Search = () => {
   var Element = Scroll.Element;
   var scroller = Scroll.scroller;
   var user = {};
+  const [isLoading, setIsLoading] = useState(false);
   const [service_providers, setServiceProviders] = useState([]);
   const [location, setLocation] = useState();
   const [search_term, setSearchTerm] = useState("");
@@ -135,12 +137,12 @@ const Search = () => {
 
   const handleLocationChange = (event) => {
     setLocation(event.target.value);
-    console.log(event.target.value);
+    // console.log(event.target.value);
   };
 
   const handleUseDefaultLocation = (event) => {
     setUseDefaultLocation(event.target.checked);
-    console.log(event.target.checked);
+    // console.log(event.target.checked);
   };
   const handleSearchTermChange = (event) => {
     setSearchTerm(event.target.value);
@@ -160,10 +162,12 @@ const Search = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setIsLoading(true);
     control_var = 0;
     if (search_term.length <= 0) {
       setServiceProviders([]);
       console.log("hi");
+      setIsLoading(false);
       setOpen(true);
     } else {
       if (search_critiria == 0) {
@@ -180,6 +184,7 @@ const Search = () => {
 
   const searchService = (use_default_location, search_term, location) => {
     if (use_default_location) {
+      // console.log(user);
       axios
         .post("http://localhost:5000/search/service", {
           service: search_term,
@@ -188,6 +193,7 @@ const Search = () => {
         .then(function (response) {
           const lst = response.data;
           setServiceProviders(lst);
+          setIsLoading(false);
         })
         .catch(function (error) {
           console.log(error);
@@ -200,8 +206,9 @@ const Search = () => {
         })
         .then(function (response) {
           const lst = response.data;
-          console.log(response.data);
+          // console.log(response.data);
           setServiceProviders(lst);
+          setIsLoading(false);
         })
         .catch(function (error) {
           console.log(error);
@@ -235,11 +242,48 @@ const Search = () => {
     }
   };
 
+  const getCurrentUserObject = () => {
+    const temp = auth.getCurrentUser();
+    const user_id = temp._id;
+    axios
+      .post("http://localhost:5000/customer/get-customer", {
+        user_id: user_id,
+      })
+      .then(function (response) {
+        // console.log(response.data);
+        const lst = response.data;
+        user = lst;
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
   useEffect(() => {
-    user = auth.getCurrentUser();
+    console.log(control_var);
     handleScroll();
+    console.log(control_var);
+    getCurrentUserObject();
   });
-  ///////////////////////////////////////////////////////// UI related ////////////////////////////////////////
+  ///////////////////////////////////////////////////////// UI related //////////////////////////////////////////////////////
+
+  const loadingScreen = () => {
+    if (isLoading) {
+      return (
+        <div>
+          <LinearProgress
+            size={60}
+            style={{ strokeLinecap: "round" }}
+            thickness={4}
+            variant="indeterminate"
+            disableShrink
+            color="#f28f00"
+          />
+        </div>
+      );
+    }
+  };
+
   const locationDropDown = () => {
     if (!use_default_location) {
       console.log(use_default_location);
