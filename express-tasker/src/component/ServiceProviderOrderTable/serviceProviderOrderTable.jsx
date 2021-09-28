@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-
 import auth from "../../services/customerAuth";
 import {
   getServiceProviderOrders,
@@ -44,6 +43,10 @@ export default class ServiceProviderOrderTable extends Component {
   async handleCancel(order_id) {
     const order = await cancelOrder(order_id);
     window.location = "/service-provider-orders";
+  }
+
+  handleComplete(order_id) {
+    window.location = `/service-provider-rating/${order_id}`;
   }
 
   render() {
@@ -95,9 +98,13 @@ export default class ServiceProviderOrderTable extends Component {
                         )}
                         {item.status === "Open" && (
                           <div>
-                            <button className={`${classes.btn} btn-success`}>
+                            <button
+                              className={`${classes.btn} btn-success`}
+                              onClick={() => this.handleComplete(item._id)}
+                            >
                               Mark Complete
                             </button>
+
                             <button
                               className={`${classes.btn} btn-danger`}
                               onClick={() => this.handleCancel(item._id)}
@@ -118,7 +125,10 @@ export default class ServiceProviderOrderTable extends Component {
                         )}
                         {item.status === "Rating" && (
                           <div>
-                            <button className={`${classes.btn} btn-success`}>
+                            <button
+                              className={`${classes.btn} btn-success`}
+                              onClick={() => this.handleComplete(item._id)}
+                            >
                               Mark Complete
                             </button>
                           </div>

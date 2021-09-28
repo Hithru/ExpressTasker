@@ -53,7 +53,7 @@ export default class CreateOrder extends Form {
       console.log("work one");
       const response = await order.createOrder(this.state.data);
       console.log("work here");
-      auth.loginWithJwt(response.headers["x-auth-token"]);
+
       window.location = "/customer-orders";
     } catch (ex) {
       if (ex.response && ex.response.status === 400) {

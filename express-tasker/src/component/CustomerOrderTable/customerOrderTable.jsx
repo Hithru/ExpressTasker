@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import axios from "axios";
 import auth from "../../services/customerAuth";
 import { getCustomerOrders, cancelOrder } from "../../services/orderService";
 import Pagination from "../common/pagination";
@@ -33,6 +32,11 @@ export default class CustomerOrderTable extends Component {
     const order = await cancelOrder(order_id);
     window.location = "/customer-orders";
   }
+
+  async handleComplete(order_id) {
+    window.location = `/customer-review/${order_id}`;
+  }
+
   render() {
     const { length: count } = this.state.orders;
     const { pageSize, currentPage, orders: allOrders } = this.state;
@@ -76,9 +80,13 @@ export default class CustomerOrderTable extends Component {
                         )}
                         {item.status === "Open" && (
                           <div>
-                            <button className={`${classes.btn} btn-success`}>
+                            <button
+                              className={`${classes.btn} btn-success`}
+                              onClick={() => this.handleComplete(item._id)}
+                            >
                               Mark Complete
                             </button>
+
                             <button
                               className={`${classes.btn} btn-danger`}
                               onClick={() => this.handleCancel(item._id)}
@@ -89,7 +97,10 @@ export default class CustomerOrderTable extends Component {
                         )}
                         {item.status === "Reviewing" && (
                           <div>
-                            <button className={`${classes.btn} btn-success`}>
+                            <button
+                              className={`${classes.btn} btn-success`}
+                              onClick={() => this.handleComplete(item._id)}
+                            >
                               Mark Complete
                             </button>
                           </div>

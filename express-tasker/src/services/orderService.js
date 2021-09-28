@@ -32,6 +32,22 @@ export function acceptOrder(order_id) {
   return http.post(apiAcceptOrderEndpoint, accept_body);
 }
 
+const apiReviewOrderEndpoint = apiUrl + "/order/review";
+
+export function reviewOrder(order_id) {
+  console.log(order_id);
+  const review_body = { order_id: order_id };
+  return http.post(apiReviewOrderEndpoint, review_body);
+}
+
+const apiRatingOrderEndpoint = apiUrl + "/order/rating";
+
+export function ratingOrder(order_id) {
+  console.log(order_id);
+  const rating_body = { order_id: order_id };
+  return http.post(apiRatingOrderEndpoint, rating_body);
+}
+
 const apiCreateEndpoint = apiUrl + "/order/createOrder";
 
 export function createOrder(order) {
@@ -50,10 +66,20 @@ export function createOrder(order) {
   });
 }
 
+const apiDetailsEndpoint = apiUrl + "/order/details";
+
+export function getOrder(order_id) {
+  const order_body = { order_id: order_id };
+  return http.post(apiDetailsEndpoint, order_body);
+}
+
 export default {
   getCustomerOrders,
   getServiceProviderOrders,
   createOrder,
   acceptOrder,
   cancelOrder,
+  getOrder,
+  reviewOrder,
+  ratingOrder,
 };
