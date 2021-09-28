@@ -129,6 +129,7 @@ const Search = () => {
   var scroller = Scroll.scroller;
   var user = {};
   const [isLoading, setIsLoading] = useState(false);
+  const [isResultFound, setIsResultFound] = useState(true);
   const [service_providers, setServiceProviders] = useState([]);
   const [location, setLocation] = useState();
   const [search_term, setSearchTerm] = useState("");
@@ -194,6 +195,7 @@ const Search = () => {
           const lst = response.data;
           setServiceProviders(lst);
           setIsLoading(false);
+          handleScroll();
         })
         .catch(function (error) {
           console.log(error);
@@ -209,6 +211,7 @@ const Search = () => {
           // console.log(response.data);
           setServiceProviders(lst);
           setIsLoading(false);
+          handleScroll();
         })
         .catch(function (error) {
           console.log(error);
@@ -224,6 +227,8 @@ const Search = () => {
       .then(function (response) {
         const lst = response.data;
         setServiceProviders(lst);
+        setIsLoading(false);
+        handleScroll();
       })
       .catch(function (error) {
         console.log(error);
@@ -236,6 +241,7 @@ const Search = () => {
       duration: 100,
       offset: -70,
     });
+    control_var = 1;
   };
 
   const getCurrentUserObject = () => {
@@ -257,9 +263,6 @@ const Search = () => {
 
   useEffect(() => {
     getCurrentUserObject();
-    console.log(control_var);
-    handleScroll();
-    console.log(control_var);
   });
   ///////////////////////////////////////////////////////// UI related //////////////////////////////////////////////////////
 
@@ -269,11 +272,11 @@ const Search = () => {
         <div>
           <LinearProgress
             size={60}
-            style={{ strokeLinecap: "round" }}
-            thickness={4}
+            style={{ height: 7 }}
+            thickness={100}
             variant="indeterminate"
             disableShrink
-            color="#f28f00"
+            color="secondary"
           />
         </div>
       );
@@ -461,6 +464,7 @@ const Search = () => {
       </Snackbar>
       <div className="serviceProviderCard">
         <Element name="search_results"></Element>
+        {loadingScreen()}
         {service_providers.map(renderServiceProviderCard)}
       </div>
     </div>
