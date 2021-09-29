@@ -9,7 +9,33 @@ import "./customerSignup.css";
 
 export default class CustomerSignUp extends Form {
   state = {
-    data: { email: "", password: "", username: "" },
+    location: [
+      "Ampara",
+      "Anuradhapura",
+      "Badulla",
+      "Batticaloa",
+      "Colombo",
+      "Galle",
+      "Gampaha",
+      "Hambanthota",
+      "Jaffna",
+      "Kalutara",
+      "Kandy",
+      "Kilinochchi",
+      "Kurunegala",
+      "Mannar",
+      "Matale",
+      "Matara",
+      "Monaragala",
+      "Mullativu",
+      "Nuwara Eliya",
+      "Polonnaruwa",
+      "Puttalam",
+      "Ratnapura",
+      "Trincomalee",
+      "Vavuniya",
+    ],
+    data: { email: "", password: "", username: "", location: "" },
     errors: {},
   };
 
@@ -17,6 +43,7 @@ export default class CustomerSignUp extends Form {
     email: Joi.string().required().email().label("Email"),
     password: Joi.string().required().min(5).label("Password"),
     username: Joi.string().required().label("UserName"),
+    location: Joi.string().label("Location"),
   };
 
   doSubmit = async () => {
@@ -44,6 +71,8 @@ export default class CustomerSignUp extends Form {
               {this.renderInput("email", "Email")}
               {this.renderInput("password", "Password", "password")}
               {this.renderInput("username", "UserName")}
+
+              {this.renderSelect("location", "Location", this.state.location)}
               {this.renderButton("Register")}
             </form>
           </div>

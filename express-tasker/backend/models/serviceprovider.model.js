@@ -7,7 +7,7 @@ const Schema = mongoose.Schema;
 const serviceProviderSchema = new Schema(
   {
     username: { type: String, required: true ,minlength:5, maxlength:50},
-    skill: { type: Array, required: true  },
+    skills: { type: Array, required: true  },
     location: { type: String, required: true },
     description: { type: String, required: true ,minlength:5, maxlength:7000 },
     review: { type: String, required: true ,minlength:5, maxlength:50 },

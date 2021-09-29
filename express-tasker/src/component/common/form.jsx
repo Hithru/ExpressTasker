@@ -18,6 +18,7 @@ class Form extends Component {
 
     const errors = {};
     for (let item of error.details) errors[item.path[0]] = item.message;
+    console.log(errors);
     return errors;
   };
 
@@ -30,7 +31,7 @@ class Form extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-
+    console.log("work this");
     const errors = this.validate();
     this.setState({ errors: errors || {} });
     if (errors) return;
@@ -57,7 +58,6 @@ class Form extends Component {
       </button>
     );
   }
-
   renderSelect(name, label, options) {
     const { data, errors } = this.state;
 
@@ -72,7 +72,6 @@ class Form extends Component {
       />
     );
   }
-
   renderInput(name, label, type = "text") {
     const { data, errors } = this.state;
 

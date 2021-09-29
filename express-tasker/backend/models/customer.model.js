@@ -18,6 +18,12 @@ const customerSchema = new Schema(
       minlength: 5,
       maxlength: 50,
     },
+    location: {
+      type: String,
+      required: true,
+      minlength: 5,
+      maxlength: 20,
+    },
     rating: {
       type: Number,
       required: true,

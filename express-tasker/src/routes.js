@@ -2,7 +2,6 @@ import React from "react";
 import { Switch, Route } from "react-router-dom";
 import LandingPage from "./component/LandingPage/LandingPage";
 import NavBar_HowItWorks from "./component/NavBar/NavBar_HowItWorks";
-//import TaskerProfile from "./component/TaskerProfile/TaskerProfile";
 import CustomerSignup from "./component/CustomerSignup/customerSignup";
 import ServiceProviderSignup from "./component/ServiceProviderSignup/serviceProviderSignup";
 import ServiceProviderProfile from "./component/ServiceProviderProfile/serviceProviderProfile";
@@ -15,6 +14,10 @@ import CustomerLogin from "./component/CustomerLogin/customerLogin";
 import ServiceProviderLogin from "./component/ServiceProviderLogin/serviceProviderLogin";
 import CustomerOrderTable from "./component/CustomerOrderTable/customerOrderTable";
 import LogOut from "./component/LogOut/logout";
+import CustomerReview from "./component/CustomerReview/customerReview";
+import ServiceProviderRating from "./component/ServiceProviderRating/serviceProviderRating";
+import CreateOrder from "./component/CreateOrder/createOrder";
+import ServiceProviderOrderTable from "./component/ServiceProviderOrderTable/serviceProviderOrderTable";
 
 export default (
   <Switch>
@@ -55,6 +58,16 @@ export default (
     <Route path="/how-it-works" component={NavBar_HowItWorks} />
     <Route path="/customer-login" component={CustomerLogin} />
     <Route path="/customer-orders" component={CustomerOrderTable} />
+    <Route
+      path="/service-provider-orders"
+      component={ServiceProviderOrderTable}
+    />
     <Route path="/service-provider-login" component={ServiceProviderLogin} />
+    <Route
+      path="/service-provider-rating/:id"
+      component={ServiceProviderRating}
+    />
+    <Route path="/customer-review/:id" component={CustomerReview} />
+    <Route path="/create-order" component={CreateOrder} />
   </Switch>
 );

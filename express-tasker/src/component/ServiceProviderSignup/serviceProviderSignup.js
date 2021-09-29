@@ -120,15 +120,18 @@ export default class Signup extends Component {
 
     axios
       .post("http://localhost:5000/serviceProvider/signup", serviceProvider)
-      .then((res) => auth.loginWithJwt(res.headers["x-auth-token"]))
+      .then((res) => {auth.loginWithJwt(res.headers["x-auth-token"]);
+      window.location = "/";}
       
-    window.location = "/";
+      )
+      
+    
   }
 
   render() {
     
     return (
-      <div class="signup-window">
+      <div className="signup-window">
         <div className="signup-form">
           <h2>Become a Service Provider</h2>
           <form onSubmit={this.onSubmit} noValidate className="signup-form">

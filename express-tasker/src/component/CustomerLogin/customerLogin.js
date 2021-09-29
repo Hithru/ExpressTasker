@@ -1,10 +1,10 @@
 import React from "react";
-import "./customerLogin.css";
 import { Redirect } from "react-router-dom";
 import Joi from "joi-browser";
 import Form from "../common/form";
 import auth from "../../services/customerAuth";
 
+import "./customerLogin.css";
 class Login extends Form {
   state = {
     data: { email: "", password: "" },
@@ -39,9 +39,9 @@ class Login extends Form {
     return (
       <div className="signup-window">
         <div className="signup-form">
-          <h1>Customer Login</h1>
+          <h2>Customer Login</h2>
 
-          <form onSubmit={this.handleSubmit}>
+          <form onSubmit={this.handleSubmit} className="signup-form">
             {this.renderInput("email", "Email")}
             {this.renderInput("password", "Password", "password")}
             {this.renderButton("Login")}

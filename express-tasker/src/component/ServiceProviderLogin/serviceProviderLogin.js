@@ -1,5 +1,4 @@
 import React from "react";
-
 import { Redirect } from "react-router-dom";
 import Joi from "joi-browser";
 import Form from "../common/form";
@@ -39,9 +38,9 @@ class Login extends Form {
     return (
       <div className="signup-window">
         <div className="signup-form">
-          <h1>ServiceProvider Login</h1>
+          <h2>ServiceProvider Login</h2>
 
-          <form onSubmit={this.handleSubmit}>
+          <form onSubmit={this.handleSubmit} className="signup-form">
             {this.renderInput("email", "Email")}
             {this.renderInput("password", "Password", "password")}
             {this.renderButton("Login")}

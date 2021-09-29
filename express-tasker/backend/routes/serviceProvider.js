@@ -21,7 +21,7 @@ router.post("/signup",async (req, res) => {
   // console.log("user exist pass");
 
   const username = req.body.username;
-  const skill = req.body.skill;
+  const skills = req.body.skill;
   const location =req.body.location;
   const description=req.body.description;
   const review ="No reviews";
@@ -33,7 +33,7 @@ router.post("/signup",async (req, res) => {
 
   const serviceProvider = new ServiceProvider({
     username,
-    skill,
+    skills,
     location,
     description,
     review,
@@ -41,7 +41,7 @@ router.post("/signup",async (req, res) => {
     contactNumber,
     profilePicture,
     email,
-    password
+    password,
   });
 
   console.log(serviceProvider);
@@ -83,9 +83,9 @@ router.post('/edit/:id', async(req,res)=>{
 
 router.route('/').get((req,res)=>{
   ServiceProvider.find()
-      .then(serviceProviders => res.json(serviceProviders))
-      .catch(err => res.status(404).json('Error: '+err));
-})
+    .then((serviceProviders) => res.json(serviceProviders))
+    .catch((err) => res.status(404).json("Error: " + err));
+});
 
 router.route('/:id').get((req,res)=>{
   ServiceProvider.findById(req.params.id)

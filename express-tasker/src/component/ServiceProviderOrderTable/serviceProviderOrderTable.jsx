@@ -1,11 +1,16 @@
 import React, { Component } from "react";
 import auth from "../../services/customerAuth";
-import { getCustomerOrders, cancelOrder } from "../../services/orderService";
+import {
+  getServiceProviderOrders,
+  cancelOrder,
+  acceptOrder,
+} from "../../services/orderService";
 import Pagination from "../common/pagination";
 import { paginate } from "../../utils/paginate";
-import classes from "./customerOrderTable.module.css";
-import "./customerOrderTable.module.css";
-export default class CustomerOrderTable extends Component {
+import classes from "./serviceProviderOrderTable.module.css";
+import "./serviceProviderOrderTable.module.css";
+
+export default class ServiceProviderOrderTable extends Component {
   constructor(props) {
     super(props);
 
@@ -18,8 +23,10 @@ export default class CustomerOrderTable extends Component {
   }
 
   async componentDidMount() {
+    console.log("user");
     const user = auth.getCurrentUser();
-    const ordersArray = await getCustomerOrders(user._id);
+    console.log(user);
+    const ordersArray = await getServiceProviderOrders(user._id);
     const orders = ordersArray.data;
     this.setState({ user, orders });
   }
@@ -28,13 +35,18 @@ export default class CustomerOrderTable extends Component {
     this.setState({ currentPage: page });
   };
 
-  async handleCancel(order_id) {
-    const order = await cancelOrder(order_id);
-    window.location = "/customer-orders";
+  async handleAccept(order_id) {
+    const order = await acceptOrder(order_id);
+    window.location = "/service-provider-orders";
   }
 
-  async handleComplete(order_id) {
-    window.location = `/customer-review/${order_id}`;
+  async handleCancel(order_id) {
+    const order = await cancelOrder(order_id);
+    window.location = "/service-provider-orders";
+  }
+
+  handleComplete(order_id) {
+    window.location = `/service-provider-rating/${order_id}`;
   }
 
   render() {
@@ -62,7 +74,7 @@ export default class CustomerOrderTable extends Component {
                 <tbody>
                   {orders.map((item) => (
                     <tr className={classes.tr} key={item._id}>
-                      <td>{item.serviceProvider_name}</td>
+                      <td>{item.customer_name}</td>
                       <td>{item.status}</td>
                       <td>{item.amount}</td>
                       <td>{item.startTime.slice(0, 10)}</td>
@@ -71,10 +83,16 @@ export default class CustomerOrderTable extends Component {
                         {item.status === "Pending" && (
                           <div>
                             <button
+                              className={`${classes.btn} btn-primary`}
+                              onClick={() => this.handleAccept(item._id)}
+                            >
+                              Accept
+                            </button>
+                            <button
                               className={`${classes.btn} btn-danger`}
                               onClick={() => this.handleCancel(item._id)}
                             >
-                              Cancel
+                              Reject
                             </button>
                           </div>
                         )}
@@ -98,20 +116,20 @@ export default class CustomerOrderTable extends Component {
                         {item.status === "Reviewing" && (
                           <div>
                             <button
-                              className={`${classes.btn} btn-success`}
-                              onClick={() => this.handleComplete(item._id)}
+                              className={`${classes.btn} btn-info`}
+                              disabled
                             >
-                              Mark Complete
+                              Under Review
                             </button>
                           </div>
                         )}
                         {item.status === "Rating" && (
                           <div>
                             <button
-                              className={`${classes.btn} btn-info`}
-                              disabled
+                              className={`${classes.btn} btn-success`}
+                              onClick={() => this.handleComplete(item._id)}
                             >
-                              Under Rating
+                              Mark Complete
                             </button>
                           </div>
                         )}
