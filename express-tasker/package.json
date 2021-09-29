@@ -17,7 +17,6 @@
     "joi-browser": "^13.4.0",
     "jwt-decode": "^3.1.2",
     "prop-types": "^15.7.2",
-
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-multi-select-component": "^4.1.12",
@@ -26,12 +25,9 @@
     "react-scripts": "4.0.3",
     "react-scroll": "^1.8.4",
     "react-slick": "^0.28.1",
-
     "validator": "^13.6.0",
-
     "react-star-rating": "^1.4.2",
     "react-toastify": "^8.0.2",
-
     "web-vitals": "^1.1.2"
   },
   "scripts": {
