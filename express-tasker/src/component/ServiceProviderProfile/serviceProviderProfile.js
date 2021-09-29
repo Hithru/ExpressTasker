@@ -1,33 +1,55 @@
 import React, { Component } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
 import "./ServiceProviderProfile.css";
 import profilepicture from './profile.jpg';
+import auth from "../../services/serviceProviderAuth";
 import contact from "./contact.png";
 
 class ServiceProviderProfile extends Component {
+    constructor(props){
+        super(props);
 
-  state={
-    profilepicture:'https://picsum.photos/200'
-  }
-  imageHandler=(e)=>{
-    const reader= new FileReader();
-    reader.onload=()=>{
-      if(reader.readyState===2){
-          this.setState({
-            profilepicture:reader.result
-          })
-      }
+        this.state = {
+          serviceProviderDetails: [],
+          profilepicture:'https://picsum.photos/200'
+        };
+       
     }
-    reader.readAsDataURL(e.target.files[0])
 
+    componentDidMount() {
+    const user = auth.getCurrentUser();
     axios
-      .post("http://localhost:5000/serviceProvider/addProfilePicture", profilepicture)
-      .then((res) => console.log(res.data));
-  }
-  
-  render() {
+      .get(`http://localhost:5000/serviceProvider/${user._id}`)
+      .then((response) => {
+        console.log(response.data)
+        this.setState({
+            serviceProviderDetails:response.data
+        })
+      })
+      .catch((error) => {
+        console.log(error);
+      });
 
+    }
+    
+    imageHandler=(e)=>{
+      const reader= new FileReader();
+      reader.onload=()=>{
+        if(reader.readyState===2){
+            this.setState({
+              profilepicture:reader.result
+            })
+        }
+      }
+      reader.readAsDataURL(e.target.files[0])
+
+      axios
+        .post("http://localhost:5000/serviceProvider/addProfilePicture", profilepicture)
+        .then((res) => console.log(res.data));
+    }
+    
+  render() {
+   
     const {profilepicture}=this.state
     
     return (
@@ -45,7 +67,7 @@ class ServiceProviderProfile extends Component {
                                 <i id="upload" className="fa fa-upload"></i>
                                 </label>
                             </div>
-                            <h1 className="username"> Shamila Nuwan</h1>
+                            <h1 className="username"> {this.state.serviceProviderDetails.username}</h1>
                             <a href="/edit-service-provider-profile"><button id="edit">Edit Profile</button></a>
                             <a href="/"><button id="order">See Orders</button></a>
                       </div>
@@ -61,15 +83,16 @@ class ServiceProviderProfile extends Component {
         <section id="container-about" className="container-about">
                   <h1 className="about">About Me</h1> 
                   <div className="rate"><h5 class="hrate">Description :</h5></div>
-                  <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.
-                  It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.
+                  <p>{this.state.serviceProviderDetails.description}
                   </p>  
                   <div className="rate"><h5 class="hrate">Hourly rate : 27</h5></div>
+                  <div className="rate"><h5 class="location">Location : {this.state.serviceProviderDetails.location}</h5></div>
                         
         </section>
 
         <h1 className="skillheader">My Skills</h1>
         <section id="skillheader" className="flex-project-container">
+                  
                     <div>Plumbing</div>
                     <div>Trical</div>
                     <div>Wood</div>  
@@ -86,9 +109,9 @@ class ServiceProviderProfile extends Component {
         <h1 id="contactnav">Contact Information</h1>
         <section className="container-1">
                   <img id="contactimg" src={contact} width="180" height="180" alt="contactlogo"/>
-                  <h4>Email : shamila.18@cse.mrt.ac.lk</h4>
+                  <h4>Email : {this.state.serviceProviderDetails.email}</h4>
                   <div id="m"><a id="mail"href="https://mail.google.com/mail/?view=cm&fs=1&to=shamila.18@cse.mrt.ac.lk"><i className="fa fa-envelope"></i> Click Here To Send an Email</a></div>
-                  <h4>Contact no: 0779112192</h4>
+                  <h4>Contact no: {this.state.serviceProviderDetails.contactNumber}</h4>
         </section>
 
       </div>

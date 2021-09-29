@@ -38,7 +38,18 @@ router.post("/signup", async (req, res) => {
   await customer.save();
 
   const token = customer.generateAuthToken();
-  res.header("x-auth-token", token).status(200).send("well Done");
+  res
+    .header("x-auth-token", token)
+    .header("access-control-expose-headers", "x-auth-token")
+    .status(200)
+    .send("well Done");
 });
+
+
+router.get("/:id",async (req,res)=>{
+  Customer.findById(req.params.id)
+      .then(customer => res.json(customer))
+      .catch(err => res.status(404).json('Error: '+err));
+})
 
 module.exports = router;

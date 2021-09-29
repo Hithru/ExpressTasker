@@ -1,59 +1,38 @@
 import React from "react";
-import "./customerSignup.css";
-import axios from "axios";
+import Joi from "joi-browser";
+import Form from "../common/form";
+import user from "../../services/customerService";
+import auth from "../../services/customerAuth";
 import LandingPage_Reviews from "../LandingPage/LandingPage_Reviews";
 
-export default class SignUp extends React.Component {
-  constructor(props) {
-    super(props);
+import "./customerSignup.css";
 
-    this.onChangeUsername = this.onChangeUsername.bind(this);
-    this.onChangeEmail = this.onChangeEmail.bind(this);
-    this.onChangePassword = this.onChangePassword.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
+export default class CustomerSignUp extends Form {
+  state = {
+    data: { email: "", password: "", username: "" },
+    errors: {},
+  };
 
-    this.state = {
-      username: "",
-      email: "",
-      password: "",
-    };
-  }
+  schema = {
+    email: Joi.string().required().email().label("Email"),
+    password: Joi.string().required().min(5).label("Password"),
+    username: Joi.string().required().label("UserName"),
+  };
 
-  onChangeUsername(e) {
-    this.setState({
-      username: e.target.value,
-    });
-  }
-
-  onChangeEmail(e) {
-    this.setState({
-      email: e.target.value,
-    });
-  }
-
-  onChangePassword(e) {
-    this.setState({
-      password: e.target.value,
-    });
-  }
-
-  onSubmit(e) {
-    e.preventDefault();
-    console.log("working");
-    const customer = {
-      username: this.state.username,
-      email: this.state.email,
-      password: this.state.password,
-    };
-
-    console.log(customer);
-
-    axios
-      .post("http://localhost:5000/customer/signup", customer)
-      .then((res) => console.log(res.data));
-
-    window.location = "/";
-  }
+  doSubmit = async () => {
+    try {
+      const response = await user.register(this.state.data);
+      console.log("work");
+      auth.loginWithJwt(response.headers["x-auth-token"]);
+      window.location = "/";
+    } catch (ex) {
+      if (ex.response && ex.response.status === 400) {
+        const errors = { ...this.state.errors };
+        errors.email = ex.response.data;
+        this.setState({ errors });
+      }
+    }
+  };
 
   render() {
     return (
@@ -61,34 +40,11 @@ export default class SignUp extends React.Component {
         <div className="signup-window">
           <div className="signup-form">
             <h2>Sign Up</h2>
-            <form onSubmit={this.onSubmit} noValidate className="signup-form">
-              <div className="email">
-                <label>Full Name</label>
-                <input
-                  type="text"
-                  name="username"
-                  onChange={this.onChangeUsername}
-                />
-              </div>
-              <div className="email">
-                <label>Email</label>
-                <input
-                  type="email"
-                  name="email"
-                  onChange={this.onChangeEmail}
-                />
-              </div>
-              <div className="password">
-                <label>Password</label>
-                <input
-                  type="password"
-                  name="password"
-                  onChange={this.onChangePassword}
-                />
-              </div>
-              <div className="submit">
-                <button className="singup-submit-button">Register Me</button>
-              </div>
+            <form onSubmit={this.handleSubmit} className="signup-form">
+              {this.renderInput("email", "Email")}
+              {this.renderInput("password", "Password", "password")}
+              {this.renderInput("username", "UserName")}
+              {this.renderButton("Register")}
             </form>
           </div>
         </div>

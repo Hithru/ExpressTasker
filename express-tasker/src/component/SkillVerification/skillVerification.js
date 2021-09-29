@@ -11,7 +11,7 @@ export default class SkillVerificationRequest extends Component {
     this.onSubmit = this.onSubmit.bind(this);
 
     this.state = {
-      skills: "",
+      skill: "",
       confirmedFrom: "",
       attachments: "",
       skills: [],
@@ -36,7 +36,7 @@ export default class SkillVerificationRequest extends Component {
 
   onChangeSkills(e) {
     this.setState({
-      skills: e.target.value,
+      skill: e.target.value,
     });
   }
 
@@ -57,23 +57,23 @@ export default class SkillVerificationRequest extends Component {
 
     const formData = new FormData();
 
-    formData.append("skills", this.state.skills);
+    formData.append("skills", this.state.skill);
     formData.append("confirmedFrom", this.state.confirmedFrom);
     formData.append("attachments", this.state.attachments);
 
     console.log(formData);
 
-    // const skillVerification = {
-    //   skills: this.state.skills,
-    //   confirmedFrom : this.state.confirmedFrom,
-    //   attachments : this.state.attachments
-    // }
+    const skillVerification = {
+      skill: this.state.skill,
+      confirmedFrom : this.state.confirmedFrom,
+      attachments : this.state.attachments
+    }
 
     axios
       .post("http://localhost:5000/skillVerification/send", formData)
       .then((res) => console.log(res.data));
 
-    window.location = "/";
+    window.location = "/service-provider-profile";
   }
 
   render() {
@@ -93,8 +93,8 @@ export default class SkillVerificationRequest extends Component {
                 ref="userInput"
                 required
                 className="form-control"
-                value={this.state.skills}
-                onChange={this.onChangeSkill}
+                value={this.state.skill}
+                onChange={this.onChangeSkills}
               >
                 {this.state.skills.map(function (skillname) {
                   return (

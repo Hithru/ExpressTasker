@@ -1,9 +1,27 @@
 const router = require("express").Router();
 const ServiceProvider = require("../models/serviceprovider.model");
+const bcrypt = require("bcrypt");
+const Joi = require("joi");
 
-router.route("/signup").post((req, res) => {
+router.post("/signup",async (req, res) => {
+
+  // const schema = Joi.object({
+  //   username: Joi.string().min(6).required(),
+  //   email: Joi.string().min(6).required().email(),
+  //   password: Joi.string().min(6).required(),
+  // });
+
+  // const { error } = schema.validate(req.body);
+  // if (error) return res.status(400).send(error.details[0].message);
+  // console.log("validation pass");
+
+  // let service_provider =await ServiceProvider.findOne({ email: req.body.email });
+
+  // if (service_provider) return res.status(400).send("User already registered.");
+  // console.log("user exist pass");
+
   const username = req.body.username;
-  const skillname = req.body.skillname;
+  const skill = req.body.skill;
   const location =req.body.location;
   const description=req.body.description;
   const review ="No reviews";
@@ -13,9 +31,9 @@ router.route("/signup").post((req, res) => {
   const email = req.body.email;
   const password = req.body.password;
 
-  const newServiceProvider = new ServiceProvider({
+  const serviceProvider = new ServiceProvider({
     username,
-    skillname,
+    skill,
     location,
     description,
     review,
@@ -25,21 +43,35 @@ router.route("/signup").post((req, res) => {
     email,
     password
   });
+
+  console.log(serviceProvider);
+  const salt = await bcrypt.genSalt(10);
+  serviceProvider.password = await bcrypt.hash(serviceProvider.password, salt);
+  await serviceProvider.save()
   
-  newServiceProvider
-    .save()
-    .then(() => res.json("Service Provider signup successfully..."))
-    .catch((err) => res.status(404).json("Error: " + err));
+  // serviceProvider
+  //   .save()
+  //   .then(() => res.json("Service Provider signup successfully..."))
+  //   .catch((err) => res.status(404).json("Error: " + err));
+  
+  const token = serviceProvider.generateAuthToken();
+  res
+    .header("x-auth-token", token)
+    .header("access-control-expose-headers", "x-auth-token")
+    .status(200)
+    .send("well Done");
+    
 });
 
 
-router.route('/edit/:id').post((req,res)=>{
+router.post('/edit/:id', async(req,res)=>{
   ServiceProvider.findById(req.params.id)
-      .then(serviceProvider => {
+      .then(async(serviceProvider) => {
           serviceProvider.username=req.body.username;
           serviceProvider.description=req.body.description;
           serviceProvider.location=req.body.location;
           serviceProvider.contactNumber=req.body.contactNumber;
+          serviceProvider.skill=req.body.skill;
 
           serviceProvider.save()
               .then(()=>res.json('Service Provider Profile Updated...'))

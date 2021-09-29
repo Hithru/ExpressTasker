@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import "./serviceProviderSignup.css";
+import auth from "../../services/customerAuth";
 import axios from "axios";
-import validator from "validator";
+import { Checkbox } from "@material-ui/core";
 
 export default class Signup extends Component {
   constructor(props) {
@@ -12,13 +13,14 @@ export default class Signup extends Component {
     this.onChangePassword = this.onChangePassword.bind(this);
     this.onChangeLocation = this.onChangeLocation.bind(this);
     this.onChangeDescription = this.onChangeDescription.bind(this);
-    this.onChangeSkill = this.onChangeSkill.bind(this);
+    // this.onChangeSkill = this.onChangeSkill.bind(this);
+    this.onChangeSkills = this.onChangeSkills.bind(this);
     this.onChangeContactNumber = this.onChangeContactNumber.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
 
     this.state = {
       username: "",
-      skillname: "",
+      skill: [],
       location: "",
       description: "",
       email: "",
@@ -28,7 +30,7 @@ export default class Signup extends Component {
     };
   }
 
-  
+
 
   componentDidMount() {
     axios
@@ -76,6 +78,15 @@ export default class Signup extends Component {
     });
   }
 
+  onChangeSkills(e) {
+    var value=e.target.value
+    var previousState= this.state.skill
+    
+    this.setState({
+      skill: [...previousState,value]
+    });
+  }
+
   onChangeDescription(e) {
     this.setState({
       description: e.target.value,
@@ -88,12 +99,18 @@ export default class Signup extends Component {
     });
   }
 
-  onSubmit(e) {
+  onSubmit=async(e)=> {
     e.preventDefault();
+
+    var skillArray= this.state.skill
+    var skill=[];
+    var skill=skillArray.filter(function(elem,pos){
+      return skillArray.indexOf(elem)==pos;
+    })
 
     const serviceProvider = {
       username: this.state.username,
-      skillname: this.state.skillname,
+      skill: skill,
       location: this.state.location,
       description: this.state.description,
       contactNumber: this.state.contactNumber,
@@ -101,17 +118,15 @@ export default class Signup extends Component {
       password: this.state.password,
     };
 
-    console.log(serviceProvider);
-
     axios
       .post("http://localhost:5000/serviceProvider/signup", serviceProvider)
-      .then((res) => console.log(res.data));
-
+      .then((res) => auth.loginWithJwt(res.headers["x-auth-token"]))
+      
     window.location = "/";
   }
 
-
   render() {
+    
     return (
       <div class="signup-window">
         <div className="signup-form">
@@ -127,7 +142,7 @@ export default class Signup extends Component {
                 onChange={this.onChangeUsername}
               />
             </div>
-            <div className="email">
+            {/* <div className="email">
               <label>Skills </label>
               
               <select ref="userInput"
@@ -145,6 +160,19 @@ export default class Signup extends Component {
                     })
                 }
             </select>
+            </div> */}
+            <div className="email">
+              <label>Select Skills </label>
+              <form onChange={this.onChangeSkills}>
+              {
+                this.state.skills.map(function(skillname) {
+                return <div><Checkbox
+                value={skillname}
+                // onChange={this.onChangeSkills}
+                />{skillname}</div>;
+                })
+
+            }</form>
             </div>
             <div className="email">
               <label>Location </label>

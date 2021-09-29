@@ -7,15 +7,15 @@ const Schema = mongoose.Schema;
 const serviceProviderSchema = new Schema(
   {
     username: { type: String, required: true ,minlength:5, maxlength:50},
-    skillname: { type: String, required: true  },
+    skill: { type: Array, required: true  },
     location: { type: String, required: true },
-    description: { type: String, required: true ,minlength:5, maxlength:3500 },
+    description: { type: String, required: true ,minlength:5, maxlength:7000 },
     review: { type: String, required: true ,minlength:5, maxlength:50 },
     rating: { type: Number, required: true ,min:0,max:5 },
-    contactNumber: {type: Number, required: true, minlength:10, maxlength:10},
+    contactNumber: {type: Number, required: true},
     profilePicture: {type: String, required: true},
     email: { type: String, required: true,minlength:5, maxlength:50 },
-    password: { type: String, required: true ,minlength:5, maxlength:500 },
+    password: { type: String, required: true ,minlength:5, maxlength:1024 },
   },
   {
     timestamps: true,

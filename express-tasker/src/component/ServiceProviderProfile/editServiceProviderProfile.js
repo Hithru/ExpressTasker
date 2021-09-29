@@ -1,27 +1,49 @@
 import React, { Component } from "react";
 import "../ServiceProviderSignup/serviceProviderSignup.css";
+import auth from "../../services/serviceProviderAuth";
 import axios from "axios";
+import { Checkbox } from "@material-ui/core";
 
 export default class Signup extends Component {
   constructor(props) {
     super(props);
-
+    
     this.onChangeUsername = this.onChangeUsername.bind(this);
+    // this.onChangeEmail = this.onChangeEmail.bind(this);
+    // this.onChangePassword = this.onChangePassword.bind(this);
     this.onChangeLocation = this.onChangeLocation.bind(this);
     this.onChangeDescription = this.onChangeDescription.bind(this);
-    this.onChangeSkill = this.onChangeSkill.bind(this);
+    this.onChangeSkills = this.onChangeSkills.bind(this);
+    this.onChangeContactNumber = this.onChangeContactNumber.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
 
     this.state = {
       username: "",
-      skillname: "",
+      skill: [],
       location: "",
       description: "",
+      email: "",
+      contactNumber:"",
+      password: "",
       skills: [],
+      serviceProviderDetails: [],
     };
   }
 
   componentDidMount() {
+    const user = auth.getCurrentUser();
+    axios
+      .get(`http://localhost:5000/serviceProvider/${user._id}`)
+      .then((response) => {
+        console.log(response.data)
+        this.setState({
+            serviceProviderDetails:response.data
+        })
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    
     axios
       .get("http://localhost:5000/skill")
       .then((response) => {
@@ -43,6 +65,18 @@ export default class Signup extends Component {
     });
   }
 
+  // onChangeEmail(e) {
+  //     this.setState({
+  //       email: e.target.value,
+  //     });
+  // }
+
+  // onChangePassword(e) {
+  //   this.setState({
+  //     password: e.target.value,
+  //   });
+  // }
+
   onChangeLocation(e) {
     this.setState({
       location: e.target.value,
@@ -55,38 +89,58 @@ export default class Signup extends Component {
     });
   }
 
+  onChangeSkills(e) {
+    var value=e.target.value
+    var previousState= this.state.skill
+    
+    this.setState({
+      skill: [...previousState,value]
+    });
+  }
+
   onChangeDescription(e) {
     this.setState({
       description: e.target.value,
     });
   }
 
-  onSubmit(e) {
+  onChangeContactNumber(e) {
+    this.setState({
+      contactNumber: e.target.value,
+    });
+  }
+
+  onSubmit=async(e)=> {
     e.preventDefault();
+
+    var skillArray= this.state.skill
+    var skill=[];
+    var skill=skillArray.filter(function(elem,pos){
+      return skillArray.indexOf(elem)==pos;
+    })
 
     const serviceProvider = {
       username: this.state.username,
-      skillname: this.state.skillname,
+      skill: skill,
       location: this.state.location,
       description: this.state.description,
+      contactNumber: this.state.contactNumber,
     };
 
-    console.log(serviceProvider);
-
-    axios
-      .post("http://localhost:5000/serviceProvider/signup", serviceProvider)
-      .then((res) => console.log(res.data));
-
+    // axios
+    //   .post("http://localhost:5000/serviceProvider/edit/{user._id}", serviceProvider)
+    //   .then((res) => console.log("Edit successfully..."))
+      
     window.location = "/";
   }
 
 
-
   render() {
+    
     return (
       <div class="signup-window">
         <div className="signup-form">
-          <h2>Edit Profile</h2>
+          <h2>Become a Service Provider</h2>
           <form onSubmit={this.onSubmit} noValidate className="signup-form">
             <div className="email">
               <label>Username </label>
@@ -96,9 +150,10 @@ export default class Signup extends Component {
                 className="form-control"
                 value={this.state.username}
                 onChange={this.onChangeUsername}
+                placeholder={this.state.serviceProviderDetails.username}
               />
             </div>
-            <div className="email">
+            {/* <div className="email">
               <label>Skills </label>
               
               <select ref="userInput"
@@ -106,8 +161,7 @@ export default class Signup extends Component {
                 // multiple={true}
                 className="form-control"
                 value={this.state.skillname}
-                onChange={this.onChangeSkill}
-                onChange={this.on}>
+                onChange={this.onChangeSkill}>
                 {
                     this.state.skills.map(function(skillname) {
                     return <option 
@@ -117,6 +171,19 @@ export default class Signup extends Component {
                     })
                 }
             </select>
+            </div> */}
+            <div className="email">
+              <label>Select Skills </label>
+              <form onChange={this.onChangeSkills}>
+              {
+                this.state.skills.map(function(skillname) {
+                return <div><Checkbox
+                value={skillname}
+                // onChange={this.onChangeSkills}
+                />{skillname}</div>;
+                })
+
+            }</form>
             </div>
             <div className="email">
               <label>Location </label>
@@ -126,6 +193,7 @@ export default class Signup extends Component {
                 className="form-control"
                 value={this.state.location}
                 onChange={this.onChangeLocation}
+                placeholder={this.state.serviceProviderDetails.location}
               />
             </div>
             <div className="email">
@@ -136,8 +204,40 @@ export default class Signup extends Component {
                 className="form-control"
                 value={this.state.description}
                 onChange={this.onChangeDescription}
+                placeholder={this.state.serviceProviderDetails.description}
               />
             </div>
+            <div className="email">
+              <label>Contact no </label>
+              <input
+                type="text"
+                required
+                className="form-control"
+                value={this.state.contactNumber}
+                onChange={this.onChangeContactNumber}
+                placeholder={this.state.serviceProviderDetails.contactNumber}
+              />
+            </div>
+            {/* <div className="email">
+              <label>Email </label>
+              <input
+                type="text"
+                className="form-control"
+                value={this.state.email}
+                onChange={this.onChangeEmail}
+                placeholder={this.state.serviceProviderDetails.email}
+              />
+            </div>
+            <div className="password">
+              <label>New Password </label>
+              <input
+                type="password"
+                className="form-control"
+                value={this.state.password}
+                onChange={this.onChangePassword}
+              />
+            </div> */}
+
             <div className="submit">
               <button type="submit" className="signup-submit-button">
                 Submit

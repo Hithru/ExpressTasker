@@ -75,6 +75,7 @@
 .username{
   margin-bottom: 10px;
   margin-top: 20px;
+  color: #cde8f3;
 }
 
 .header-h1{
@@ -159,13 +160,27 @@
 
 .container-banner{
   background-color: #f1f1f1;
-  background-image: url("./cover.jpg");
+  background-image: url("./cover2.png");
   text-align: center;
   border-style: hidden;
   border-radius: 0px;
   font-family: 'Ruda', sans-serif;
   padding-top: 10px;
   padding-bottom: 10px;
+}
+
+.banner-card{
+  background-color: #f1f1f1;
+  background-image: url("./card.jpg");
+  text-align: center;
+  border-style: hidden;
+  border-radius: 5px;
+  font-family: 'Ruda', sans-serif;
+  padding-top: 20px;
+  padding-bottom: 10px;
+  margin-left: 29px;
+  margin-top: 80px;
+  width: 1460px;
 }
 
 #profilepic{
@@ -314,7 +329,7 @@ span:hover{
   background-color: rgb(255, 255, 255);
 }
  .skillheader{
-   background-color: #fca311;
+   background-color: #163280;
    border-radius: 5px;
    padding: 5px 0 5px 0;
    font-family: Arial, Helvetica, sans-serif;
@@ -323,13 +338,24 @@ span:hover{
    color: rgb(250, 249, 245);
    font-size: 33px;
  }
+ 
+ .skillheader2{
+  background-color: #163280;
+  border-radius: 5px;
+  padding: 9px 0 9px 0;
+  font-family: Arial, Helvetica, sans-serif;
+  margin-left: 27px;
+  margin-right: 27px;
+  color: rgb(250, 249, 245);
+  font-size: 27px;
+}
 
  .contact{
   padding: 5px 0 5px 0;
  }
 
  #contactnav{
-  background-color: #fca311;
+  background-color: #163280;
   border-radius: 5px;
   padding: 5px 0 5px 0;
   font-family: Arial, Helvetica, sans-serif;
@@ -340,13 +366,22 @@ span:hover{
  }
 
  .about{
-   background-color: #fca311;
+   background-color: #163280;
    border-radius: 5px;
    padding: 5px 0 5px 0;
    margin-bottom: 15px;
    color: rgb(250, 249, 245);
    font-size: 33px;
  }
+
+ .about2{
+  background-color: #163280;
+  border-radius: 5px;
+  padding: 9px 0 9px 0;
+  margin-bottom: 15px;
+  color: rgb(250, 249, 245);
+  font-size: 27px;
+}
 
  .rate{
    padding-left: 15px;
@@ -364,16 +399,21 @@ span:hover{
   font-weight: 700;
  }
 
+ .location{
+  margin-top: 20px;
+  font-weight: 700;
+}
+
  #skillverify{
   min-width: 22%;
   border-radius: 30px;
   margin-left: 30px;
   padding: 9px 0 9px 0;
-  background-color: rgb(6, 6, 129);
+  background-color: rgb(236, 127, 25);
  }
 
  #skillverify:hover{
-    background-color: rgb(37, 37, 194);
+    background-color: rgb(13, 57, 153);
     color: rgb(245, 245, 245);
     font-weight: 400;
  }
@@ -386,10 +426,11 @@ span:hover{
   margin-top: 0;
   font-family: 'Balsamiq Sans', cursive;
   letter-spacing: 0.5px;
+  background-color: #e95d1d;
  }
 
  #edit:hover{
-   background-color: rgb(40, 38, 156);
+   background-color: #bd4d1a;
  }
 
  #order{
@@ -400,9 +441,20 @@ span:hover{
   padding: 8px 0 8px 0;
   margin-top: 0;
   font-family: 'Balsamiq Sans', cursive;
-  background-color: #6e0a0d;
+  background-color: #ec5c1a;
  }
 
  #order:hover{
-   background-color: #a10f14;
+   background-color: #b44815;
  }
+
+ .username2{
+   color: rgb(19, 4, 85);
+   font-weight: 900;
+   
+ }
+
+ .username3{
+  color: #f1bf61;
+}
+
