@@ -54,6 +54,7 @@ router.get("/:id",async (req,res)=>{
       .then(customer => res.json(customer))
       .catch(err => res.status(404).json('Error: '+err));
 })
+
 router.route("/get-customer").post((req, res) => {
   Customer.find({ _id: req.body.user_id }).then((data) => {
     res.send(data[0]);
