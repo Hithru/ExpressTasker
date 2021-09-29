@@ -6,14 +6,16 @@ const Schema = mongoose.Schema;
 
 const serviceProviderSchema = new Schema(
   {
-    username: { type: String, required: true },
-    skills: { type: [String], required: true },
+    username: { type: String, required: true ,minlength:5, maxlength:50},
+    skills: { type: Array, required: true  },
     location: { type: String, required: true },
-    description: { type: String, required: true },
-    review: { type: String, required: true },
-    rating: { type: Number, required: true },
-    email: { type: String, required: true },
-    password: { type: String, required: true },
+    description: { type: String, required: true ,minlength:5, maxlength:7000 },
+    review: { type: String, required: true ,minlength:5, maxlength:50 },
+    rating: { type: Number, required: true ,min:0,max:5 },
+    contactNumber: {type: Number, required: true},
+    profilePicture: {type: String, required: true},
+    email: { type: String, required: true,minlength:5, maxlength:50 },
+    password: { type: String, required: true ,minlength:5, maxlength:1024 },
   },
   {
     timestamps: true,

@@ -1,0 +1,11 @@
+ #customerProfile{
+     background-image:url("./cover.jpg") ;
+ }
+
+ .title{
+     color: rgb(253, 196, 90);
+ }
+
+ .data{
+     color: cornsilk;
+ }

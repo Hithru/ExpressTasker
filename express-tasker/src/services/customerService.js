@@ -14,5 +14,5 @@ export function register(user) {
 }
 
 export default {
-  register,
+  register
 };

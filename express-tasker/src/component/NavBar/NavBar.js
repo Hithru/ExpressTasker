@@ -47,12 +47,18 @@ const NavBar = ({ user }) => {
               <NavLink className="nav-item nav-link" to="#">
                 Messages
               </NavLink>
+              <NavLink className="nav-item nav-link" to="/service-provider-profile">
+                {user.username}
+              </NavLink>
+              
               <NavLink
                 className="nav-item nav-link"
                 to="/service-provider-orders"
               >
                 Order
               </NavLink>
+              <NavLink className="nav-item nav-link" to="/logout">
+                Logout</NavLink>
             </React.Fragment>
           )}
           {user && !user.isServiceProvider && (
@@ -66,11 +72,7 @@ const NavBar = ({ user }) => {
               <NavLink className="nav-item nav-link" to="/customer-orders">
                 Orders
               </NavLink>
-            </React.Fragment>
-          )}
-          {user && (
-            <React.Fragment>
-              <NavLink className="nav-item nav-link" to="/profile">
+              <NavLink className="nav-item nav-link" to="/customer-profile">
                 {user.username}
               </NavLink>
               <NavLink className="nav-item nav-link" to="/logout">
@@ -78,6 +80,16 @@ const NavBar = ({ user }) => {
               </NavLink>
             </React.Fragment>
           )}
+          {/* {user && (
+            <React.Fragment>
+              <NavLink className="nav-item nav-link" to="/service-provider-profile">
+                {user.username}
+              </NavLink>
+              <NavLink className="nav-item nav-link" to="/logout">
+                Logout
+              </NavLink>
+            </React.Fragment>
+          )} */}
         </div>
       </div>
     </nav>

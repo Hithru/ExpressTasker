@@ -4,6 +4,10 @@ import LandingPage from "./component/LandingPage/LandingPage";
 import NavBar_HowItWorks from "./component/NavBar/NavBar_HowItWorks";
 import CustomerSignup from "./component/CustomerSignup/customerSignup";
 import ServiceProviderSignup from "./component/ServiceProviderSignup/serviceProviderSignup";
+import ServiceProviderProfile from "./component/ServiceProviderProfile/serviceProviderProfile";
+import ServiceProviderCard from "./component/ServiceProviderCard/serviceProviderCard";
+import CustomerProfile from "./component/CustomerProfile/customerProfile";
+import EditServiceProviderProfile from"./component/ServiceProviderProfile/editServiceProviderProfile";
 import Search from "./component/Search/Search";
 import SkillVerification from "./component/SkillVerification/skillVerification";
 import CustomerLogin from "./component/CustomerLogin/customerLogin";
@@ -23,6 +27,26 @@ export default (
       path="/service-provider-signup"
       exact
       component={ServiceProviderSignup}
+    />
+    <Route
+      path="/service-provider-profile"
+      exact
+      component={ServiceProviderProfile}
+    />
+    <Route
+      path="/customer-profile"
+      exact
+      component={CustomerProfile}
+    />
+    <Route
+      path="/service-provider-card"
+      exact
+      component={ServiceProviderCard}
+    />
+    <Route
+      path="/edit-service-provider-profile"
+      exact
+      component={EditServiceProviderProfile}
     />
     <Route path="/search" exact component={Search} />
     <Route

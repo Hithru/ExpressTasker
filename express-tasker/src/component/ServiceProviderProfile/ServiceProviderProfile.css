@@ -1,0 +1,460 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Balsamiq+Sans&display=swap');
+
+.App{
+  background-color: #ffffff;
+}
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 40vmin;
+  pointer-events: none;
+}
+
+.label{
+  margin-left: 0px;
+}
+
+#success{
+  font-size: 70px;
+  color: #ffdfac;
+  margin-top: 40px;
+  margin-right: 130px;
+  font-family: 'Ubuntu', sans-serif;
+}
+#profile{
+  text-align: left;
+}
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+#upload{
+ padding: 4px 8px 4px 8px;
+ border-radius: 3px;
+ color: #f1d486;
+ background-color: rgb(14, 25, 92);
+}
+
+#upload:hover{
+  background-color: rgb(10, 18, 66);
+  cursor: pointer;
+}
+
+#uploadName{
+  font-size: 14px;
+}
+
+#input[type="file"]{
+  display: none;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.container-banner{
+  margin-top: 50px;
+}
+
+.username{
+  margin-bottom: 10px;
+  margin-top: 20px;
+  color: #cde8f3;
+}
+
+.header-h1{
+  color: antiquewhite;
+  font-family: 'Roboto Condensed', sans-serif;
+  text-align: center;
+  text-transform: uppercase;
+  /* border-style: solid; */
+  margin:auto;
+  /* border-radius: 15px; */
+  
+
+}
+
+.navbar{
+  background-color: rgb(114, 131, 231);
+  border-radius: 0px;
+  border-style: hidden;
+  padding: 18px; 
+  text-align: center;
+  width: auto;
+  position: sticky;
+  top:0;
+  z-index: 1;
+  margin-top: 60px;
+}
+
+.navbar a{
+  color: rgb(27, 22, 22);
+  text-decoration: none;
+  padding: 10px;
+  font-family: Arial, Helvetica, sans-serif;
+  text-decoration: none;
+  color: black;
+  font-size: 17px;
+  
+
+}
+.navbar a:hover{
+  background-color: #7c7e80;
+  border-style: hidden;
+  border-radius: 5px;
+  color: rgb(255, 254, 253);
+}
+
+@media screen and (max-width:500px){
+  .navbar{
+      background-color: rgb(255, 246, 246);
+      border-radius: 15px;
+      border-style: hidden;
+      padding: 0px; 
+      margin: auto;
+      text-align: center;
+      display: flex;
+      flex-direction: row;
+      height: 50px;
+      padding-bottom: 14px;
+      
+   }
+   #protofolio-link{
+      padding-right: 5px;
+  }
+
+
+}
+@media screen and (max-width:350px){
+
+  .navbar {
+      color: rgb(27, 22, 22);
+      text-decoration: none;
+      padding: 8px;
+      font-family: Arial, Helvetica, sans-serif;
+      text-decoration: none;
+      color: black;
+      font-size: 17px;
+      display: flex;
+      flex-direction: column;
+      height: 200px;
+      
+    }
+}
+
+.container-banner{
+  background-color: #f1f1f1;
+  background-image: url("./cover2.png");
+  text-align: center;
+  border-style: hidden;
+  border-radius: 0px;
+  font-family: 'Ruda', sans-serif;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.banner-card{
+  background-color: #f1f1f1;
+  background-image: url("./card.jpg");
+  text-align: center;
+  border-style: hidden;
+  border-radius: 5px;
+  font-family: 'Ruda', sans-serif;
+  padding-top: 20px;
+  padding-bottom: 10px;
+  margin-left: 29px;
+  margin-top: 80px;
+  width: 1460px;
+}
+
+#profilepic{
+  border-radius: 86px;
+  margin: 30px 0 30px 0;
+}
+
+.container-about{
+  border-radius: 0px;
+  border-style: hidden;
+  padding: 30px; 
+  text-align: center;
+}
+
+.container-about>p{
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: 20px;
+  padding-right: 30px;
+  padding-left: 40px;
+  text-align: left;
+}
+.container-about>h1{
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.flex-project-container{
+
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+}
+.flex-project-container>div{
+  background-color: #f1f1f1;
+  width: 150px;
+  height: 150px;;
+  margin: 10px;
+  text-align: center;
+  line-height: 75px;
+  font-size: 30px;
+  border-style: hidden;
+  border-radius: 30px;
+}
+
+.flex-project-container img{
+  margin-top: 27px;
+}
+
+.flex-project-container > div:hover
+{
+transform: scale(1.1);
+
+}
+
+.projects{
+  background-color: rgb(255, 255, 255);
+  border-radius: 15px;
+  border-style: hidden;
+  padding: 18px; 
+  text-align: center;
+  
+}
+.projects h1{
+  font-family: 'Ruda', sans-serif;
+}
+
+.projects p{
+  font-family: 'Slabo 27px', serif;
+  font-size: 20px;
+}
+
+.container{
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-evenly; 
+  flex-wrap: wrap;
+}
+
+.container a{
+  padding-right: 10px;
+  text-decoration: none;
+
+}
+
+.container p{
+  
+  color: black;
+  font-family: 'Slabo 27px', serif;
+}
+
+.container a:hover
+{
+transform: scale(1.1);
+}
+
+.container-1{
+  color: #e7d7a9;
+  text-align: center;
+  font-family: 'Saira Semi Condensed', sans-serif;
+  font-size: 16px;
+  margin-bottom: 70px;
+  background-color: rgb(6, 5, 80);
+  padding: 9px 0 5px 0;
+}
+
+#contactimg{
+  border-style: hidden;
+  background-color: #f5b959;
+  border-radius: 90px;
+  margin: 5px 0 10px 0;
+}
+
+.container-1 > a{
+  padding-left: 5px;
+  font-size: 22px;
+  text-decoration: none;
+}
+span:hover{
+  text-decoration: none;
+  transform: scale(1.5);
+  
+}
+
+#m{
+  margin-bottom: 5px;
+}
+
+#mail{
+  text-decoration: none;
+  color: rgb(155, 186, 223);
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif, sans-serif;
+  font-size: 16px;
+  font-weight: bold;
+  
+}
+
+#mailmelogo{
+  border-style: hidden;
+  border-radius:5px;
+  width:28px;
+  height:28px;
+  margin: 10px 0 10px 0;
+}
+
+#skillheader{
+  background-color: rgb(255, 255, 255);
+}
+ .skillheader{
+   background-color: #163280;
+   border-radius: 5px;
+   padding: 5px 0 5px 0;
+   font-family: Arial, Helvetica, sans-serif;
+   margin-left: 27px;
+   margin-right: 27px;
+   color: rgb(250, 249, 245);
+   font-size: 33px;
+ }
+ 
+ .skillheader2{
+  background-color: #163280;
+  border-radius: 5px;
+  padding: 9px 0 9px 0;
+  font-family: Arial, Helvetica, sans-serif;
+  margin-left: 27px;
+  margin-right: 27px;
+  color: rgb(250, 249, 245);
+  font-size: 27px;
+}
+
+ .contact{
+  padding: 5px 0 5px 0;
+ }
+
+ #contactnav{
+  background-color: #163280;
+  border-radius: 5px;
+  padding: 5px 0 5px 0;
+  font-family: Arial, Helvetica, sans-serif;
+  margin-left: 27px;
+  margin-right: 27px;
+  color: rgb(250, 249, 245);
+  font-size: 23px;
+ }
+
+ .about{
+   background-color: #163280;
+   border-radius: 5px;
+   padding: 5px 0 5px 0;
+   margin-bottom: 15px;
+   color: rgb(250, 249, 245);
+   font-size: 33px;
+ }
+
+ .about2{
+  background-color: #163280;
+  border-radius: 5px;
+  padding: 9px 0 9px 0;
+  margin-bottom: 15px;
+  color: rgb(250, 249, 245);
+  font-size: 27px;
+}
+
+ .rate{
+   padding-left: 15px;
+   text-align: left;
+ }
+
+ .rate2{
+  margin-top: 20px;
+  margin-bottom: 30px;
+  padding-left: 40px;
+  text-align: left;
+ }
+
+ .hrate{
+  font-weight: 700;
+ }
+
+ .location{
+  margin-top: 20px;
+  font-weight: 700;
+}
+
+ #skillverify{
+  min-width: 22%;
+  border-radius: 30px;
+  margin-left: 30px;
+  padding: 9px 0 9px 0;
+  background-color: rgb(236, 127, 25);
+ }
+
+ #skillverify:hover{
+    background-color: rgb(13, 57, 153);
+    color: rgb(245, 245, 245);
+    font-weight: 400;
+ }
+
+ #edit{
+  min-width: 18%;
+  border-radius: 14px;
+  font-size: 15px;
+  padding: 8px 0 8px 0;
+  margin-top: 0;
+  font-family: 'Balsamiq Sans', cursive;
+  letter-spacing: 0.5px;
+  background-color: #e95d1d;
+ }
+
+ #edit:hover{
+   background-color: #bd4d1a;
+ }
+
+ #order{
+  min-width: 26%;
+  border-radius: 14px;
+  font-size: 16px;
+  letter-spacing: 1px;
+  padding: 8px 0 8px 0;
+  margin-top: 0;
+  font-family: 'Balsamiq Sans', cursive;
+  background-color: #ec5c1a;
+ }
+
+ #order:hover{
+   background-color: #b44815;
+ }
+
+ .username2{
+   color: rgb(19, 4, 85);
+   font-weight: 900;
+   
+ }
+
+ .username3{
+  color: #f1bf61;
+}
+
