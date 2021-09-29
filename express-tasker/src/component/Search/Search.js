@@ -24,6 +24,7 @@ import {
   Select,
 } from "@material-ui/core";
 import { color, fontWeight } from "@material-ui/system";
+import { apiUrl } from "../../config.json";
 const axios = require("axios").default;
 var Scroll = require("react-scroll");
 const useStyles = makeStyles({
@@ -187,7 +188,7 @@ const Search = () => {
     if (use_default_location) {
       // console.log(user);
       axios
-        .post("http://localhost:5000/search/service", {
+        .post(apiUrl + "/search/service", {
           service: search_term,
           location: user.location, //This should be edited as user get data
         })
@@ -202,7 +203,7 @@ const Search = () => {
         });
     } else {
       axios
-        .post("http://localhost:5000/search/service", {
+        .post(apiUrl + "/search/service", {
           service: search_term,
           location: location,
         })
@@ -221,7 +222,7 @@ const Search = () => {
 
   const searchServiceProvider = (service_provider) => {
     axios
-      .post("http://localhost:5000/search/service-provider", {
+      .post(apiUrl + "/search/service-provider", {
         service_provider: service_provider,
       })
       .then(function (response) {
@@ -248,7 +249,7 @@ const Search = () => {
     const temp = auth.getCurrentUser();
     const user_id = temp._id;
     axios
-      .post("http://localhost:5000/customer/get-customer", {
+      .post(apiUrl + "/customer/get-customer", {
         user_id: user_id,
       })
       .then(function (response) {
@@ -347,7 +348,7 @@ const Search = () => {
 
   const renderServiceProviderCard = (card, index) => {
     return (
-      <a href="http://localhost:3000" className="sp-card">
+      <a href="/" className="sp-card">
         <Card sx={{ minWidth: 275 }} className={classes.provider_card}>
           <CardContent>
             <Typography

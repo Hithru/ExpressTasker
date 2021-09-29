@@ -28,6 +28,7 @@ import background7 from "./7.jpg";
 import background8 from "./8.jpg";
 import background9 from "./9.jpg";
 import background10 from "./10.jpg";
+import { apiUrl } from "../../config.json";
 
 const axios = require("axios").default;
 
@@ -67,7 +68,7 @@ class LandingPage_TaskCards extends Component {
     };
 
     axios
-      .get("http://localhost:5000/search/service-provider/top-rated", {})
+      .get(apiUrl + "/search/service-provider/top-rated", {})
       .then(function (response) {
         const lst = response.data;
         setState1(lst);
