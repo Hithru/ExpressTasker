@@ -10,6 +10,8 @@ const auth = require("./routes/auth");
 const orderRouter = require("./routes/order");
 const reviewRouter = require("./routes/review");
 const ratingRouter = require("./routes/rating");
+const searchRouter = require("./routes/search");
+
 require("dotenv").config();
 
 if (!config.get("jwtPrivateKey")) {
@@ -37,6 +39,8 @@ app.use("/auth", auth);
 app.use("/order", orderRouter);
 app.use("/review", reviewRouter);
 app.use("/rating", ratingRouter);
+app.use("/search", searchRouter);
+
 app.listen(port, () => {
   console.log(`Server is running on port: ${port}`);
 });

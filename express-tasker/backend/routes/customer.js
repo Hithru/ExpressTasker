@@ -48,4 +48,10 @@ router.post("/signup", async (req, res) => {
     .send("well Done");
 });
 
+router.route("/get-customer").post((req, res) => {
+  Customer.find({ _id: req.body.user_id }).then((data) => {
+    res.send(data[0]);
+  });
+});
+
 module.exports = router;
