@@ -122,7 +122,8 @@ class LandingPage_TaskCards extends Component {
             </div>
           </div>
           <div class="skills">
-            {this.renderSkillSet(card.skills.slice(0, 3))}
+            {this.renderSkillSet(this.getSkillRows(card.skills.slice(0, 5), 2))}
+            {console.log(this.getSkillRows(card.skills.slice(0, 3), 2))}
           </div>
         </div>
       );
@@ -130,10 +131,43 @@ class LandingPage_TaskCards extends Component {
     }
   };
 
+  getSkillRows = (arr, chunkSize) => {
+    const res = [];
+    for (let i = 0; i < arr.length; i += chunkSize) {
+      const chunk = arr.slice(i, i + chunkSize);
+      res.push(chunk);
+    }
+    return res;
+  };
+
+  renderSkillRow = (skillrow) => {
+    return (
+      <div
+        style={{
+          flexDirection: "row",
+          marginRight: "10px",
+          marginLeft: "10px",
+        }}
+      >
+        {skillrow.map(this.renderSkillChip)}
+      </div>
+    );
+  };
+
   renderSkillSet = (skills) => {
     console.log(skills);
     if (typeof skills !== "undefined") {
-      return <div>{skills.map(this.renderSkillChip)}</div>;
+      return (
+        <div
+          style={{
+            flexDirection: "column",
+            marginRight: "10px",
+            marginLeft: "10px",
+          }}
+        >
+          {skills.map(this.renderSkillRow)}
+        </div>
+      );
     }
   };
 
@@ -153,7 +187,6 @@ class LandingPage_TaskCards extends Component {
             backgroundColor: "#f28f00",
             color: "#00235e",
             fontWeight: "bold",
-            width: "50%",
           }}
           size="large"
         />
@@ -185,6 +218,7 @@ class LandingPage_TaskCards extends Component {
       speed: 500,
       slidesToShow: 3,
       slidesToScroll: 3,
+      variableWidth: false,
     };
 
     return (
