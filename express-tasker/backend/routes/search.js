@@ -18,7 +18,10 @@ router.route("/service").post((req, res) => {
   const location = req.body.location;
   let service_providers = [];
   ServiceProvider.find({
-    skills: { $regex: service, $options: "i" },
+    $or: [
+      { skills: { $regex: service, $options: "i" } },
+      { description: { $regex: service, $options: "i" } },
+    ],
   }).then((data) => {
     service_providers = data;
     // console.log(service_providers);
