@@ -1,7 +1,7 @@
 import "./message.css";
 const Message = ({ own }) => {
   return (
-    <div className="message own">
+    <div className="message">
       <div className="messageTop">
         Vagner International
         <p className="messageText">
