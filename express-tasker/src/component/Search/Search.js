@@ -348,7 +348,8 @@ const Search = () => {
 
   const renderServiceProviderCard = (card, index) => {
     return (
-      <a href="/" className="sp-card">
+      
+      <a href={`/service-provider-card/${card._id}`} className="sp-card">
         <Card sx={{ minWidth: 275 }} className={classes.provider_card}>
           <CardContent>
             <Typography
