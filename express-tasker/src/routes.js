@@ -1,5 +1,5 @@
 import React from "react";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
 import LandingPage from "./component/LandingPage/LandingPage";
 import NavBar_HowItWorks from "./component/NavBar/NavBar_HowItWorks";
 import CustomerSignup from "./component/CustomerSignup/customerSignup";
@@ -7,7 +7,7 @@ import ServiceProviderSignup from "./component/ServiceProviderSignup/serviceProv
 import ServiceProviderProfile from "./component/ServiceProviderProfile/serviceProviderProfile";
 import ServiceProviderCard from "./component/ServiceProviderCard/serviceProviderCard";
 import CustomerProfile from "./component/CustomerProfile/customerProfile";
-import EditServiceProviderProfile from"./component/ServiceProviderProfile/editServiceProviderProfile";
+import EditServiceProviderProfile from "./component/ServiceProviderProfile/editServiceProviderProfile";
 import Search from "./component/Search/Search";
 import SkillVerification from "./component/SkillVerification/skillVerification";
 import CustomerLogin from "./component/CustomerLogin/customerLogin";
@@ -18,6 +18,7 @@ import CustomerReview from "./component/CustomerReview/customerReview";
 import ServiceProviderRating from "./component/ServiceProviderRating/serviceProviderRating";
 import CreateOrder from "./component/CreateOrder/createOrder";
 import ServiceProviderOrderTable from "./component/ServiceProviderOrderTable/serviceProviderOrderTable";
+import auth from "../src/services/customerAuth";
 
 export default (
   <Switch>
@@ -33,13 +34,9 @@ export default (
       exact
       component={ServiceProviderProfile}
     />
+    <Route path="/customer-profile" exact component={CustomerProfile} />
     <Route
-      path="/customer-profile"
-      exact
-      component={CustomerProfile}
-    />
-    <Route
-      path="/service-provider-card"
+      path="/service-provider-card/:id"
       exact
       component={ServiceProviderCard}
     />
@@ -48,7 +45,9 @@ export default (
       exact
       component={EditServiceProviderProfile}
     />
-    <Route path="/search" exact component={Search} />
+    <Route path="/search">
+      {!auth.getCurrentUser() ? <LandingPage /> : <Search />}
+    </Route>
     <Route
       path="/skill-verification-request"
       exact
