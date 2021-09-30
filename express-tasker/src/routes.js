@@ -7,7 +7,7 @@ import ServiceProviderSignup from "./component/ServiceProviderSignup/serviceProv
 import ServiceProviderProfile from "./component/ServiceProviderProfile/serviceProviderProfile";
 import ServiceProviderCard from "./component/ServiceProviderCard/serviceProviderCard";
 import CustomerProfile from "./component/CustomerProfile/customerProfile";
-import EditServiceProviderProfile from"./component/ServiceProviderProfile/editServiceProviderProfile";
+import EditServiceProviderProfile from "./component/ServiceProviderProfile/editServiceProviderProfile";
 import Search from "./component/Search/Search";
 import SkillVerification from "./component/SkillVerification/skillVerification";
 import CustomerLogin from "./component/CustomerLogin/customerLogin";
@@ -33,11 +33,7 @@ export default (
       exact
       component={ServiceProviderProfile}
     />
-    <Route
-      path="/customer-profile"
-      exact
-      component={CustomerProfile}
-    />
+    <Route path="/customer-profile" exact component={CustomerProfile} />
     <Route
       path="/service-provider-card"
       exact
