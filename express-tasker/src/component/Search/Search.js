@@ -347,7 +347,6 @@ const Search = () => {
   };
 
   const renderServiceProviderCard = (card, index) => {
-    console.log("hello");
     return (
       <a href="/" className="sp-card">
         <Card sx={{ minWidth: 275 }} className={classes.provider_card}>

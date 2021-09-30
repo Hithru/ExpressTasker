@@ -1,0 +1,35 @@
+/* .signup-window {
+  font-family: "Montserrat", sans-serif;
+  height: 100%;
+  min-width: 60%;
+  margin-top: 60px;
+  padding-top: 40px;
+  background-color: red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+} */
+.messenger {
+  font-family: "Montserrat", sans-serif;
+  height: 100%;
+  min-width: 100%;
+  margin-top: 60px;
+  padding-top: 40px;
+  display: flex;
+}
+
+.chatMenu {
+  background-color: #00235e;
+  flex: 4;
+}
+
+.chatBox {
+  flex: 8;
+}
+
+.chatMenuWrapper,
+.chatBoxWrapper {
+  padding: 10px;
+  height: 100%;
+}
