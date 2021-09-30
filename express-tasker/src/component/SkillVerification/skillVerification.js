@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import auth from "../../services/serviceProviderAuth";
 
 export default class SkillVerificationRequest extends Component {
   constructor(props) {
@@ -15,6 +16,7 @@ export default class SkillVerificationRequest extends Component {
       confirmedFrom: "",
       attachments: "",
       skills: [],
+      serviceProviderDetails: [],
     };
   }
 
@@ -32,6 +34,19 @@ export default class SkillVerificationRequest extends Component {
       .catch((error) => {
         console.log(error);
       });
+
+      // const user = auth.getCurrentUser();
+      // axios
+      //   .get(`http://localhost:5000/serviceProvider/${user._id}`)
+      //   .then((response) => {
+      //     console.log(response.data)
+      //     this.setState({
+      //         serviceProviderDetails:response.data
+      //     })
+      //   })
+      //   .catch((error) => {
+      //     console.log(error);
+      //   });
   }
 
   onChangeSkills(e) {
@@ -71,12 +86,16 @@ export default class SkillVerificationRequest extends Component {
 
     axios
       .post("http://localhost:5000/skillVerification/send", formData)
-      .then((res) => console.log(res.data));
+      .then((res) =>
+      {console.log(res.data);
+        window.location = "/service-provider-profile";
+      } );
 
-    window.location = "/service-provider-profile";
   }
 
   render() {
+    // const skillArray=[this.state.serviceProviderDetails.skills]
+
     return (
       <div className="signup-window">
         <div className="signup-form">

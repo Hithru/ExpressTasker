@@ -29,7 +29,7 @@ class ServiceProviderProfile extends Component {
       .catch((error) => {
         console.log(error);
       });
-
+      
     }
     
     imageHandler=(e)=>{
@@ -51,6 +51,7 @@ class ServiceProviderProfile extends Component {
   render() {
    
     const {profilepicture}=this.state
+    const skillArray=[this.state.serviceProviderDetails.skills]
     
     return (
       <div className="App">
@@ -85,19 +86,19 @@ class ServiceProviderProfile extends Component {
                   <div className="rate"><h5 class="hrate">Description :</h5></div>
                   <p>{this.state.serviceProviderDetails.description}
                   </p>  
-                  <div className="rate"><h5 class="hrate">Hourly rate : 27</h5></div>
+                  <div className="rate"><h5 class="hrate">Hourly rate : Rs.500</h5></div>
                   <div className="rate"><h5 class="location">Location : {this.state.serviceProviderDetails.location}</h5></div>
                         
         </section>
 
         <h1 className="skillheader">My Skills</h1>
-        <section id="skillheader" className="flex-project-container">
-                  
-                    <div>Plumbing</div>
-                    <div>Trical</div>
-                    <div>Wood</div>  
-                    <div>Plumb</div>
-                    <div>Trical</div>            
+        <section id="skillheader" >
+            {/* {skillArray.map((value)=>{
+              return <div key={value} value={value}>{value}</div>
+            })}  */}
+                      <div className="s">Mounting And Installation</div>
+                      <div className="s">Delivery Service</div>
+                      <div className="s">Home Service</div>             
         </section>
         <div className="rate2">
           <h5 class="hrate">For better customer attraction, verify your skills from here :

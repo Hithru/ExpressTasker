@@ -39,7 +39,7 @@ export default (
       component={CustomerProfile}
     />
     <Route
-      path="/service-provider-card"
+      path="/service-provider-card/:id"
       exact
       component={ServiceProviderCard}
     />

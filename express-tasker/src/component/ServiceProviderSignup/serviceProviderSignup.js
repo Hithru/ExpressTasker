@@ -13,7 +13,6 @@ export default class Signup extends Component {
     this.onChangePassword = this.onChangePassword.bind(this);
     this.onChangeLocation = this.onChangeLocation.bind(this);
     this.onChangeDescription = this.onChangeDescription.bind(this);
-    // this.onChangeSkill = this.onChangeSkill.bind(this);
     this.onChangeSkills = this.onChangeSkills.bind(this);
     this.onChangeContactNumber = this.onChangeContactNumber.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
@@ -21,12 +20,39 @@ export default class Signup extends Component {
     this.state = {
       username: "",
       skill: [],
-      location: "",
+      locations: [
+        "Ampara",
+        "Anuradhapura",
+        "Badulla",
+        "Batticaloa",
+        "Colombo",
+        "Galle",
+        "Gampaha",
+        "Hambanthota",
+        "Jaffna",
+        "Kalutara",
+        "Kandy",
+        "Kilinochchi",
+        "Kurunegala",
+        "Mannar",
+        "Matale",
+        "Matara",
+        "Monaragala",
+        "Mullativu",
+        "Nuwara Eliya",
+        "Polonnaruwa",
+        "Puttalam",
+        "Ratnapura",
+        "Trincomalee",
+        "Vavuniya",
+      ],
+      location:"",
       description: "",
       email: "",
       contactNumber:"",
       password: "",
       skills: [],
+
     };
   }
 
@@ -122,10 +148,7 @@ export default class Signup extends Component {
       .post("http://localhost:5000/serviceProvider/signup", serviceProvider)
       .then((res) => {auth.loginWithJwt(res.headers["x-auth-token"]);
       window.location = "/";}
-      
-      )
-      
-    
+      )  
   }
 
   render() {
@@ -145,25 +168,6 @@ export default class Signup extends Component {
                 onChange={this.onChangeUsername}
               />
             </div>
-            {/* <div className="email">
-              <label>Skills </label>
-              
-              <select ref="userInput"
-                required
-                // multiple={true}
-                className="form-control"
-                value={this.state.skillname}
-                onChange={this.onChangeSkill}>
-                {
-                    this.state.skills.map(function(skillname) {
-                    return <option 
-                        key={skillname}
-                        value={skillname}>{skillname}
-                        </option>;
-                    })
-                }
-            </select>
-            </div> */}
             <div className="email">
               <label>Select Skills </label>
               <form onChange={this.onChangeSkills}>
@@ -179,13 +183,20 @@ export default class Signup extends Component {
             </div>
             <div className="email">
               <label>Location </label>
-              <input
-                type="text"
+              <select ref="userInput"
                 required
                 className="form-control"
                 value={this.state.location}
-                onChange={this.onChangeLocation}
-              />
+                onChange={this.onChangeLocation}>
+                {
+                    this.state.locations.map(function(location) {
+                    return <option 
+                        key={location}
+                        value={location}>{location}
+                        </option>;
+                    })
+                }
+            </select>
             </div>
             <div className="email">
               <label>Description </label>
