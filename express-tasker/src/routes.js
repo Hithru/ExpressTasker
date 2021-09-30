@@ -1,5 +1,5 @@
 import React from "react";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
 import LandingPage from "./component/LandingPage/LandingPage";
 import NavBar_HowItWorks from "./component/NavBar/NavBar_HowItWorks";
 import CustomerSignup from "./component/CustomerSignup/customerSignup";
@@ -18,6 +18,7 @@ import CustomerReview from "./component/CustomerReview/customerReview";
 import ServiceProviderRating from "./component/ServiceProviderRating/serviceProviderRating";
 import CreateOrder from "./component/CreateOrder/createOrder";
 import ServiceProviderOrderTable from "./component/ServiceProviderOrderTable/serviceProviderOrderTable";
+import auth from "../src/services/customerAuth";
 
 export default (
   <Switch>
@@ -44,7 +45,9 @@ export default (
       exact
       component={EditServiceProviderProfile}
     />
-    <Route path="/search" exact component={Search} />
+    <Route path="/search">
+      {!auth.getCurrentUser() ? <LandingPage /> : <Search />}
+    </Route>
     <Route
       path="/skill-verification-request"
       exact
