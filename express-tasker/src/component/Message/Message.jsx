@@ -1,21 +1,49 @@
 import "./message.css";
-const Message = ({ own }) => {
+import { format } from "timeago.js";
+import { apiUrl } from "../../config.json";
+import { useEffect, useRef, useState } from "react";
+const axios = require("axios").default;
+const Message = ({ message, own, currentUser }) => {
+  const [senderName, setSenderName] = useState();
+  useEffect(() => {
+    if (own) {
+      setSenderName(currentUser.username);
+    } else {
+      if (currentUser.isServiceProvider) {
+        getCustomer(message.sender);
+      } else {
+        getServiceProvider(message.sender);
+      }
+    }
+  }, [currentUser]);
+
+  const getCustomer = async (user_id) => {
+    try {
+      const res = await axios.post(apiUrl + "/customer/get-customer", {
+        user_id: user_id,
+      });
+      setSenderName(res.data.username);
+      console.log(senderName);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  const getServiceProvider = async (user_id) => {
+    try {
+      const res = await axios.get(apiUrl + "/serviceProvider/" + user_id);
+      console.log(res);
+      setSenderName(res.data.username);
+    } catch (err) {
+      console.log(err);
+    }
+  };
   return (
-    <div className="message">
+    <div className={own ? "message own" : "message"}>
       <div className="messageTop">
-        Vagner International
-        <p className="messageText">
-          industry. Lorem Ipsum has been the industry's standard dummy text ever
-          since the 1500s, when an unknown printer took a galley of type and
-          scrambled it to make a type specimen book. It has survived not only
-          five centuries, but also the leap into electronic typesetting,
-          remaining essentially unchanged. It was popularised in the 1960s with
-          the release of Letraset sheets containing Lorem Ipsum passages, and
-          more recently with desktop publishing software like Aldus PageMaker
-          including versions of Lorem Ipsu
-        </p>
+        {senderName}
+        <p className="messageText">{message.text}</p>
       </div>
-      <div className="messageBottom"></div>
+      <div className="messageBottom">{format(message.createdAt)}</div>
     </div>
   );
 };

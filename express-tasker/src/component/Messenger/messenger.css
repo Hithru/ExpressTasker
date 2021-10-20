@@ -1,35 +1,113 @@
-/* .signup-window {
-  font-family: "Montserrat", sans-serif;
-  height: 100%;
-  min-width: 60%;
-  margin-top: 60px;
-  padding-top: 40px;
-  background-color: red;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-} */
 .messenger {
   font-family: "Montserrat", sans-serif;
-  height: 100%;
-  min-width: 100%;
-  margin-top: 60px;
+  height: 90vh;
+  height: auto;
+  margin-top: 0.5%;
   padding-top: 40px;
   display: flex;
 }
 
 .chatMenu {
   background-color: #00235e;
-  flex: 4;
+  flex: 3;
+  padding: 5px;
+  height: 90vh;
+}
+
+.chatBoxTop {
+  overflow-y: scroll;
+  position: relative;
 }
 
 .chatBox {
-  flex: 8;
+  flex: 6.5;
+  height: 83vh;
 }
 
+.chatBoxBottom {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom-left-radius: 5px;
+}
+
+.chatMessageInput {
+  width: 80%;
+  height: 90px;
+  padding: 10px;
+  border-radius: 5px;
+}
+.chatSubmitButton {
+  border-radius: 5px;
+}
+.chatSubmitButtonWrapper {
+  width: 15%;
+  height: 40px;
+}
+.aboutRecipient {
+  flex: 3;
+}
+
+.chatBoxWrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
 .chatMenuWrapper,
 .chatBoxWrapper {
   padding: 10px;
   height: 100%;
+}
+
+.chatMenuWrapper {
+  overflow-y: scroll;
+  height: 60vh;
+}
+
+.noConversationText {
+  font-size: 35px;
+  color: gray;
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: center;
+}
+
+.noConversationWrapper {
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
+
+.noConversation {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.chatListTopic {
+  margin-top: 50px;
+  font-size: 26px;
+  color: aliceblue;
+}
+
+.additionalBar {
+  height: 5vh;
+  background-color: #00235e;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: white;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #00235e;
+  border-radius: 10px;
 }
