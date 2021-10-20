@@ -1,0 +1,50 @@
+.infoCard {
+  flex-direction: column;
+  border-radius: 10px;
+  background-color: #00235e;
+  margin: 5%;
+  height: auto;
+  color: aliceblue;
+  padding: 5%;
+}
+.recipientInfoTopic {
+  margin-top: 50px;
+  font-size: 26px;
+  color: #00235e;
+}
+
+.cardUserName {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.cardLocation {
+  font-size: 15 px;
+  align-self: flex-start;
+}
+
+.horizontalLine {
+  width: 100%;
+  height: 50%;
+}
+
+.ratingSection {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cardRating {
+  font-size: 40px;
+  font-weight: bold;
+}
+
+.contactSection {
+  flex-direction: column;
+  justify-self: right;
+}
+
+.skillsSection {
+  flex-direction: column;
+  justify-content: flex-start;
+}

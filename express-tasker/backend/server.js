@@ -11,6 +11,8 @@ const orderRouter = require("./routes/order");
 const reviewRouter = require("./routes/review");
 const ratingRouter = require("./routes/rating");
 const searchRouter = require("./routes/search");
+const conversationRouter = require("./routes/conversations");
+const messageRouter = require("./routes/messages");
 
 require("dotenv").config();
 
@@ -40,6 +42,8 @@ app.use("/order", orderRouter);
 app.use("/review", reviewRouter);
 app.use("/rating", ratingRouter);
 app.use("/search", searchRouter);
+app.use("/conversations", conversationRouter);
+app.use("/messages", messageRouter);
 
 app.listen(port, () => {
   console.log(`Server is running on port: ${port}`);

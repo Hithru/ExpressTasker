@@ -19,6 +19,7 @@ import ServiceProviderRating from "./component/ServiceProviderRating/serviceProv
 import CreateOrder from "./component/CreateOrder/createOrder";
 import ServiceProviderOrderTable from "./component/ServiceProviderOrderTable/serviceProviderOrderTable";
 import auth from "../src/services/customerAuth";
+import Messenger from "./component/Messenger/Messenger";
 
 export default (
   <Switch>
@@ -68,5 +69,6 @@ export default (
     />
     <Route path="/customer-review/:id" component={CustomerReview} />
     <Route path="/create-order" component={CreateOrder} />
+    <Route path="/messenger" component={Messenger} />
   </Switch>
 );
