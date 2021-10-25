@@ -44,9 +44,16 @@ const NavBar = ({ user }) => {
           )}
           {user && user.isServiceProvider && (
             <React.Fragment>
-              <NavLink className="nav-item nav-link" to="#">
+              <NavLink className="nav-item nav-link" to="/messenger">
                 Messages
               </NavLink>
+              <NavLink
+                className="nav-item nav-link"
+                to="/service-provider-profile"
+              >
+                {user.username}
+              </NavLink>
+
               <NavLink
                 className="nav-item nav-link"
                 to="/service-provider-orders"
@@ -70,7 +77,7 @@ const NavBar = ({ user }) => {
               <NavLink className="nav-item nav-link" to="/search">
                 Search
               </NavLink>
-              <NavLink className="nav-item nav-link" to="#">
+              <NavLink className="nav-item nav-link" to="/messenger">
                 Messages
               </NavLink>
               <NavLink className="nav-item nav-link" to="/customer-orders">
