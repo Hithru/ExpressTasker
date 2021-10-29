@@ -1,7 +1,11 @@
 import React, { Component } from "react";
+import { Redirect } from "react-router-dom";
 import axios from "axios";
 import "../ServiceProviderProfile/ServiceProviderProfile.css";
 import contact from "../ServiceProviderProfile/contact.png";
+import auth from "../../services/customerAuth";
+import { apiUrl } from "../../config.json";
+import { ControlPointDuplicateOutlined } from "@material-ui/icons";
 
 class ServiceProviderCard extends Component {
   constructor(props) {
@@ -9,6 +13,7 @@ class ServiceProviderCard extends Component {
 
     this.state = {
       serviceProviderDetails: [],
+      shouldRedirect: false,
     };
   }
 
@@ -27,6 +32,32 @@ class ServiceProviderCard extends Component {
       });
   }
 
+  clickConnect = async () => {
+    const user = auth.getCurrentUser(); //getting current user
+    const user_id = user._id; //getting user's id
+    const service_provider_id = this.state.serviceProviderDetails._id; //getting service provider id
+    try {
+      const res_1 = await axios.get(
+        apiUrl +
+          "/conversations/isThereConversation/" +
+          user_id +
+          "/" +
+          service_provider_id
+      ); //get conversaton list specific to user and service provider
+      console.log(res_1.data.length);
+      if (res_1.data.length <= 0) {
+        const res_2 = await axios.post(apiUrl + "/conversations/", {
+          senderId: user_id,
+          receiverId: service_provider_id,
+        });
+      }
+      this.setState({ shouldRedirect: true });
+      console.log(this.state.shouldRedirect);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   render() {
     const skillArray = [this.state.serviceProviderDetails.skills];
 
@@ -42,9 +73,19 @@ class ServiceProviderCard extends Component {
                 </h1>
               </div>
               <div class="col-3">
-                <a href="/">
-                  <button id="connect">Connect</button>
-                </a>
+                <button
+                  id="connect"
+                  onClick={(e) => {
+                    {
+                      this.clickConnect();
+                    }
+                  }}
+                >
+                  Connect
+                </button>
+                {this.state.shouldRedirect ? (
+                  <Redirect push to="/messenger" />
+                ) : null}
               </div>
             </div>
           </div>
