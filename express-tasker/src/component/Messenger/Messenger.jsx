@@ -8,7 +8,9 @@ import { apiUrl } from "../../config.json";
 import { useEffect, useRef, useState } from "react";
 import { AnnouncementRounded } from "@material-ui/icons";
 import { io } from "socket.io-client";
+import PaymentForm from "../PaymentForm/PaymentForm";
 const axios = require("axios").default;
+
 const Messenger = () => {
   const user = auth.getCurrentUser();
 
@@ -96,6 +98,8 @@ const Messenger = () => {
     setNewMessage("");
   };
 
+  const handlePaymentRequest = () => {};
+
   useEffect(() => {
     scrollRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
@@ -120,7 +124,6 @@ const Messenger = () => {
     <div>
       {" "}
       <div className="messenger">
-        {console.log(messages)}
         <div className="chatMenu">
           <div className="chatListTopic">Chat List</div>
           <div className="chatMenuWrapper">
@@ -165,6 +168,7 @@ const Messenger = () => {
                     }}
                     value={newMessage}
                   ></textarea>
+
                   <div className="chatSubmitButtonWrapper">
                     <button className="chatSubmitButton" onClick={handleSubmit}>
                       Send
@@ -184,6 +188,17 @@ const Messenger = () => {
               conversation={currentChat}
               currentUser={user}
             />
+          </div>
+          <div className="paymentFormWrapper">
+            {!user.isRecipientServiceProvider ? (
+              <PaymentForm
+                isRecipientServiceProvider={!user.isServiceProvider}
+                conversation={currentChat}
+                currentUser={user}
+              />
+            ) : (
+              <></>
+            )}
           </div>
         </div>
       </div>

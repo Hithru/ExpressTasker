@@ -45,6 +45,12 @@
   width: 15%;
   height: 40px;
 }
+
+.paymentRequestButton {
+  border-radius: 5px;
+  background-color: darkslateblue;
+}
+
 .aboutRecipient {
   flex: 3;
 }

@@ -13,6 +13,7 @@ export default class CreateOrder extends Form {
       customer_name: "",
       customer_id: "",
       amount: "",
+      description: "",
       status: "Pending",
       startTime: "",
     },
@@ -25,6 +26,7 @@ export default class CreateOrder extends Form {
     customer_name: Joi.required(),
     customer_id: Joi.required(),
     status: Joi.required(),
+    description: Joi.required().label("Description"),
     amount: Joi.required().label("Amount"),
     startTime: Joi.required().label("StartTime"),
   };
@@ -33,8 +35,8 @@ export default class CreateOrder extends Form {
     const customer = auth.getCurrentUser();
     const customer_id = customer._id;
     const customer_name = customer.username;
-    const serviceProvider_name = "Shamila Nuwan";
-    const serviceProvider_id = "61456374e6137e03ac29478b";
+    const serviceProvider_name = this.props.match.params.name;
+    const serviceProvider_id = this.props.match.params.id;
     const status = "Pending";
 
     this.setState({
@@ -88,7 +90,8 @@ export default class CreateOrder extends Form {
                 />
               </div>
             </form>
-            <form onSubmit={this.handleSubmit} className="signup-form">
+            <form onSubmit={this.doSubmit} className="signup-form">
+              {this.renderInput("description", "Description")}
               {this.renderInput("amount", "Amount")}
               {this.renderInput("startTime", "StarTime", "datetime-local")}
               {this.renderButton("Create Request")}

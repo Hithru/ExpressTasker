@@ -190,7 +190,7 @@
   margin-top: 27px;
 }
 
-.projects{
+.projects {
   background-color: rgb(255, 255, 255);
   border-radius: 15px;
   border-style: hidden;
@@ -220,9 +220,8 @@
 
 .container p {
   color: black;
-  font-family: 'Slabo 27px', serif;
+  font-family: "Slabo 27px", serif;
 }
-
 
 .container-1 {
   color: #e7d7a9;
@@ -361,23 +360,23 @@
   font-weight: 400;
 }
 
- #connect{
+#connect {
   min-width: 22%;
-  width: 100px ;
+  width: 100px;
   border-radius: 30px;
   margin-left: 290px;
   margin-top: 20px;
   padding: 9px 4px 9px 0;
   background-color: rgb(236, 127, 25);
- }
+}
 
- #connect:hover{
+#connect:hover {
   background-color: rgb(13, 57, 153);
   color: rgb(245, 245, 245);
   font-weight: 400;
 }
 
- #edit{
+#edit {
   min-width: 18%;
   border-radius: 14px;
   font-size: 15px;
@@ -407,18 +406,17 @@
   background-color: #b44815;
 }
 
- .username2{
-   color: rgb(19, 4, 85);
-   font-weight: 900;
-   margin-left: 200px;
- }
+.username2 {
+  color: rgb(19, 4, 85);
+  font-weight: 900;
+  margin-left: 200px;
+}
 
 .username3 {
   color: #f1bf61;
 }
 
-.s{
+.s {
   font-size: 25px;
   font-weight: 900px;
 }
-
