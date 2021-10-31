@@ -31,7 +31,6 @@ const Message = ({ message, own, currentUser }) => {
   const getServiceProvider = async (user_id) => {
     try {
       const res = await axios.get(apiUrl + "/serviceProvider/" + user_id);
-      console.log(res);
       setSenderName(res.data.username);
     } catch (err) {
       console.log(err);

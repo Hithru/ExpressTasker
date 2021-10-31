@@ -15,6 +15,7 @@ export default class Signup extends Component {
     this.onChangeDescription = this.onChangeDescription.bind(this);
     this.onChangeSkills = this.onChangeSkills.bind(this);
     this.onChangeContactNumber = this.onChangeContactNumber.bind(this);
+    this.onChangeMerchantID = this.onChangeMerchantID.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
 
     this.state = {
@@ -52,6 +53,7 @@ export default class Signup extends Component {
       contactNumber: "",
       password: "",
       skills: [],
+      merchantId: "",
     };
   }
 
@@ -122,6 +124,12 @@ export default class Signup extends Component {
     });
   }
 
+  onChangeMerchantID(e) {
+    this.setState({
+      merchantId: e.target.value,
+    });
+  }
+
   onSubmit = async (e) => {
     e.preventDefault();
 
@@ -137,6 +145,7 @@ export default class Signup extends Component {
       location: this.state.location,
       description: this.state.description,
       contactNumber: this.state.contactNumber,
+      merchantId: this.state.merchantId,
       email: this.state.email,
       password: this.state.password,
     };
@@ -217,6 +226,15 @@ export default class Signup extends Component {
                 className="form-control"
                 value={this.state.contactNumber}
                 onChange={this.onChangeContactNumber}
+              />
+            </div>
+            <div className="email">
+              <label>PayHere Merchant ID </label>
+              <input
+                type="text"
+                className="form-control"
+                value={this.state.merchantId}
+                onChange={this.onChangeMerchantID}
               />
             </div>
             <div className="email">

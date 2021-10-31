@@ -60,6 +60,7 @@ export function createOrder(order) {
     serviceProvider_name: order.serviceProvider_name,
     customer_name: order.customer_name,
     customer_id: order.customer_id,
+    description: order.description,
     amount: order.amount,
     status: order.status,
     startTime: order.startTime,

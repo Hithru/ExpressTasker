@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
 import axios from "axios";
-import "../ServiceProviderProfile/ServiceProviderProfile.css";
+// import "../ServiceProviderProfile/ServiceProviderProfile.css";
 import contact from "../ServiceProviderProfile/contact.png";
 import auth from "../../services/customerAuth";
 import { apiUrl } from "../../config.json";
 import { ControlPointDuplicateOutlined } from "@material-ui/icons";
+import "./serviceprovidercard.css";
 
 class ServiceProviderCard extends Component {
   constructor(props) {
@@ -60,37 +61,44 @@ class ServiceProviderCard extends Component {
 
   render() {
     const skillArray = [this.state.serviceProviderDetails.skills];
-
+    console.log(this.state.serviceProviderDetails);
     return (
       <div className="App">
-        <section className="banner-card">
-          <div class="container">
-            <div class="row">
-              <div class="col-9">
-                <h1 className="username2">
-                  <h5 className="username3">service provider</h5>{" "}
-                  {this.state.serviceProviderDetails.username}
-                </h1>
-              </div>
-              <div class="col-3">
-                <button
-                  id="connect"
-                  onClick={(e) => {
-                    {
-                      this.clickConnect();
-                    }
-                  }}
-                >
-                  Connect
-                </button>
-                {this.state.shouldRedirect ? (
-                  <Redirect push to="/messenger" />
-                ) : null}
-              </div>
+        <section className="banner-card" style={{ width: "97%" }}>
+          <div class="container" style={{ flexDirection: "column" }}>
+            <div class="col-9">
+              <h1 className="username2">
+                <h5 className="username3">service provider</h5>{" "}
+                {this.state.serviceProviderDetails.username}
+              </h1>
+            </div>
+            <div className="buttonGroup" style={{ flexDirection: "row" }}>
+              <button
+                className="button"
+                onClick={(e) => {
+                  {
+                    this.clickConnect();
+                  }
+                }}
+              >
+                Connect
+              </button>
+              <a
+                href={
+                  "/create-order/" +
+                  this.state.serviceProviderDetails._id +
+                  "/" +
+                  this.state.serviceProviderDetails.username
+                }
+              >
+                <button className="button">Create Order</button>
+              </a>
+              {this.state.shouldRedirect ? (
+                <Redirect push to="/messenger" />
+              ) : null}
             </div>
           </div>
         </section>
-
         <section id="container-about" className="container-about">
           <h1 className="about2">About Service Provider</h1>
           <div className="rate">
@@ -106,8 +114,7 @@ class ServiceProviderCard extends Component {
             </h5>
           </div>
         </section>
-
-        <h1 className="skillheader2">Services</h1>
+        \<h1 className="skillheader2">Services</h1>
         <section id="skillheader">
           {/* {skillArray.map((value)=>{
                           return <div key={value} value={value}>{value}</div>
@@ -116,7 +123,6 @@ class ServiceProviderCard extends Component {
           <div className="s">Delivery Service</div>
           <div className="s">Home Service</div>
         </section>
-
         <h1 id="contactnav">Contact Information</h1>
         <section className="container-1">
           <img
