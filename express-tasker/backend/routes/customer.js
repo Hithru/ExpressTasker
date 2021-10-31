@@ -1,6 +1,7 @@
 const express = require("express");
 const router = require("express").Router();
 const { Customer } = require("../models/customer.model");
+const { CustomerComplaint } = require("../models/customerComplaint.model");
 const bcrypt = require("bcrypt");
 const Joi = require("joi");
 
@@ -48,17 +49,41 @@ router.post("/signup", async (req, res) => {
     .send("well Done");
 });
 
-
-router.get("/:id",async (req,res)=>{
+router.get("/:id", async (req, res) => {
   Customer.findById(req.params.id)
-      .then(customer => res.json(customer))
-      .catch(err => res.status(404).json('Error: '+err));
-})
+    .then((customer) => res.json(customer))
+    .catch((err) => res.status(404).json("Error: " + err));
+});
 
 router.route("/get-customer").post((req, res) => {
   Customer.find({ _id: req.body.user_id }).then((data) => {
     res.send(data[0]);
   });
+});
+
+router.post("/createComplaint", async (req, res) => {
+  console.log("data came to backend");
+  const schema = Joi.object({
+    customer_id: Joi.string().min(6).required(),
+    customer_name: Joi.string().min(6).required(),
+    customer_email: Joi.string().min(6).required(),
+    description: Joi.string().required(),
+  });
+
+  const { error } = schema.validate(req.body);
+  if (error) return res.status(400).send(error.details[0].message);
+  console.log("validation pass");
+
+  const complaint = new CustomerComplaint({
+    customer_id: req.body.customer_id,
+    customer_name: req.body.customer_name,
+    customer_email: req.body.customer_email,
+    description: req.body.description,
+    isSolved: false,
+  });
+  await complaint.save();
+
+  res.send(complaint);
 });
 
 module.exports = router;
