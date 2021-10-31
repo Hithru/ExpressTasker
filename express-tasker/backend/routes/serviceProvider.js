@@ -1,5 +1,8 @@
 const router = require("express").Router();
 const ServiceProvider = require("../models/serviceprovider.model");
+const {
+  ServiceProviderComplaint,
+} = require("../models/serviceProviderComplaint.model");
 const bcrypt = require("bcrypt");
 const Joi = require("joi");
 
@@ -92,4 +95,28 @@ router.route("/:id").get((req, res) => {
     .catch((err) => res.status(404).json("Error: " + err));
 });
 
+router.post("/createComplaint", async (req, res) => {
+  console.log("data came to backend");
+  const schema = Joi.object({
+    serviceProvider_id: Joi.string().min(6).required(),
+    serviceProvider_name: Joi.string().min(6).required(),
+    serviceProvider_email: Joi.string().min(6).required(),
+    description: Joi.string().required(),
+  });
+
+  const { error } = schema.validate(req.body);
+  if (error) return res.status(400).send(error.details[0].message);
+  console.log("validation pass");
+
+  const complaint = new ServiceProviderComplaint({
+    serviceProvider_id: req.body.serviceProvider_id,
+    serviceProvider_name: req.body.serviceProvider_name,
+    serviceProvider_email: req.body.serviceProvider_email,
+    description: req.body.description,
+    isSolved: false,
+  });
+  await complaint.save();
+
+  res.send(complaint);
+});
 module.exports = router;
