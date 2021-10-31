@@ -200,6 +200,7 @@ const PaymentForm = ({
                 backgroundColor: "#f28f00",
                 width: "80%",
                 marginTop: "5%",
+                fontWeight: "bold",
               }}
             >
               Pay
