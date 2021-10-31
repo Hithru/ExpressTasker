@@ -14,6 +14,7 @@ router.post("/createOrder", async (req, res) => {
     serviceProvider_id: Joi.string().min(6).required(),
     serviceProvider_name: Joi.string().min(6).required(),
     amount: Joi.number().required(),
+    description: Joi.string().required(),
     status: Joi.string(),
     startTime: Joi.date(),
   });
@@ -28,6 +29,7 @@ router.post("/createOrder", async (req, res) => {
     serviceProvider_id: req.body.serviceProvider_id,
     serviceProvider_name: req.body.serviceProvider_name,
     amount: req.body.amount,
+    description: req.body.description,
     status: req.body.status,
     startTime: req.body.startTime,
   });
@@ -61,6 +63,29 @@ router.post("/serviceProvider", async (req, res) => {
   }).sort("-status");
 
   console.log(orders);
+  res.send(orders);
+});
+
+//getting unclosed orders which are specific to both customer and service provider
+router.post("/commonUnclosedOrders", async (req, res) => {
+  const customer_id = req.body.customer_id;
+  const service_provider_id = req.body.service_provider_id;
+  const closed_string = "Closed";
+  const cancel_string = "Canceled";
+  const pending_string = "Pending";
+  const orders = await Order.find({
+    $and: [
+      { serviceProvider_id: service_provider_id },
+      { customer_id: customer_id },
+      {
+        $and: [
+          { status: { $not: { $eq: cancel_string } } },
+          { status: { $not: { $eq: closed_string } } },
+          { status: { $not: { $eq: pending_string } } },
+        ],
+      },
+    ],
+  });
   res.send(orders);
 });
 
@@ -127,6 +152,31 @@ router.post("/rating", async (req, res) => {
     });
 
     res.send(order);
+  }
+});
+
+//Listening to the payment notification on the back end
+router.post("/paymentListen", async (req, res) => {
+  const merchant_id = req.body.merchant_id;
+  const order_id = req.body.order_id;
+  const payhere_amount = req.body.payhere_amount;
+  const payhere_currency = req.body.payhere_currency;
+  const status_code = req.body.status_code;
+  const payhere_secret = req.body.payhere_secret;
+  const md5sig = req.body.md5sig;
+  const checking_value = strtoupper(
+    md5(
+      merchant_id +
+        order_id +
+        payhere_amount +
+        payhere_currency +
+        status_code +
+        strtoupper(md5(payhere_secret))
+    )
+  );
+  if (md5sig == checking_value) {
+    res.send("OK");
+    console.log("Payment OK");
   }
 });
 

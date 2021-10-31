@@ -1,0 +1,14 @@
+.button {
+  min-width: 22%;
+  width: 100px;
+  border-radius: 30px;
+  padding: 9px 4px 9px 0;
+  margin: 2%;
+  background-color: rgb(236, 127, 25);
+}
+
+.button:hover {
+  background-color: rgb(13, 57, 153);
+  color: rgb(245, 245, 245);
+  font-weight: 400;
+}

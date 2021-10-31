@@ -68,7 +68,7 @@ export default (
       component={ServiceProviderRating}
     />
     <Route path="/customer-review/:id" component={CustomerReview} />
-    <Route path="/create-order" component={CreateOrder} />
+    <Route path="/create-order/:id/:name" component={CreateOrder} />
     <Route path="/messenger" component={Messenger} />
   </Switch>
 );

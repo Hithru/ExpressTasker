@@ -8,6 +8,7 @@ import { apiUrl } from "../../config.json";
 import { useEffect, useRef, useState } from "react";
 import { AnnouncementRounded } from "@material-ui/icons";
 import { io } from "socket.io-client";
+import PaymentForm from "../PaymentForm/PaymentForm";
 const axios = require("axios").default;
 
 const Messenger = () => {
@@ -123,7 +124,6 @@ const Messenger = () => {
     <div>
       {" "}
       <div className="messenger">
-        {console.log(messages)}
         <div className="chatMenu">
           <div className="chatListTopic">Chat List</div>
           <div className="chatMenuWrapper">
@@ -188,6 +188,17 @@ const Messenger = () => {
               conversation={currentChat}
               currentUser={user}
             />
+          </div>
+          <div className="paymentFormWrapper">
+            {!user.isRecipientServiceProvider ? (
+              <PaymentForm
+                isRecipientServiceProvider={!user.isServiceProvider}
+                conversation={currentChat}
+                currentUser={user}
+              />
+            ) : (
+              <></>
+            )}
           </div>
         </div>
       </div>

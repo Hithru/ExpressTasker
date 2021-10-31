@@ -3,8 +3,7 @@ const ServiceProvider = require("../models/serviceprovider.model");
 const bcrypt = require("bcrypt");
 const Joi = require("joi");
 
-router.post("/signup",async (req, res) => {
-
+router.post("/signup", async (req, res) => {
   // const schema = Joi.object({
   //   username: Joi.string().min(6).required(),
   //   email: Joi.string().min(6).required().email(),
@@ -22,12 +21,13 @@ router.post("/signup",async (req, res) => {
 
   const username = req.body.username;
   const skills = req.body.skill;
-  const location =req.body.location;
-  const description=req.body.description;
-  const review ="No reviews";
+  const location = req.body.location;
+  const description = req.body.description;
+  const review = "No reviews";
   const rating = 0;
   const contactNumber = req.body.contactNumber;
-  const profilePicture= "no picture";
+  const merchantId = req.body.merchantId;
+  const profilePicture = "no picture";
   const email = req.body.email;
   const password = req.body.password;
 
@@ -39,6 +39,7 @@ router.post("/signup",async (req, res) => {
     review,
     rating,
     contactNumber,
+    merchantId,
     profilePicture,
     email,
     password,
@@ -47,52 +48,48 @@ router.post("/signup",async (req, res) => {
   console.log(serviceProvider);
   const salt = await bcrypt.genSalt(10);
   serviceProvider.password = await bcrypt.hash(serviceProvider.password, salt);
-  await serviceProvider.save()
-  
+  await serviceProvider.save();
+
   // serviceProvider
   //   .save()
   //   .then(() => res.json("Service Provider signup successfully..."))
   //   .catch((err) => res.status(404).json("Error: " + err));
-  
+
   const token = serviceProvider.generateAuthToken();
   res
     .header("x-auth-token", token)
     .header("access-control-expose-headers", "x-auth-token")
     .status(200)
     .send("well Done");
-    
 });
 
-
-router.post('/edit/:id', async(req,res)=>{
+router.post("/edit/:id", async (req, res) => {
   ServiceProvider.findById(req.params.id)
-      .then(async(serviceProvider) => {
-          serviceProvider.username=req.body.username;
-          serviceProvider.description=req.body.description;
-          serviceProvider.location=req.body.location;
-          serviceProvider.contactNumber=req.body.contactNumber;
-          serviceProvider.skill=req.body.skill;
+    .then(async (serviceProvider) => {
+      serviceProvider.username = req.body.username;
+      serviceProvider.description = req.body.description;
+      serviceProvider.location = req.body.location;
+      serviceProvider.contactNumber = req.body.contactNumber;
+      serviceProvider.skill = req.body.skill;
+      serviceProvider.merchantId = req.body.merchantId;
+      serviceProvider
+        .save()
+        .then(() => res.json("Service Provider Profile Updated..."))
+        .catch((err) => res.status(404).json("Error: " + err));
+    })
+    .catch((err) => res.status(404).json("Error: " + err));
+});
 
-          serviceProvider.save()
-              .then(()=>res.json('Service Provider Profile Updated...'))
-              .catch(err => res.status(404).json('Error: '+err))
-      })
-      .catch(err => res.status(404).json('Error: '+err))
-})
-
-
-router.route('/').get((req,res)=>{
+router.route("/").get((req, res) => {
   ServiceProvider.find()
     .then((serviceProviders) => res.json(serviceProviders))
     .catch((err) => res.status(404).json("Error: " + err));
 });
 
-router.route('/:id').get((req,res)=>{
+router.route("/:id").get((req, res) => {
   ServiceProvider.findById(req.params.id)
-      .then(serviceProvider => res.json(serviceProvider))
-      .catch(err => res.status(404).json('Error: '+err));
-})
-
-
+    .then((serviceProvider) => res.json(serviceProvider))
+    .catch((err) => res.status(404).json("Error: " + err));
+});
 
 module.exports = router;
