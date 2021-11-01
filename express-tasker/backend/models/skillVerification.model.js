@@ -13,6 +13,9 @@ const skillVerificationSchema = new Schema(
   }
 );
 
-const SkillVerification = mongoose.model("SkillVerification", skillVerificationSchema);
+const SkillVerification = mongoose.model(
+  "SkillVerification",
+  skillVerificationSchema
+);
 
 module.exports = SkillVerification;

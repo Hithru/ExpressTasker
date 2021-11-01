@@ -22,6 +22,7 @@ const serviceProviderSchema = new Schema(
     profilePicture: { type: String, required: true },
     email: { type: String, required: true, minlength: 5, maxlength: 50 },
     password: { type: String, required: true, minlength: 5, maxlength: 1024 },
+    isVerified: { type: Boolean, required: true },
   },
   {
     timestamps: true,
