@@ -3,16 +3,18 @@ import "../ServiceProviderSignup/serviceProviderSignup.css";
 import auth from "../../services/customerAuth";
 import axios from "axios";
 import { Checkbox } from "@material-ui/core";
+import { apiUrl } from "../../config.json";
 
 export default class Signup extends Component {
   constructor(props) {
     super(props);
-    
+
     this.onChangeUsername = this.onChangeUsername.bind(this);
     this.onChangeLocation = this.onChangeLocation.bind(this);
     this.onChangeDescription = this.onChangeDescription.bind(this);
     this.onChangeSkills = this.onChangeSkills.bind(this);
     this.onChangeContactNumber = this.onChangeContactNumber.bind(this);
+    this.onChangeMerchantID = this.onChangeMerchantID.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
 
     this.state = {
@@ -47,7 +49,8 @@ export default class Signup extends Component {
       location:"",
       description: "",
       email: "",
-      contactNumber:"",
+      contactNumber: "",
+      merchantId: "",
       password: "",
       skills: [],
 
@@ -58,7 +61,7 @@ export default class Signup extends Component {
 
   componentDidMount() {
     axios
-      .get("http://localhost:5000/skill")
+      .get(`${apiUrl}/skill`)
       .then((response) => {
         if (response.data.length > 0) {
           this.setState({
@@ -98,16 +101,16 @@ export default class Signup extends Component {
 
   onChangeSkill(e) {
     this.setState({
-      skillname: e.target.value
+      skillname: e.target.value,
     });
   }
 
   onChangeSkills(e) {
-    var value=e.target.value
-    var previousState= this.state.skill
-    
+    var value = e.target.value;
+    var previousState = this.state.skill;
+
     this.setState({
-      skill: [...previousState,value]
+      skill: [...previousState, value],
     });
   }
 
@@ -123,14 +126,20 @@ export default class Signup extends Component {
     });
   }
 
-  onSubmit=async(e)=> {
+  onChangeMerchantID(e) {
+    this.setState({
+      merchantId: e.target.value,
+    });
+  }
+
+  onSubmit = async (e) => {
     e.preventDefault();
 
-    var skillArray= this.state.skill
-    var skill=[];
-    var skill=skillArray.filter(function(elem,pos){
-      return skillArray.indexOf(elem)==pos;
-    })
+    var skillArray = this.state.skill;
+    var skill = [];
+    var skill = skillArray.filter(function (elem, pos) {
+      return skillArray.indexOf(elem) == pos;
+    });
 
     const serviceProvider = {
       username: this.state.username,
@@ -144,14 +153,13 @@ export default class Signup extends Component {
     const user= auth.getCurrentUser();
 
     axios
-      .post(`http://localhost:5000/serviceProvider/edit/${user._id}`, serviceProvider)
+      .post(`${apiUrl}/serviceProvider/edit/${user._id}`, serviceProvider)
       .then((res) => {
       window.location = "/service-provider-profile";}
       )  
   }
 
   render() {
-    
     return (
       <div className="signup-window">
         <div className="signup-form">
@@ -170,15 +178,18 @@ export default class Signup extends Component {
             <div className="email">
               <label>Select Skills </label>
               <form onChange={this.onChangeSkills}>
-              {
-                this.state.skills.map(function(skillname) {
-                return <div><Checkbox
-                value={skillname}
-                // onChange={this.onChangeSkills}
-                />{skillname}</div>;
-                })
-
-            }</form>
+                {this.state.skills.map(function (skillname) {
+                  return (
+                    <div>
+                      <Checkbox
+                        value={skillname}
+                        // onChange={this.onChangeSkills}
+                      />
+                      {skillname}
+                    </div>
+                  );
+                })}
+              </form>
             </div>
             <div className="email">
               <label>Location </label>

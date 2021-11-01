@@ -1,0 +1,25 @@
+.paymentFormCard {
+  flex-direction: column;
+  border-radius: 10px;
+  background-color: #00235e;
+  margin: 5%;
+  height: auto;
+  color: aliceblue;
+  padding: 5%;
+  display: flex;
+  justify-content: center;
+}
+
+.paymentFormTopic {
+  margin-top: 10px;
+  font-size: 26px;
+  color: #00235e;
+}
+
+.orderSelect {
+  width: 200px;
+}
+
+.textArea {
+  background-color: white;
+}

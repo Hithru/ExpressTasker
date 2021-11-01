@@ -1,63 +1,41 @@
 import React, { Component } from "react";
 import axios from "axios";
 import auth from "../../services/serviceProviderAuth";
+import {apiUrl} from "../../config.json";
 
 export default class SkillVerificationRequest extends Component {
   constructor(props) {
     super(props);
 
-    this.onChangeSkills = this.onChangeSkills.bind(this);
-    this.onChangeConfirmedFrom = this.onChangeConfirmedFrom.bind(this);
+    this.onChangeDescription = this.onChangeDescription.bind(this);
     this.onChangeAttachments = this.onChangeAttachments.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
 
     this.state = {
-      skill: "",
-      confirmedFrom: "",
+      description: "",
       attachments: "",
-      skills: [],
       serviceProviderDetails: [],
     };
   }
-
   componentDidMount() {
+    const user = auth.getCurrentUser();
     axios
-      .get("http://localhost:5000/skill")
+      .get(`${apiUrl}/serviceProvider/${user._id}`)
       .then((response) => {
-        if (response.data.length > 0) {
-          this.setState({
-            skills: response.data.map((skill) => skill.skillname),
-            skillname: response.data[0].skillname,
-          });
-        }
+        console.log(response.data)
+        this.setState({
+            serviceProviderDetails:response.data
+        })
       })
       .catch((error) => {
         console.log(error);
       });
-
-      // const user = auth.getCurrentUser();
-      // axios
-      //   .get(`http://localhost:5000/serviceProvider/${user._id}`)
-      //   .then((response) => {
-      //     console.log(response.data)
-      //     this.setState({
-      //         serviceProviderDetails:response.data
-      //     })
-      //   })
-      //   .catch((error) => {
-      //     console.log(error);
-      //   });
-  }
-
-  onChangeSkills(e) {
+      
+    }
+  
+  onChangeDescription(e) {
     this.setState({
-      skill: e.target.value,
-    });
-  }
-
-  onChangeConfirmedFrom(e) {
-    this.setState({
-      confirmedFrom: e.target.value,
+      description: e.target.value,
     });
   }
 
@@ -72,20 +50,24 @@ export default class SkillVerificationRequest extends Component {
 
     const formData = new FormData();
 
-    formData.append("skills", this.state.skill);
-    formData.append("confirmedFrom", this.state.confirmedFrom);
+    formData.append("serviceProviderName", this.state.serviceProviderDetails.username);
+    formData.append("serviceProviderId", this.state.serviceProviderDetails._id);
+    formData.append("email", this.state.serviceProviderDetails.email);
+    formData.append("description", this.state.description);
     formData.append("attachments", this.state.attachments);
 
     console.log(formData);
 
     const skillVerification = {
-      skill: this.state.skill,
-      confirmedFrom : this.state.confirmedFrom,
+      serviceProviderName: this.state.serviceProviderDetails.username,
+      serviceProviderId: this.state.serviceProviderDetails._id,
+      email: this.state.serviceProviderDetails.email,
+      description : this.state.description,
       attachments : this.state.attachments
     }
 
     axios
-      .post("http://localhost:5000/skillVerification/send", formData)
+      .post(`${apiUrl}/skillVerification/send`, formData)
       .then((res) =>
       {console.log(res.data);
         window.location = "/service-provider-profile";
@@ -99,39 +81,22 @@ export default class SkillVerificationRequest extends Component {
     return (
       <div className="signup-window">
         <div className="signup-form">
-          <h2>Skill Verification Request</h2>
+          <h2>Service Provider Verification Request</h2>
           <form
             onSubmit={this.onSubmit}
             encType="multipart/form-data"
             noValidae
             className="signup-form"
           >
+            
             <div className="email">
-              <label>Choose Skill </label>
-              <select
-                ref="userInput"
-                required
-                className="form-control"
-                value={this.state.skill}
-                onChange={this.onChangeSkills}
-              >
-                {this.state.skills.map(function (skillname) {
-                  return (
-                    <option key={skillname} value={skillname}>
-                      {skillname}
-                    </option>
-                  );
-                })}
-              </select>
-            </div>
-            <div className="email">
-              <label>Confirmed Company Name </label>
+              <label>Description </label>
               <input
                 type="text"
                 required
                 className="form-control"
-                value={this.state.confirmedFrom}
-                onChange={this.onChangeConfirmedFrom}
+                value={this.state.description}
+                onChange={this.onChangeDescription}
               />
             </div>
             <div className="email">

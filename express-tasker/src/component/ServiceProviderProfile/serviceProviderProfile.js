@@ -4,6 +4,7 @@ import "./ServiceProviderProfile.css";
 import profilepicture from './profile.jpg';
 import auth from "../../services/serviceProviderAuth";
 import contact from "./contact.png";
+import {apiUrl} from "../../config.json";
 
 class ServiceProviderProfile extends Component {
     constructor(props){
@@ -19,7 +20,7 @@ class ServiceProviderProfile extends Component {
     componentDidMount() {
     const user = auth.getCurrentUser();
     axios
-      .get(`http://localhost:5000/serviceProvider/${user._id}`)
+      .get(`${apiUrl}/serviceProvider/${user._id}`)
       .then((response) => {
         console.log(response.data)
         this.setState({
@@ -44,7 +45,7 @@ class ServiceProviderProfile extends Component {
       reader.readAsDataURL(e.target.files[0])
 
       axios
-        .post("http://localhost:5000/serviceProvider/addProfilePicture", profilepicture)
+        .post(`${apiUrl}/serviceProvider/addProfilePicture`, profilepicture)
         .then((res) => console.log(res.data));
     }
     

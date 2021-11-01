@@ -17,13 +17,19 @@ const storage = multer.diskStorage({
 const uploads = multer({ storage: storage });
 
 router.route("/send").post(uploads.single("attachments"), (req, res) => {
-  const skills = req.body.skills;
-  const confirmedFrom = req.body.confirmedFrom;
+  const serviceProviderName = req.body.serviceProviderName;
+  const serviceProviderId = req.body.serviceProviderId;
+  const email = req.body.email;
+  const description = req.body.description;
+  const isSolved = false;
   const attachments = req.file.originalname;
 
   const newSkillVerificationRequest = new SkillVerification({
-    skills,
-    confirmedFrom,
+    serviceProviderName,
+    serviceProviderId,
+    email,
+    description,
+    isSolved,
     attachments,
   });
 
