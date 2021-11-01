@@ -5,21 +5,6 @@ const Joi = require("joi");
 
 router.post("/signup",async (req, res) => {
 
-  // const schema = Joi.object({
-  //   username: Joi.string().min(6).required(),
-  //   email: Joi.string().min(6).required().email(),
-  //   password: Joi.string().min(6).required(),
-  // });
-
-  // const { error } = schema.validate(req.body);
-  // if (error) return res.status(400).send(error.details[0].message);
-  // console.log("validation pass");
-
-  // let service_provider =await ServiceProvider.findOne({ email: req.body.email });
-
-  // if (service_provider) return res.status(400).send("User already registered.");
-  // console.log("user exist pass");
-
   const username = req.body.username;
   const skills = req.body.skill;
   const location =req.body.location;
@@ -48,11 +33,6 @@ router.post("/signup",async (req, res) => {
   const salt = await bcrypt.genSalt(10);
   serviceProvider.password = await bcrypt.hash(serviceProvider.password, salt);
   await serviceProvider.save()
-  
-  // serviceProvider
-  //   .save()
-  //   .then(() => res.json("Service Provider signup successfully..."))
-  //   .catch((err) => res.status(404).json("Error: " + err));
   
   const token = serviceProvider.generateAuthToken();
   res
