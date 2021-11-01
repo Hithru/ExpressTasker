@@ -34,6 +34,32 @@ router.post("/createReview", async (req, res) => {
   });
   await review.save();
 
+  const serviceProviderRatings = await Review.find({
+    serviceProvider_id: req.body.serviceProvider_id,
+  });
+
+  let sumRating = 0;
+  let numberOfRatings = serviceProviderRatings.length;
+
+  serviceProviderRatings.forEach(function (arrayItem) {
+    sumRating += arrayItem.rating;
+    // console.log(arrayItem.rating);
+  });
+
+  // console.log(serviceProviderRatings);
+  // console.log(numberOfRatings);
+  // console.log(sumRating);
+  const finalNewRating = (sumRating / numberOfRatings).toFixed(1);
+
+  const serviceProvider = await ServiceProvider.findByIdAndUpdate(
+    req.body.serviceProvider_id,
+    {
+      rating: finalNewRating,
+    }
+  );
+
+  // console.log(finalNewRating);
+  // console.log(serviceProvider);
   res.send(review);
 });
 
