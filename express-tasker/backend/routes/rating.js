@@ -30,8 +30,32 @@ router.post("/createRating", async (req, res) => {
     serviceProvider_name: req.body.serviceProvider_name,
     rating: req.body.rating,
   });
+
   await rating.save();
 
+  const customerRatings = await Rating.find({
+    customer_id: req.body.customer_id,
+  });
+
+  let sumRating = 0;
+  let numberOfRatings = customerRatings.length;
+
+  customerRatings.forEach(function (arrayItem) {
+    sumRating += arrayItem.rating;
+    console.log(arrayItem.rating);
+  });
+
+  console.log(customerRatings);
+  console.log(numberOfRatings);
+  console.log(sumRating);
+  const finalNewRating = (sumRating / numberOfRatings).toFixed(1);
+
+  const customer = await Customer.findByIdAndUpdate(req.body.customer_id, {
+    rating: finalNewRating,
+  });
+
+  console.log(finalNewRating);
+  console.log(customer);
   res.send(rating);
 });
 
