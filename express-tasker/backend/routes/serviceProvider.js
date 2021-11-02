@@ -31,7 +31,7 @@ router.post("/signup", async (req, res) => {
   const contactNumber = req.body.contactNumber;
   const merchantId = req.body.merchantId;
   const profilePicture = "no picture";
-  const email = req.body.email;
+  const email = req.body.email.toLowerCase();
   const password = req.body.password;
   const isVerified = false;
 

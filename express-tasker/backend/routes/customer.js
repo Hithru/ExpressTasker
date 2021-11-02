@@ -23,7 +23,7 @@ router.post("/signup", async (req, res) => {
   console.log("user exist pass");
 
   const username = req.body.username;
-  const email = req.body.email;
+  const email = req.body.email.toLowerCase();
   const password = req.body.password;
   const location = req.body.location;
   const rating = 0;
