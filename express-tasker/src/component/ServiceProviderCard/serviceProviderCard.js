@@ -72,7 +72,7 @@ class ServiceProviderCard extends Component {
                 {this.state.serviceProviderDetails.username}
               </h1>
             </div>
-            <div className="buttonGroup" style={{ flexDirection: "row" }}>
+            <div className="buttonGroup">
               <button
                 className="button"
                 onClick={(e) => {
@@ -83,16 +83,6 @@ class ServiceProviderCard extends Component {
               >
                 Connect
               </button>
-              <a
-                href={
-                  "/create-order/" +
-                  this.state.serviceProviderDetails._id +
-                  "/" +
-                  this.state.serviceProviderDetails.username
-                }
-              >
-                <button className="button">Create Order</button>
-              </a>
               {this.state.shouldRedirect ? (
                 <Redirect push to="/messenger" />
               ) : null}

@@ -115,7 +115,9 @@ const PaymentForm = ({
 
   const processPayment = () => {
     if (!service_provider.merchantId == "") {
-      window.payhere.startPayment(payment);
+      if (!selected_order_id == "" && !amount == "") {
+        window.payhere.startPayment(payment);
+      }
     } else {
       setOpen(true);
     }
