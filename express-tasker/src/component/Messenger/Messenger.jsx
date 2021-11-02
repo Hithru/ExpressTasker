@@ -9,6 +9,7 @@ import { useEffect, useRef, useState } from "react";
 import { AnnouncementRounded } from "@material-ui/icons";
 import { io } from "socket.io-client";
 import PaymentForm from "../PaymentForm/PaymentForm";
+import { Button } from "react-scroll";
 const axios = require("axios").default;
 
 const Messenger = () => {
@@ -19,6 +20,7 @@ const Messenger = () => {
   const [messages, setMessages] = useState(null);
   const [newMessage, setNewMessage] = useState("");
   const [arrivalMessage, setArrivalMessage] = useState(null);
+  const [service_provider, setServiceProvider] = useState(null);
   const socket = useRef(io("ws://localhost:8900"));
   const scrollRef = useRef();
 
@@ -67,6 +69,18 @@ const Messenger = () => {
     try {
       const res = await axios.get(apiUrl + "/messages/" + currentChat?._id);
       setMessages(res.data);
+      const receiverId = currentChat?.members.find(
+        (member) => member !== user._id
+      );
+      axios
+        .get(`http://localhost:5000/serviceProvider/${receiverId}`)
+        .then((response) => {
+          console.log(response.data);
+          setServiceProvider(response.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     } catch (err) {
       console.log(err);
     }
@@ -103,6 +117,7 @@ const Messenger = () => {
   useEffect(() => {
     scrollRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
+
   //////////////////////////////////////////////////UI related //////////////////////////////////////////
 
   const renderNoConversation = () => {
@@ -142,6 +157,20 @@ const Messenger = () => {
               </div>
             ))}
           </div>
+          {service_provider ? (
+            <a
+              href={
+                "/create-order/" +
+                service_provider?._id +
+                "/" +
+                service_provider?.username
+              }
+            >
+              <button className="createOrderButton">Create Order</button>
+            </a>
+          ) : (
+            <></>
+          )}
           <hr></hr>
         </div>
         <div className="chatBox">

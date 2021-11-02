@@ -33,6 +33,7 @@ router.post("/signup", async (req, res) => {
   const profilePicture = "no picture";
   const email = req.body.email;
   const password = req.body.password;
+  const isVerified = false;
 
   const serviceProvider = new ServiceProvider({
     username,
@@ -46,6 +47,7 @@ router.post("/signup", async (req, res) => {
     profilePicture,
     email,
     password,
+    isVerified,
   });
 
   console.log(serviceProvider);
