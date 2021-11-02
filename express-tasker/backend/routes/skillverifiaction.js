@@ -6,7 +6,7 @@ const storage = multer.diskStorage({
   destination: (req, file, callback) => {
     callback(
       null,
-      "C:/Users/shami/ExpressTaskerNew/ExpressTasker/express-tasker/public/uploads"
+      "D:/ExpressTasker/ExpressTasker/express-tasker/public/uploads"
     );
   },
   filename: (req, file, callback) => {
@@ -22,6 +22,7 @@ router.route("/send").post(uploads.single("attachments"), (req, res) => {
   const email = req.body.email;
   const description = req.body.description;
   const isSolved = false;
+  const isaccepted = false;
   const attachments = req.file.originalname;
 
   const newSkillVerificationRequest = new SkillVerification({
@@ -30,6 +31,7 @@ router.route("/send").post(uploads.single("attachments"), (req, res) => {
     email,
     description,
     isSolved,
+    isaccepted,
     attachments,
   });
 
