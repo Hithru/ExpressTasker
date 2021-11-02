@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "./customerProfile.css";
 import axios from "axios";
 import auth from "../../services/customerAuth";
-
+import {apiUrl} from "../../config.json";
 
 export default class Signup extends Component {
   
@@ -17,7 +17,7 @@ export default class Signup extends Component {
   componentDidMount() {
     const user = auth.getCurrentUser();
     axios
-      .get(`http://localhost:5000/customer/${user._id}`)
+      .get(`${apiUrl}/customer/${user._id}`)
       .then((response) => {
         console.log(response.data)
         this.setState({

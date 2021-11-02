@@ -8,6 +8,8 @@ import ServiceProviderProfile from "./component/ServiceProviderProfile/servicePr
 import ServiceProviderCard from "./component/ServiceProviderCard/serviceProviderCard";
 import CustomerProfile from "./component/CustomerProfile/customerProfile";
 import EditServiceProviderProfile from "./component/ServiceProviderProfile/editServiceProviderProfile";
+import ServiceProviderComplaint from "./component/ServiceProviderProfile/serviceProviderComplaint";
+import CustomerComplaint from "./component/CustomerProfile/customerComplaint";
 import Search from "./component/Search/Search";
 import SkillVerification from "./component/SkillVerification/skillVerification";
 import CustomerLogin from "./component/CustomerLogin/customerLogin";
@@ -45,6 +47,16 @@ export default (
       path="/edit-service-provider-profile"
       exact
       component={EditServiceProviderProfile}
+    />
+     <Route
+      path="/service-provider-complaint"
+      exact
+      component={ServiceProviderComplaint}
+    />
+    <Route
+      path="/customer-complaint"
+      exact
+      component={CustomerComplaint}
     />
     <Route path="/search">
       {!auth.getCurrentUser() ? <LandingPage /> : <Search />}

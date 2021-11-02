@@ -4,6 +4,7 @@ import "./ServiceProviderProfile.css";
 import profilepicture from './profile.jpg';
 import auth from "../../services/serviceProviderAuth";
 import contact from "./contact.png";
+import {apiUrl} from "../../config.json";
 
 class ServiceProviderProfile extends Component {
     constructor(props){
@@ -11,7 +12,7 @@ class ServiceProviderProfile extends Component {
 
         this.state = {
           serviceProviderDetails: [],
-          profilepicture:'https://picsum.photos/200'
+          profilepicture:'https://www.pngkey.com/png/full/72-729716_user-avatar-png-graphic-free-download-icon.png'
         };
        
     }
@@ -19,7 +20,7 @@ class ServiceProviderProfile extends Component {
     componentDidMount() {
     const user = auth.getCurrentUser();
     axios
-      .get(`http://localhost:5000/serviceProvider/${user._id}`)
+      .get(`${apiUrl}/serviceProvider/${user._id}`)
       .then((response) => {
         console.log(response.data)
         this.setState({
@@ -44,7 +45,7 @@ class ServiceProviderProfile extends Component {
       reader.readAsDataURL(e.target.files[0])
 
       axios
-        .post("http://localhost:5000/serviceProvider/addProfilePicture", profilepicture)
+        .post(`${apiUrl}/serviceProvider/addProfilePicture`, profilepicture)
         .then((res) => console.log(res.data));
     }
     
@@ -52,7 +53,8 @@ class ServiceProviderProfile extends Component {
    
     const {profilepicture}=this.state
     const skillArray=[this.state.serviceProviderDetails.skills]
-    
+    const s=skillArray[0]
+    console.log(s)
     return (
       <div className="App">
         <section className="container-banner">
@@ -70,7 +72,7 @@ class ServiceProviderProfile extends Component {
                             </div>
                             <h1 className="username"> {this.state.serviceProviderDetails.username}</h1>
                             <a href="/edit-service-provider-profile"><button id="edit">Edit Profile</button></a>
-                            <a href="/"><button id="order">See Orders</button></a>
+                            <a href="/service-provider-orders"><button id="order">See Orders</button></a>
                       </div>
 
                       <div class="col-6">
@@ -96,9 +98,9 @@ class ServiceProviderProfile extends Component {
             {/* {skillArray.map((value)=>{
               return <div key={value} value={value}>{value}</div>
             })}  */}
-                      <div className="s">Mounting And Installation</div>
+                      <div className="s">Mounting & Installation</div>
                       <div className="s">Delivery Service</div>
-                      <div className="s">Home Service</div>             
+                      <div className="s">Cooking Service</div>             
         </section>
         <div className="rate2">
           <h5 class="hrate">For better customer attraction, verify your skills from here :

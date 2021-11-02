@@ -63,27 +63,46 @@ router.route("/get-customer").post((req, res) => {
 
 router.post("/createComplaint", async (req, res) => {
   console.log("data came to backend");
-  const schema = Joi.object({
-    customer_id: Joi.string().min(6).required(),
-    customer_name: Joi.string().min(6).required(),
-    customer_email: Joi.string().min(6).required(),
-    description: Joi.string().required(),
+  const customer_id = req.body.customer_id;
+  const customer_name = req.body.customer_name;
+  const customer_email = req.body.customer_email;
+  const description = req.body.description;
+  const isSolved = false;
+
+  const newCustomerComplaint = new CustomerComplaint({
+    customer_name,
+    customer_id,
+    customer_email,
+    description,
+    isSolved,
   });
 
-  const { error } = schema.validate(req.body);
-  if (error) return res.status(400).send(error.details[0].message);
-  console.log("validation pass");
+  newCustomerComplaint
+    .save()
+    .then(() => res.send(newCustomerComplaint))
+    .catch((err) => res.status(404).json("Error: " + err));
 
-  const complaint = new CustomerComplaint({
-    customer_id: req.body.customer_id,
-    customer_name: req.body.customer_name,
-    customer_email: req.body.customer_email,
-    description: req.body.description,
-    isSolved: false,
-  });
-  await complaint.save();
+  // const schema = Joi.object({
+  //   customer_id: Joi.string().min(6).required(),
+  //   customer_name: Joi.string().min(6).required(),
+  //   customer_email: Joi.string().min(6).required(),
+  //   description: Joi.string().required(),
+  // });
 
-  res.send(complaint);
+  // const { error } = schema.validate(req.body);
+  // if (error) return res.status(400).send(error.details[0].message);
+  // console.log("validation pass");
+
+  // const complaint = new CustomerComplaint({
+  //   customer_id: req.body.customer_id,
+  //   customer_name: req.body.customer_name,
+  //   customer_email: req.body.customer_email,
+  //   description: req.body.description,
+  //   isSolved: false,
+  // });
+  // await complaint.save();
+
+  // res.send(complaint);
 });
 
 module.exports = router;

@@ -4,8 +4,11 @@ const Schema = mongoose.Schema;
 
 const skillVerificationSchema = new Schema(
   {
-    skills: { type: String, required: true },
-    confirmedFrom: { type: String, required: true },
+    serviceProviderName:{ type: String, required: true },
+    serviceProviderId:{ type: String, required: true },
+    email:{ type: String, required: true },
+    description: { type: String, required: true },
+    isSolved: { type: Boolean, required: true },
     attachments: { type: String, required: true },
   },
   {

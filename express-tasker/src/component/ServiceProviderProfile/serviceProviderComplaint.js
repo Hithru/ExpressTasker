@@ -3,17 +3,15 @@ import axios from "axios";
 import auth from "../../services/serviceProviderAuth";
 import {apiUrl} from "../../config.json";
 
-export default class SkillVerificationRequest extends Component {
+export default class ServiceProviderComplaint extends Component {
   constructor(props) {
     super(props);
 
     this.onChangeDescription = this.onChangeDescription.bind(this);
-    this.onChangeAttachments = this.onChangeAttachments.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
 
     this.state = {
       description: "",
-      attachments: "",
       serviceProviderDetails: [],
     };
   }
@@ -39,49 +37,32 @@ export default class SkillVerificationRequest extends Component {
     });
   }
 
-  onChangeAttachments(e) {
-    this.setState({
-      attachments: e.target.files[0],
-    });
-  }
 
   onSubmit(e) {
     e.preventDefault();
 
-    const formData = new FormData();
-
-    formData.append("serviceProviderName", this.state.serviceProviderDetails.username);
-    formData.append("serviceProviderId", this.state.serviceProviderDetails._id);
-    formData.append("email", this.state.serviceProviderDetails.email);
-    formData.append("description", this.state.description);
-    formData.append("attachments", this.state.attachments);
-
-    console.log(formData);
-
-    const skillVerification = {
-      serviceProviderName: this.state.serviceProviderDetails.username,
-      serviceProviderId: this.state.serviceProviderDetails._id,
-      email: this.state.serviceProviderDetails.email,
-      description : this.state.description,
-      attachments : this.state.attachments
-    }
-
+    const serviceProviderComplaint = {
+        serviceProvider_id: this.state.serviceProviderDetails.username,
+        serviceProvider_name: this.state.serviceProviderDetails._id,
+        serviceProvider_email: this.state.serviceProviderDetails.email,
+        description: this.state.description, 
+      };
+  
     axios
-      .post(`${apiUrl}/skillVerification/send`, formData)
+      .post(`${apiUrl}/serviceProvider/createComplaint`, serviceProviderComplaint)
       .then((res) =>
       {console.log(res.data);
-        window.location = "/service-provider-profile";
+        window.location = "/";
       } );
 
   }
 
   render() {
-    // const skillArray=[this.state.serviceProviderDetails.skills]
-
+      
     return (
       <div className="signup-window">
         <div className="signup-form">
-          <h2>Service Provider Verification Request</h2>
+          <h2>Create Complaint</h2>
           <form
             onSubmit={this.onSubmit}
             encType="multipart/form-data"
@@ -99,20 +80,10 @@ export default class SkillVerificationRequest extends Component {
                 onChange={this.onChangeDescription}
               />
             </div>
-            <div className="email">
-              <label htmlFor="file">Choose Certificates </label>
-              <input
-                type="file"
-                required
-                className="form-control"
-                filename="attachments"
-                // value={this.state.attachments}
-                onChange={this.onChangeAttachments}
-              />
-            </div>
+
             <div className="submit">
               <button type="submit" className="signup-submit-button">
-                Send Request
+                Send 
               </button>
             </div>
           </form>

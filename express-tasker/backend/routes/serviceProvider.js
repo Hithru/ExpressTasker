@@ -99,26 +99,50 @@ router.route("/:id").get((req, res) => {
 
 router.post("/createComplaint", async (req, res) => {
   console.log("data came to backend");
-  const schema = Joi.object({
-    serviceProvider_id: Joi.string().min(6).required(),
-    serviceProvider_name: Joi.string().min(6).required(),
-    serviceProvider_email: Joi.string().min(6).required(),
-    description: Joi.string().required(),
+  const serviceProvider_id = req.body.serviceProvider_id;
+  const serviceProvider_name = req.body.serviceProvider_name;
+  const serviceProvider_email = req.body.serviceProvider_email;
+  const description = req.body.description;
+  const isSolved = false;
+
+  const newServicEproviderComplaint = new ServiceProviderComplaint({
+    serviceProvider_name,
+    serviceProvider_id,
+    serviceProvider_email,
+    description,
+    isSolved,
   });
 
-  const { error } = schema.validate(req.body);
-  if (error) return res.status(400).send(error.details[0].message);
-  console.log("validation pass");
+  newServicEproviderComplaint
+    .save()
+    .then(() => res.send(newServicEproviderComplaint))
+    .catch((err) => res.status(404).json("Error: " + err));
 
-  const complaint = new ServiceProviderComplaint({
-    serviceProvider_id: req.body.serviceProvider_id,
-    serviceProvider_name: req.body.serviceProvider_name,
-    serviceProvider_email: req.body.serviceProvider_email,
-    description: req.body.description,
-    isSolved: false,
-  });
-  await complaint.save();
+  // const schema = Joi.object({
+  //   serviceProvider_id: Joi.string().min(6).required(),
+  //   serviceProvider_name: Joi.string().min(6).required(),
+  //   serviceProvider_email: Joi.string().min(6).required(),
+  //   description: Joi.string().required(),
+  // });
 
-  res.send(complaint);
+  // const { error } = schema.validate({
+  //   serviceProvider_id: req.body.serviceProvider_id,
+  //   serviceProvider_name: req.body.serviceProvider_name,
+  //   serviceProvider_email: req.body.serviceProvider_email,
+  //   description: req.body.description,
+  // });
+  // if (error) return res.status(400).send(error.details[0].message);
+  // console.log("validation pass");
+
+  // const complaint = new ServiceProviderComplaint({
+  //   serviceProvider_id: req.body.serviceProvider_id,
+  //   serviceProvider_name: req.body.serviceProvider_name,
+  //   serviceProvider_email: req.body.serviceProvider_email,
+  //   description: req.body.description,
+  //   isSolved: false,
+  // });
+  // await complaint.save();
+
+  // res.send(complaint);
 });
 module.exports = router;

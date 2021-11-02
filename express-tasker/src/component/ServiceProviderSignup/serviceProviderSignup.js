@@ -3,6 +3,7 @@ import "./serviceProviderSignup.css";
 import auth from "../../services/customerAuth";
 import axios from "axios";
 import { Checkbox } from "@material-ui/core";
+import {apiUrl} from "../../config.json";
 
 export default class Signup extends Component {
   constructor(props) {
@@ -59,7 +60,7 @@ export default class Signup extends Component {
 
   componentDidMount() {
     axios
-      .get("http://localhost:5000/skill")
+      .get(`${apiUrl}:5000/skill`)
       .then((response) => {
         if (response.data.length > 0) {
           this.setState({
@@ -151,7 +152,7 @@ export default class Signup extends Component {
     };
 
     axios
-      .post("http://localhost:5000/serviceProvider/signup", serviceProvider)
+      .post(`${apiUrl}/serviceProvider/signup`, serviceProvider)
       .then((res) => {
         auth.loginWithJwt(res.headers["x-auth-token"]);
         window.location = "/";

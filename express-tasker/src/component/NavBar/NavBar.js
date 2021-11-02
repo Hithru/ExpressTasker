@@ -47,12 +47,6 @@ const NavBar = ({ user }) => {
               <NavLink className="nav-item nav-link" to="/messenger">
                 Messages
               </NavLink>
-              <NavLink
-                className="nav-item nav-link"
-                to="/service-provider-profile"
-              >
-                {user.username}
-              </NavLink>
 
               <NavLink
                 className="nav-item nav-link"
@@ -60,6 +54,13 @@ const NavBar = ({ user }) => {
               >
                 Order
               </NavLink>
+              <NavLink
+                className="nav-item nav-link"
+                to="/service-provider-complaint"
+              >
+                Create complaint
+              </NavLink>
+
               <NavLink
                 className="nav-item nav-link"
                 to="/service-provider-profile"
@@ -82,6 +83,9 @@ const NavBar = ({ user }) => {
               </NavLink>
               <NavLink className="nav-item nav-link" to="/customer-orders">
                 Orders
+              </NavLink>
+              <NavLink className="nav-item nav-link" to="/customer-complaint">
+                Create Complaint
               </NavLink>
               <NavLink className="nav-item nav-link" to="/customer-profile">
                 {user.username}

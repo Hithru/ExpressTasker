@@ -21,7 +21,7 @@ class ServiceProviderCard extends Component {
   componentDidMount() {
     let id = this.props.match.params.id;
     axios
-      .get(`http://localhost:5000/serviceProvider/${id}`)
+      .get(`${apiUrl}/serviceProvider/${id}`)
       .then((response) => {
         console.log(response.data);
         this.setState({
