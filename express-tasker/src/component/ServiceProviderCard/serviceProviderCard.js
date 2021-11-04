@@ -7,6 +7,7 @@ import auth from "../../services/customerAuth";
 import { apiUrl } from "../../config.json";
 import { ControlPointDuplicateOutlined } from "@material-ui/icons";
 import "./serviceprovidercard.css";
+import VerifiedUserIcon from "@material-ui/icons/VerifiedUser";
 
 class ServiceProviderCard extends Component {
   constructor(props) {
@@ -69,7 +70,17 @@ class ServiceProviderCard extends Component {
             <div class="col-9">
               <h1 className="username2">
                 <h5 className="username3">service provider</h5>{" "}
-                {this.state.serviceProviderDetails.username}
+                <div style={{ flexDirection: "row" }}>
+                  {this.state.serviceProviderDetails.username}
+                  &nbsp;
+                  {this.state.serviceProviderDetails.isVerified ? (
+                    <VerifiedUserIcon
+                      style={{ color: "#f28f00", fontSize: "40px" }}
+                    />
+                  ) : (
+                    <></>
+                  )}
+                </div>
               </h1>
             </div>
             <div className="buttonGroup">

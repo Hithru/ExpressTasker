@@ -25,6 +25,8 @@ import {
 } from "@material-ui/core";
 import { color, fontWeight } from "@material-ui/system";
 import { apiUrl } from "../../config.json";
+import VerifiedUserIcon from "@material-ui/icons/VerifiedUser";
+
 const axios = require("axios").default;
 var Scroll = require("react-scroll");
 const useStyles = makeStyles({
@@ -348,7 +350,6 @@ const Search = () => {
 
   const renderServiceProviderCard = (card, index) => {
     return (
-      
       <a href={`/service-provider-card/${card._id}`} className="sp-card">
         <Card sx={{ minWidth: 275 }} className={classes.provider_card}>
           <CardContent>
@@ -365,9 +366,17 @@ const Search = () => {
                 {card.skills.map(renderSkillSet)}
               </ButtonGroup>
             </Typography>
-            <Typography variant="h5" component="div">
-              {card.username}
-            </Typography>
+            <div style={{ display: "flex", flexDirection: "row" }}>
+              <Typography variant="h5" component="div">
+                {card.username}
+              </Typography>
+              &nbsp;
+              {card.isVerified ? (
+                <VerifiedUserIcon style={{ color: "#f28f00" }} />
+              ) : (
+                <></>
+              )}
+            </div>
             <Typography sx={{ mb: 1.5 }} color="text.secondary"></Typography>
             <Typography variant="body2">
               {card.location}
