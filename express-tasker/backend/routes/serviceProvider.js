@@ -1,10 +1,27 @@
 const router = require("express").Router();
 const ServiceProvider = require("../models/serviceprovider.model");
+const Profile= require("../models/profile.model")
 const {
   ServiceProviderComplaint,
 } = require("../models/serviceProviderComplaint.model");
 const bcrypt = require("bcrypt");
 const Joi = require("joi");
+const multer = require("multer");
+
+const storage = multer.diskStorage({
+  destination: (req, file, callback) => {
+    callback(
+      null,
+      "C:/Users/shami/ExpressTaskerNew/ExpressTasker/express-tasker/src/component/ServiceProviderProfile/profilePhotos"
+    );
+  },
+  filename: (req, file, callback) => {
+    callback(null, file.originalname);
+  },
+});
+
+const uploads = multer({ storage: storage });
+
 
 router.post("/signup", async (req, res) => {
   // const schema = Joi.object({
@@ -68,6 +85,26 @@ router.post("/signup", async (req, res) => {
     .send("well Done");
 });
 
+
+router.route("/addProfilePicture").post(uploads.single("profilePicture"), (req, res) => {
+  const serviceProviderName = req.body.serviceProviderName;
+  const serviceProviderId = req.body.serviceProviderId;
+  const profilePicture= req.file.originalname;
+
+  const newProfile = new Profile({
+    serviceProviderName,
+    serviceProviderId,
+    profilePicture,
+  });
+
+  newProfile
+    .save()
+    .then(() => res.json("Profile photo updated..."))
+    .catch((err) => res.status(404).json("Error: " + err));
+});
+
+
+
 router.post("/edit/:id", async (req, res) => {
   ServiceProvider.findById(req.params.id)
     .then(async (serviceProvider) => {
@@ -94,6 +131,12 @@ router.route("/").get((req, res) => {
 router.route("/:id").get((req, res) => {
   ServiceProvider.findById(req.params.id)
     .then((serviceProvider) => res.json(serviceProvider))
+    .catch((err) => res.status(404).json("Error: " + err));
+});
+
+router.route("/profile/:id").get((req, res) => {
+  Profile.find({serviceProviderId:(req.params.id).toString()}).limit(1).sort({$natural:-1})
+    .then((profile) => res.json(profile))
     .catch((err) => res.status(404).json("Error: " + err));
 });
 
