@@ -33,6 +33,17 @@ connection.once("open", () => {
   console.log("MongoDB database connection established successfully");
 });
 
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("express-tasker/build"));
+  // Express serve up index.html file if it doesn't recognize route
+  const path = require("path");
+  app.get("*", (req, res) => {
+    res.sendFile(
+      path.resolve(__dirname, "express-tasker", "build", "index.html")
+    );
+  });
+}
+
 app.use("/customer", customerRouter);
 app.use("/serviceProvider", serviceProviderRouter);
 app.use("/skill", skillRouter);

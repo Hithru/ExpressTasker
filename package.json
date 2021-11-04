@@ -4,7 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest --watchAll --coverage --verbose --silent --runInBand"
+    "test": "jest --watchAll --coverage --verbose --silent --runInBand",
+    "build": "cd express-tasker && npm run build",
+    "install-app": "cd express-tasker && npm install",
+    "start-socket": "cd express-tasker/socket && npm start",
+    "heroku-postbuild": "npm run install-app && npm run build && npm run start-socket",
+    "start": "node server.js"
   },
   "keywords": [],
   "author": "",
