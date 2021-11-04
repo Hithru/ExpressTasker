@@ -8,7 +8,7 @@
     "build": "cd express-tasker && npm run build",
     "install-app": "cd express-tasker && npm install",
     "start-socket": "cd express-tasker/socket && npm start",
-    "heroku-postbuild": "npm run install-app && npm run build && npm run start-socket",
+    "heroku-postbuild": "npm run install-app && npm run build ",
     "start": "node server.js"
   },
   "keywords": [],
