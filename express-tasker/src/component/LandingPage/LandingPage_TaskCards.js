@@ -68,7 +68,7 @@ class LandingPage_TaskCards extends Component {
     };
 
     axios
-      .get(apiUrl + "/search/service-provider/top-rated", {})
+      .post(apiUrl + "/search/service-provider/top-rated", {})
       .then(function (response) {
         const lst = response.data;
         setState1(lst);

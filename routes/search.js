@@ -46,7 +46,7 @@ router.route("/service").post((req, res) => {
 ///////////////////////////////////////////////// Top  rated providers get //////////////////////////////////
 
 //get top 10 rated services among all
-router.route("/service-provider/top-rated").get((req, res) => {
+router.route("/service-provider/top-rated").post((req, res) => {
   let service_providers = [];
   ServiceProvider.find({}).then((data) => {
     service_providers = data;
