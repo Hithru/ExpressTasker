@@ -49,7 +49,7 @@ router.post("/signup", async (req, res) => {
     .send("well Done");
 });
 
-router.get("/:id", async (req, res) => {
+router.post("/:id", async (req, res) => {
   Customer.findById(req.params.id)
     .then((customer) => res.json(customer))
     .catch((err) => res.status(404).json("Error: " + err));
