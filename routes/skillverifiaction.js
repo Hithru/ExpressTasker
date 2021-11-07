@@ -41,7 +41,7 @@ router.route("/send").post(uploads.single("attachments"), (req, res) => {
     .catch((err) => res.status(404).json("Error: " + err));
 });
 
-router.route("/").get((req, res) => {
+router.route("/").post((req, res) => {
   SkillVerification.find()
     .then((skillVerificationRequests) => res.json(skillVerificationRequests))
     .catch((err) => res.status(404).json("Error: " + err));

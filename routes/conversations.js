@@ -15,7 +15,7 @@ router.post("/", async (req, res) => {
 });
 
 //getting all conversations for a specific user
-router.get("/:userId", async (req, res) => {
+router.post("/:userId", async (req, res) => {
   try {
     const conversation = await Conversation.find({
       members: { $in: [req.params.userId] },
@@ -26,7 +26,7 @@ router.get("/:userId", async (req, res) => {
   }
 });
 
-router.get("/isThereConversation/:userId/:receiverId", async (req, res) => {
+router.post("/isThereConversation/:userId/:receiverId", async (req, res) => {
   try {
     const conversation = await Conversation.find({
       $and: [

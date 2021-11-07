@@ -54,7 +54,7 @@ const Messenger = () => {
 
   const getConversations = async () => {
     try {
-      const res = await axios.get(apiUrl + "/conversations/" + user._id);
+      const res = await axios.post(apiUrl + "/conversations/" + user._id);
       setConversations(res.data);
     } catch (err) {
       console.log(err);

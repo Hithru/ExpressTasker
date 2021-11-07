@@ -22,7 +22,7 @@ class ServiceProviderCard extends Component {
   componentDidMount() {
     let id = this.props.match.params.id;
     axios
-      .get(`${apiUrl}/serviceProvider/${id}`)
+      .post(`${apiUrl}/serviceProvider/${id}`)
       .then((response) => {
         console.log(response.data);
         this.setState({
@@ -39,7 +39,7 @@ class ServiceProviderCard extends Component {
     const user_id = user._id; //getting user's id
     const service_provider_id = this.state.serviceProviderDetails._id; //getting service provider id
     try {
-      const res_1 = await axios.get(
+      const res_1 = await axios.post(
         apiUrl +
           "/conversations/isThereConversation/" +
           user_id +

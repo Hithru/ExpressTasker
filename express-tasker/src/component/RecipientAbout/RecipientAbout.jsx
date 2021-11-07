@@ -42,7 +42,7 @@ const RecipientAbout = ({
 
   const getServiceProvider = async (user_id) => {
     try {
-      const res = await axios.get(apiUrl + "/serviceProvider/" + user_id);
+      const res = await axios.post(apiUrl + "/serviceProvider/" + user_id);
       console.log(res);
       setRecipient(res.data);
     } catch (err) {

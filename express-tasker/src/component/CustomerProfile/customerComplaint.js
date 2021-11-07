@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import auth from "../../services/customerAuth";
-import {apiUrl} from "../../config.json";
+import { apiUrl } from "../../config.json";
 
 export default class CustomerComplaint extends Component {
   constructor(props) {
@@ -18,47 +18,43 @@ export default class CustomerComplaint extends Component {
   componentDidMount() {
     const user = auth.getCurrentUser();
     axios
-      .get(`${apiUrl}/customer/${user._id}`)
+      .post(`${apiUrl}/customer/${user._id}`)
       .then((response) => {
-        console.log(response.data)
+        console.log(response.data);
         this.setState({
-            customerDetails:response.data
-        })
+          customerDetails: response.data,
+        });
       })
       .catch((error) => {
         console.log(error);
       });
-      
-    }
-  
+  }
+
   onChangeDescription(e) {
     this.setState({
       description: e.target.value,
     });
   }
 
-
   onSubmit(e) {
     e.preventDefault();
 
     const customerComplaint = {
-        customer_id: this.state.customerDetails.username,
-        customer_name: this.state.customerDetails._id,
-        customer_email: this.state.customerDetails.email,
-        description: this.state.description, 
-      };
-  
+      customer_id: this.state.customerDetails.username,
+      customer_name: this.state.customerDetails._id,
+      customer_email: this.state.customerDetails.email,
+      description: this.state.description,
+    };
+
     axios
       .post(`${apiUrl}/customer/createComplaint`, customerComplaint)
-      .then((res) =>
-      {console.log(res.data);
+      .then((res) => {
+        console.log(res.data);
         window.location = "/";
-      } );
-
+      });
   }
 
   render() {
-      
     return (
       <div className="signup-window">
         <div className="signup-form">
@@ -69,7 +65,6 @@ export default class CustomerComplaint extends Component {
             noValidae
             className="signup-form"
           >
-            
             <div className="email">
               <label>Description </label>
               <input
@@ -83,7 +78,7 @@ export default class CustomerComplaint extends Component {
 
             <div className="submit">
               <button type="submit" className="signup-submit-button">
-                Send 
+                Send
               </button>
             </div>
           </form>
