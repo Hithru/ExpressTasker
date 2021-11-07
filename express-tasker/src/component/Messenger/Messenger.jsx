@@ -21,11 +21,11 @@ const Messenger = () => {
   const [newMessage, setNewMessage] = useState("");
   const [arrivalMessage, setArrivalMessage] = useState(null);
   const [service_provider, setServiceProvider] = useState(null);
-  const socket = useRef(io("ws://localhost:8900"));
+  const socket = useRef(io("https://expresstaskersocket.herokuapp.com/"));
   const scrollRef = useRef();
 
   useEffect(() => {
-    socket.current = io("ws://localhost:8900");
+    socket.current = io("https://expresstaskersocket.herokuapp.com/");
     socket.current.on("getMessage", (data) => {
       setArrivalMessage({
         sender: data.senderId,
