@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import auth from "../../services/serviceProviderAuth";
-import {apiUrl} from "../../config.json";
+import { apiUrl } from "../../config.json";
 
 export default class ServiceProviderComplaint extends Component {
   constructor(props) {
@@ -18,47 +18,46 @@ export default class ServiceProviderComplaint extends Component {
   componentDidMount() {
     const user = auth.getCurrentUser();
     axios
-      .get(`${apiUrl}/serviceProvider/${user._id}`)
+      .post(`${apiUrl}/serviceProvider/${user._id}`)
       .then((response) => {
-        console.log(response.data)
+        console.log(response.data);
         this.setState({
-            serviceProviderDetails:response.data
-        })
+          serviceProviderDetails: response.data,
+        });
       })
       .catch((error) => {
         console.log(error);
       });
-      
-    }
-  
+  }
+
   onChangeDescription(e) {
     this.setState({
       description: e.target.value,
     });
   }
 
-
   onSubmit(e) {
     e.preventDefault();
 
     const serviceProviderComplaint = {
-        serviceProvider_id: this.state.serviceProviderDetails.username,
-        serviceProvider_name: this.state.serviceProviderDetails._id,
-        serviceProvider_email: this.state.serviceProviderDetails.email,
-        description: this.state.description, 
-      };
-  
-    axios
-      .post(`${apiUrl}/serviceProvider/createComplaint`, serviceProviderComplaint)
-      .then((res) =>
-      {console.log(res.data);
-        window.location = "/";
-      } );
+      serviceProvider_id: this.state.serviceProviderDetails.username,
+      serviceProvider_name: this.state.serviceProviderDetails._id,
+      serviceProvider_email: this.state.serviceProviderDetails.email,
+      description: this.state.description,
+    };
 
+    axios
+      .post(
+        `${apiUrl}/serviceProvider/createComplaint`,
+        serviceProviderComplaint
+      )
+      .then((res) => {
+        console.log(res.data);
+        window.location = "/";
+      });
   }
 
   render() {
-      
     return (
       <div className="signup-window">
         <div className="signup-form">
@@ -69,7 +68,6 @@ export default class ServiceProviderComplaint extends Component {
             noValidae
             className="signup-form"
           >
-            
             <div className="email">
               <label>Description </label>
               <input
@@ -83,7 +81,7 @@ export default class ServiceProviderComplaint extends Component {
 
             <div className="submit">
               <button type="submit" className="signup-submit-button">
-                Send 
+                Send
               </button>
             </div>
           </form>
