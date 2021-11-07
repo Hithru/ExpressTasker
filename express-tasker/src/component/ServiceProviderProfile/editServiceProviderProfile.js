@@ -46,22 +46,19 @@ export default class Signup extends Component {
         "Trincomalee",
         "Vavuniya",
       ],
-      location:"",
+      location: "",
       description: "",
       email: "",
       contactNumber: "",
       merchantId: "",
       password: "",
       skills: [],
-
     };
   }
 
-
-
   componentDidMount() {
     axios
-      .get(`${apiUrl}/skill`)
+      .post(`${apiUrl}/skill`)
       .then((response) => {
         if (response.data.length > 0) {
           this.setState({
@@ -82,9 +79,9 @@ export default class Signup extends Component {
   }
 
   onChangeEmail(e) {
-      this.setState({
-        email: e.target.value,
-      });
+    this.setState({
+      email: e.target.value,
+    });
   }
 
   onChangePassword(e) {
@@ -147,17 +144,16 @@ export default class Signup extends Component {
       location: this.state.location,
       description: this.state.description,
       contactNumber: this.state.contactNumber,
-      
     };
 
-    const user= auth.getCurrentUser();
+    const user = auth.getCurrentUser();
 
     axios
       .post(`${apiUrl}/serviceProvider/edit/${user._id}`, serviceProvider)
       .then((res) => {
-      window.location = "/service-provider-profile";}
-      )  
-  }
+        window.location = "/service-provider-profile";
+      });
+  };
 
   render() {
     return (
@@ -193,20 +189,21 @@ export default class Signup extends Component {
             </div>
             <div className="email">
               <label>Location </label>
-              <select ref="userInput"
+              <select
+                ref="userInput"
                 required
                 className="form-control"
                 value={this.state.location}
-                onChange={this.onChangeLocation}>
-                {
-                    this.state.locations.map(function(location) {
-                    return <option 
-                        key={location}
-                        value={location}>{location}
-                        </option>;
-                    })
-                }
-            </select>
+                onChange={this.onChangeLocation}
+              >
+                {this.state.locations.map(function (location) {
+                  return (
+                    <option key={location} value={location}>
+                      {location}
+                    </option>
+                  );
+                })}
+              </select>
             </div>
             <div className="email">
               <label>Description </label>
@@ -228,7 +225,7 @@ export default class Signup extends Component {
                 onChange={this.onChangeContactNumber}
               />
             </div>
-            
+
             <div className="submit">
               <button type="submit" className="signup-submit-button">
                 Submit
