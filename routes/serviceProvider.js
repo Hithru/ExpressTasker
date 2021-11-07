@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const ServiceProvider = require("../models/serviceprovider.model");
-const Profile= require("../models/profile.model")
+const Profile = require("../models/profile.model");
 const {
   ServiceProviderComplaint,
 } = require("../models/serviceProviderComplaint.model");
@@ -21,7 +21,6 @@ const storage = multer.diskStorage({
 });
 
 const uploads = multer({ storage: storage });
-
 
 router.post("/signup", async (req, res) => {
   // const schema = Joi.object({
@@ -85,25 +84,24 @@ router.post("/signup", async (req, res) => {
     .send("well Done");
 });
 
+router
+  .route("/addProfilePicture")
+  .post(uploads.single("profilePicture"), (req, res) => {
+    const serviceProviderName = req.body.serviceProviderName;
+    const serviceProviderId = req.body.serviceProviderId;
+    const profilePicture = req.file.originalname;
 
-router.route("/addProfilePicture").post(uploads.single("profilePicture"), (req, res) => {
-  const serviceProviderName = req.body.serviceProviderName;
-  const serviceProviderId = req.body.serviceProviderId;
-  const profilePicture= req.file.originalname;
+    const newProfile = new Profile({
+      serviceProviderName,
+      serviceProviderId,
+      profilePicture,
+    });
 
-  const newProfile = new Profile({
-    serviceProviderName,
-    serviceProviderId,
-    profilePicture,
+    newProfile
+      .save()
+      .then(() => res.json("Profile photo updated..."))
+      .catch((err) => res.status(404).json("Error: " + err));
   });
-
-  newProfile
-    .save()
-    .then(() => res.json("Profile photo updated..."))
-    .catch((err) => res.status(404).json("Error: " + err));
-});
-
-
 
 router.post("/edit/:id", async (req, res) => {
   ServiceProvider.findById(req.params.id)
@@ -122,20 +120,22 @@ router.post("/edit/:id", async (req, res) => {
     .catch((err) => res.status(404).json("Error: " + err));
 });
 
-router.route("/").get((req, res) => {
+router.route("/").post((req, res) => {
   ServiceProvider.find()
     .then((serviceProviders) => res.json(serviceProviders))
     .catch((err) => res.status(404).json("Error: " + err));
 });
 
-router.route("/:id").get((req, res) => {
+router.route("/:id").post((req, res) => {
   ServiceProvider.findById(req.params.id)
     .then((serviceProvider) => res.json(serviceProvider))
     .catch((err) => res.status(404).json("Error: " + err));
 });
 
-router.route("/profile/:id").get((req, res) => {
-  Profile.find({serviceProviderId:(req.params.id).toString()}).limit(1).sort({$natural:-1})
+router.route("/profile/:id").post((req, res) => {
+  Profile.find({ serviceProviderId: req.params.id.toString() })
+    .limit(1)
+    .sort({ $natural: -1 })
     .then((profile) => res.json(profile))
     .catch((err) => res.status(404).json("Error: " + err));
 });

@@ -67,13 +67,15 @@ const Messenger = () => {
 
   const getMessages = async () => {
     try {
-      const res = await axios.get(apiUrl + "/messages/" + currentChat?._id);
+      const res = await axios.post(apiUrl + "/messages/" + currentChat?._id);
       setMessages(res.data);
       const receiverId = currentChat?.members.find(
         (member) => member !== user._id
       );
       axios
-        .get(`http://localhost:5000/serviceProvider/${receiverId}`)
+        .post(
+          `https://expresstasker.herokuapp.com/serviceProvider/${receiverId}`
+        )
         .then((response) => {
           console.log(response.data);
           setServiceProvider(response.data);
