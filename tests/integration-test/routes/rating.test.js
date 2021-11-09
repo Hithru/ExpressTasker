@@ -261,7 +261,7 @@ describe("/Review", () => {
       });
 
       //Correct Data
-      it("should return 200 when valid data to review send with token set", async () => {
+      it("should return 200 when valid data to rating send with token set", async () => {
         let token;
         await agent
           .post("/customer/signup")

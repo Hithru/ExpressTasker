@@ -3,6 +3,7 @@ const router = require("express").Router();
 const { Customer } = require("../models/customer.model");
 const ServiceProvider = require("../models/serviceprovider.model");
 const { Order } = require("../models/order.model");
+const authCustomer = require("../middleware/authCustomer");
 const mongoose = require("mongoose");
 const Joi = require("joi");
 
@@ -38,7 +39,7 @@ router.post("/createOrder", async (req, res) => {
   res.send(order);
 });
 
-router.post("/customer", async (req, res) => {
+router.post("/customer", authCustomer, async (req, res) => {
   console.log(req.body.customer_id);
   const orders = await Order.find({ customer_id: req.body.customer_id }).sort(
     "-status"

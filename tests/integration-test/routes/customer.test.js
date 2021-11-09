@@ -36,6 +36,25 @@ describe("/Customer", () => {
           })
           .expect(400);
       });
+
+      it("should return 400 when user already registerd", async () => {
+        await agent.post("/customer/signup").send({
+          username: "Hithru",
+          email: "hithrualwis@gmail.com",
+          password: "123456",
+          location: "Ampara",
+        });
+
+        await agent
+          .post("/customer/signup")
+          .send({
+            username: "Hithru",
+            email: "hithrualwis@gmail.com",
+            password: "123456",
+            location: "Ampara",
+          })
+          .expect(400);
+      });
     });
   });
 });
