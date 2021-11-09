@@ -2,6 +2,7 @@ const express = require("express");
 const router = require("express").Router();
 const { Customer } = require("../models/customer.model");
 const { CustomerComplaint } = require("../models/customerComplaint.model");
+const authCustomer = require("../middleware/authCustomer");
 const bcrypt = require("bcrypt");
 const Joi = require("joi");
 
@@ -49,20 +50,15 @@ router.post("/signup", async (req, res) => {
     .send("well Done");
 });
 
-router.post("/:id", async (req, res) => {
-  Customer.findById(req.params.id)
-    .then((customer) => res.json(customer))
-    .catch((err) => res.status(404).json("Error: " + err));
-});
-
 router.route("/get-customer").post((req, res) => {
   Customer.find({ _id: req.body.user_id }).then((data) => {
     res.send(data[0]);
   });
 });
 
-router.post("/createComplaint", async (req, res) => {
+router.route("/createcomplaint").post((req, res) => {
   console.log("data came to backend");
+  console.log(req.body);
   const customer_id = req.body.customer_id;
   const customer_name = req.body.customer_name;
   const customer_email = req.body.customer_email;
@@ -100,9 +96,14 @@ router.post("/createComplaint", async (req, res) => {
   //   description: req.body.description,
   //   isSolved: false,
   // });
-  // await complaint.save();
+  // complaint.save();
 
   // res.send(complaint);
+});
+router.post("/:id", async (req, res) => {
+  Customer.findById(req.params.id)
+    .then((customer) => res.json(customer))
+    .catch((err) => res.status(404).json("Error: " + err));
 });
 
 module.exports = router;
