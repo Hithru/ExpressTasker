@@ -49,17 +49,6 @@ router.post("/signup", async (req, res) => {
     .send("well Done");
 });
 
-router.post("/:id", async (req, res) => {
-  Customer.findById(req.params.id)
-    .then((customer) => res.json(customer))
-    .catch((err) => res.status(404).json("Error: " + err));
-});
-
-router.route("/get-customer").post((req, res) => {
-  Customer.find({ _id: req.body.user_id }).then((data) => {
-    res.send(data[0]);
-  });
-});
 
 router.post("/createComplaint", async (req, res) => {
   console.log("data came to backend");
@@ -103,6 +92,19 @@ router.post("/createComplaint", async (req, res) => {
   // await complaint.save();
 
   // res.send(complaint);
+});
+
+
+router.post("/:id", async (req, res) => {
+  Customer.findById(req.params.id)
+    .then((customer) => res.json(customer))
+    .catch((err) => res.status(404).json("Error: " + err));
+});
+
+router.route("/get-customer").post((req, res) => {
+  Customer.find({ _id: req.body.user_id }).then((data) => {
+    res.send(data[0]);
+  });
 });
 
 module.exports = router;

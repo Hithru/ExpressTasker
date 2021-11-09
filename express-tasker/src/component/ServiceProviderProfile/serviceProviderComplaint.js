@@ -46,6 +46,8 @@ export default class ServiceProviderComplaint extends Component {
       description: this.state.description,
     };
 
+    console.log(serviceProviderComplaint);
+
     axios
       .post(
         `${apiUrl}/serviceProvider/createComplaint`,
@@ -53,7 +55,7 @@ export default class ServiceProviderComplaint extends Component {
       )
       .then((res) => {
         console.log(res.data);
-        window.location = "/";
+        window.location = "/service-provider-profile";
       });
   }
 

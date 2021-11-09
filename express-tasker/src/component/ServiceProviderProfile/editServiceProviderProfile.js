@@ -144,6 +144,7 @@ export default class Signup extends Component {
       location: this.state.location,
       description: this.state.description,
       contactNumber: this.state.contactNumber,
+      merchantId: this.state.merchantId,
     };
 
     const user = auth.getCurrentUser();
@@ -213,6 +214,16 @@ export default class Signup extends Component {
                 className="form-control"
                 value={this.state.description}
                 onChange={this.onChangeDescription}
+              />
+            </div>
+            <div className="email">
+              <label>PayHere Merchant ID </label>
+              <input
+                type="text"
+                required
+                className="form-control"
+                value={this.state.merchantId}
+                onChange={this.onChangeMerchantID}
               />
             </div>
             <div className="email">

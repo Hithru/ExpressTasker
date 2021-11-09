@@ -17,6 +17,7 @@ class ServiceProviderProfile extends Component {
       serviceProviderDetails: [],
       profilePhotoDetails: [],
       profilePicture: "",
+      secureUrl:"",
       profilepicture:
         "https://www.pngkey.com/png/full/72-729716_user-avatar-png-graphic-free-download-icon.png",
     };
@@ -67,37 +68,40 @@ class ServiceProviderProfile extends Component {
       this.state.serviceProviderDetails.username
     );
     formData.append("serviceProviderId", this.state.serviceProviderDetails._id);
-    formData.append("profilePicture", this.state.profilePicture);
+    formData.append("file", this.state.profilePicture,"file");
 
     axios
       .post(`${apiUrl}/serviceProvider/addProfilePicture`, formData)
       .then((res) => {
-        console.log(res.data);
-        window.location = "/";
+        console.log(res);
+        this.setState({
+          secureUrl: res.data,
+        });
+        window.location = "/service-provider-profile";
       });
   }
 
-  imageHandler = (e) => {
-    const reader = new FileReader();
-    reader.onload = () => {
-      if (reader.readyState === 2) {
-        this.setState({
-          profilepicture: reader.result,
-        });
-      }
-    };
-    reader.readAsDataURL(e.target.files[0]);
+  // imageHandler = (e) => {
+  //   const reader = new FileReader();
+  //   reader.onload = () => {
+  //     if (reader.readyState === 2) {
+  //       this.setState({
+  //         profilepicture: reader.result,
+  //       });
+  //     }
+  //   };
+  //   reader.readAsDataURL(e.target.files[0]);
 
-    axios
-      .post(`${apiUrl}/serviceProvider/addProfilePicture`, profilepicture)
-      .then((res) => console.log(res.data));
-  };
+  //   axios
+  //     .post(`${apiUrl}/serviceProvider/addProfilePicture`, profilepicture)
+  //     .then((res) => console.log(res.data));
+  // };
 
   render() {
     const { profilepicture } = this.state.profilePicture;
     const skillArray = [this.state.serviceProviderDetails.skills];
     const s = skillArray[0];
-    console.log(s);
+    console.log(this.state.secureUrl);
     return (
       <div className="App">
         <section className="container-banner">
@@ -107,11 +111,13 @@ class ServiceProviderProfile extends Component {
                 {this.state.profilePhotoDetails.map((value) => {
                   return (
                     <div>
+                      
                       <img
                         id="profilepic"
+                        // src={this.state.secureUrl}
                         src={
                           true
-                            ? "./profilePhotos/" + value.profilePicture
+                            ? value.profilePicture
                             : "./profilePhotos/Certificate1.jpg"
                         }
                         width="170"
