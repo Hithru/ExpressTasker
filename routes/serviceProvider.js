@@ -7,20 +7,40 @@ const {
 const bcrypt = require("bcrypt");
 const Joi = require("joi");
 const multer = require("multer");
+const cloudinary = require('cloudinary').v2;
+const { CloudinaryStorage } = require('multer-storage-cloudinary');
+const config = require("config");
+require("dotenv").config()
 
-const storage = multer.diskStorage({
-  destination: (req, file, callback) => {
-    callback(
-      null,
-      "C:/Users/shami/ExpressTaskerNew/ExpressTasker/express-tasker/src/component/ServiceProviderProfile/profilePhotos"
-    );
-  },
-  filename: (req, file, callback) => {
-    callback(null, file.originalname);
-  },
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_NAME,
+  api_key: process.env.CLOUDINARY_KEY,
+  api_secret: process.env.CLOUDINARY_SECRET
 });
 
-const uploads = multer({ storage: storage });
+const storage = new CloudinaryStorage({
+  cloudinary,
+  allowedFormats: ['jpg', 'png'],
+  filename: function (req, file, cb) {
+    cb(null, file.originalname); 
+  }
+});
+
+const uploadCloud = multer({ storage });
+
+// const storage = multer.diskStorage({
+//   destination: (req, file, callback) => {
+//     callback(
+//       null,
+//       "C:/Users/shami/ExpressTaskerNew/ExpressTasker/express-tasker/src/component/ServiceProviderProfile/profilePhotos"
+//     );
+//   },
+//   filename: (req, file, callback) => {
+//     callback(null, file.originalname);
+//   },
+// });
+
+// const uploads = multer({ storage: storage });
 
 router.post("/signup", async (req, res) => {
   // const schema = Joi.object({
@@ -86,10 +106,15 @@ router.post("/signup", async (req, res) => {
 
 router
   .route("/addProfilePicture")
-  .post(uploads.single("profilePicture"), (req, res) => {
+  .post(uploadCloud.single("file"), (req, res, next) => {
+    if (!req.file) {
+      next(new Error('No file uploaded!'));
+      return;
+    }
+   
     const serviceProviderName = req.body.serviceProviderName;
     const serviceProviderId = req.body.serviceProviderId;
-    const profilePicture = req.file.originalname;
+    const profilePicture = req.file.path;
 
     const newProfile = new Profile({
       serviceProviderName,
@@ -99,8 +124,58 @@ router
 
     newProfile
       .save()
-      .then(() => res.json("Profile photo updated..."))
+      .then(() => res.json(req.file.path ))
       .catch((err) => res.status(404).json("Error: " + err));
+  });
+
+
+  router.post("/createComplaint", async (req, res) => {
+    console.log("data came to backend");
+    const serviceProvider_id = req.body.serviceProvider_id;
+    const serviceProvider_name = req.body.serviceProvider_name;
+    const serviceProvider_email = req.body.serviceProvider_email;
+    const description = req.body.description;
+    const isSolved = false;
+  
+    const newServiceProviderComplaint = new ServiceProviderComplaint({
+      serviceProvider_name,
+      serviceProvider_id,
+      serviceProvider_email,
+      description,
+      isSolved,
+    });
+  
+    newServiceProviderComplaint
+      .save()
+      .then(() => res.send(newServiceProviderComplaint))
+      .catch((err) => res.status(404).json("Error: " + err));
+  
+    // const schema = Joi.object({
+    //   serviceProvider_id: Joi.string().min(6).required(),
+    //   serviceProvider_name: Joi.string().min(6).required(),
+    //   serviceProvider_email: Joi.string().min(6).required(),
+    //   description: Joi.string().required(),
+    // });
+  
+    // const { error } = schema.validate({
+    //   serviceProvider_id: req.body.serviceProvider_id,
+    //   serviceProvider_name: req.body.serviceProvider_name,
+    //   serviceProvider_email: req.body.serviceProvider_email,
+    //   description: req.body.description,
+    // });
+    // if (error) return res.status(400).send(error.details[0].message);
+    // console.log("validation pass");
+  
+    // const complaint = new ServiceProviderComplaint({
+    //   serviceProvider_id: req.body.serviceProvider_id,
+    //   serviceProvider_name: req.body.serviceProvider_name,
+    //   serviceProvider_email: req.body.serviceProvider_email,
+    //   description: req.body.description,
+    //   isSolved: false,
+    // });
+    // await complaint.save();
+  
+    // res.send(complaint);
   });
 
 router.post("/edit/:id", async (req, res) => {
@@ -140,52 +215,4 @@ router.route("/profile/:id").post((req, res) => {
     .catch((err) => res.status(404).json("Error: " + err));
 });
 
-router.post("/createComplaint", async (req, res) => {
-  console.log("data came to backend");
-  const serviceProvider_id = req.body.serviceProvider_id;
-  const serviceProvider_name = req.body.serviceProvider_name;
-  const serviceProvider_email = req.body.serviceProvider_email;
-  const description = req.body.description;
-  const isSolved = false;
-
-  const newServicEproviderComplaint = new ServiceProviderComplaint({
-    serviceProvider_name,
-    serviceProvider_id,
-    serviceProvider_email,
-    description,
-    isSolved,
-  });
-
-  newServicEproviderComplaint
-    .save()
-    .then(() => res.send(newServicEproviderComplaint))
-    .catch((err) => res.status(404).json("Error: " + err));
-
-  // const schema = Joi.object({
-  //   serviceProvider_id: Joi.string().min(6).required(),
-  //   serviceProvider_name: Joi.string().min(6).required(),
-  //   serviceProvider_email: Joi.string().min(6).required(),
-  //   description: Joi.string().required(),
-  // });
-
-  // const { error } = schema.validate({
-  //   serviceProvider_id: req.body.serviceProvider_id,
-  //   serviceProvider_name: req.body.serviceProvider_name,
-  //   serviceProvider_email: req.body.serviceProvider_email,
-  //   description: req.body.description,
-  // });
-  // if (error) return res.status(400).send(error.details[0].message);
-  // console.log("validation pass");
-
-  // const complaint = new ServiceProviderComplaint({
-  //   serviceProvider_id: req.body.serviceProvider_id,
-  //   serviceProvider_name: req.body.serviceProvider_name,
-  //   serviceProvider_email: req.body.serviceProvider_email,
-  //   description: req.body.description,
-  //   isSolved: false,
-  // });
-  // await complaint.save();
-
-  // res.send(complaint);
-});
 module.exports = router;
