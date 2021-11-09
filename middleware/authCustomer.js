@@ -2,7 +2,7 @@ const jwt = require("jsonwebtoken");
 const config = require("config");
 
 module.exports = function (req, res, next) {
-  if (!config.get("requiresAuth")) return next();
+  console.log("middleware start");
 
   const token = req.header("x-auth-token");
   if (!token) return res.status(401).send("Access denied. No token provided.");
@@ -12,6 +12,7 @@ module.exports = function (req, res, next) {
     req.customer = decoded;
     if (req.customer.isServiceProvider)
       return res.status(403).send("Access denied.");
+    console.log("middleware work properly");
     next();
   } catch (ex) {
     res.status(400).send("Invalid token.");

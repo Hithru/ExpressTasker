@@ -3,10 +3,11 @@ const router = require("express").Router();
 const { Customer } = require("../models/customer.model");
 const ServiceProvider = require("../models/serviceprovider.model");
 const { Review } = require("../models/review.model");
+const authCustomer = require("../middleware/authCustomer");
 const mongoose = require("mongoose");
 const Joi = require("joi");
 
-router.post("/createReview", async (req, res) => {
+router.post("/createReview", authCustomer, async (req, res) => {
   console.log("data came to backend");
   console.log(req.body);
   const schema = Joi.object({
