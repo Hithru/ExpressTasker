@@ -78,6 +78,7 @@ describe("/Review", () => {
             status: "Finished",
             startTime: "2021-09-18T03:56:36.310+00:00",
           })
+          .set("x-auth-token", token)
           .then((res) => {
             // Save the cookie to use it later to retrieve the session
             orderData = res.body;
@@ -160,6 +161,7 @@ describe("/Review", () => {
             status: "Finished",
             startTime: "2021-09-18T03:56:36.310+00:00",
           })
+          .set("x-auth-token", token)
           .then((res) => {
             // Save the cookie to use it later to retrieve the session
             orderData = res.body;
@@ -243,6 +245,7 @@ describe("/Review", () => {
             status: "Finished",
             startTime: "2021-09-18T03:56:36.310+00:00",
           })
+          .set("x-auth-token", token)
           .then((res) => {
             // Save the cookie to use it later to retrieve the session
             orderData = res.body;
@@ -325,6 +328,7 @@ describe("/Review", () => {
             status: "Finished",
             startTime: "2021-09-18T03:56:36.310+00:00",
           })
+          .set("x-auth-token", token)
           .then((res) => {
             // Save the cookie to use it later to retrieve the session
             orderData = res.body;
@@ -407,6 +411,7 @@ describe("/Review", () => {
             status: "Finished",
             startTime: "2021-09-18T03:56:36.310+00:00",
           })
+          .set("x-auth-token", token)
           .then((res) => {
             // Save the cookie to use it later to retrieve the session
             orderData = res.body;

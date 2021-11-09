@@ -77,29 +77,8 @@ router.route("/createcomplaint").post((req, res) => {
     .save()
     .then(() => res.send(newCustomerComplaint))
     .catch((err) => res.status(404).json("Error: " + err));
-
-  // const schema = Joi.object({
-  //   customer_id: Joi.string().min(6).required(),
-  //   customer_name: Joi.string().min(6).required(),
-  //   customer_email: Joi.string().min(6).required(),
-  //   description: Joi.string().required(),
-  // });
-
-  // const { error } = schema.validate(req.body);
-  // if (error) return res.status(400).send(error.details[0].message);
-  // console.log("validation pass");
-
-  // const complaint = new CustomerComplaint({
-  //   customer_id: req.body.customer_id,
-  //   customer_name: req.body.customer_name,
-  //   customer_email: req.body.customer_email,
-  //   description: req.body.description,
-  //   isSolved: false,
-  // });
-  // complaint.save();
-
-  // res.send(complaint);
 });
+
 router.post("/:id", async (req, res) => {
   Customer.findById(req.params.id)
     .then((customer) => res.json(customer))

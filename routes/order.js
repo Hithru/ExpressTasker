@@ -1,13 +1,10 @@
-const express = require("express");
 const router = require("express").Router();
-const { Customer } = require("../models/customer.model");
-const ServiceProvider = require("../models/serviceprovider.model");
 const { Order } = require("../models/order.model");
 const authCustomer = require("../middleware/authCustomer");
-const mongoose = require("mongoose");
+const authServiceProvider = require("../middleware/authServiceProvider");
 const Joi = require("joi");
 
-router.post("/createOrder", async (req, res) => {
+router.post("/createOrder", authCustomer, async (req, res) => {
   console.log("data came to backend");
   const schema = Joi.object({
     customer_id: Joi.string().min(6).required(),
@@ -57,7 +54,7 @@ router.post("/details", async (req, res) => {
   res.send(order);
 });
 
-router.post("/serviceProvider", async (req, res) => {
+router.post("/serviceProvider", authServiceProvider, async (req, res) => {
   console.log(req.body.serviceProvider_id);
   const orders = await Order.find({
     serviceProvider_id: req.body.serviceProvider_id,
