@@ -63,7 +63,7 @@ export default class ServiceProviderOrderTable extends Component {
               <table className={classes.table}>
                 <thead>
                   <tr>
-                    <th>Service Provider</th>
+                    <th>Customer</th>
                     <th>Status</th>
                     <th>Amount</th>
                     <th>Start Date</th>
