@@ -7,23 +7,23 @@ const {
 const bcrypt = require("bcrypt");
 const Joi = require("joi");
 const multer = require("multer");
-const cloudinary = require('cloudinary').v2;
-const { CloudinaryStorage } = require('multer-storage-cloudinary');
+const cloudinary = require("cloudinary").v2;
+const { CloudinaryStorage } = require("multer-storage-cloudinary");
 const config = require("config");
-require("dotenv").config()
+require("dotenv").config();
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_NAME,
   api_key: process.env.CLOUDINARY_KEY,
-  api_secret: process.env.CLOUDINARY_SECRET
+  api_secret: process.env.CLOUDINARY_SECRET,
 });
 
 const storage = new CloudinaryStorage({
   cloudinary,
-  allowedFormats: ['jpg', 'png'],
+  allowedFormats: ["jpg", "png"],
   filename: function (req, file, cb) {
-    cb(null, file.originalname); 
-  }
+    cb(null, file.originalname);
+  },
 });
 
 const uploadCloud = multer({ storage });
@@ -108,10 +108,10 @@ router
   .route("/addProfilePicture")
   .post(uploadCloud.single("file"), (req, res, next) => {
     if (!req.file) {
-      next(new Error('No file uploaded!'));
+      next(new Error("No file uploaded!"));
       return;
     }
-   
+
     const serviceProviderName = req.body.serviceProviderName;
     const serviceProviderId = req.body.serviceProviderId;
     const profilePicture = req.file.path;
@@ -124,61 +124,61 @@ router
 
     newProfile
       .save()
-      .then(() => res.json(req.file.path ))
+      .then(() => res.json(req.file.path))
       .catch((err) => res.status(404).json("Error: " + err));
   });
 
+router.post("/createComplaint", async (req, res) => {
+  console.log("data came to backend");
+  const serviceProvider_id = req.body.serviceProvider_id;
+  const serviceProvider_name = req.body.serviceProvider_name;
+  const serviceProvider_email = req.body.serviceProvider_email;
+  const description = req.body.description;
+  const isSolved = false;
 
-  router.post("/createComplaint", async (req, res) => {
-    console.log("data came to backend");
-    const serviceProvider_id = req.body.serviceProvider_id;
-    const serviceProvider_name = req.body.serviceProvider_name;
-    const serviceProvider_email = req.body.serviceProvider_email;
-    const description = req.body.description;
-    const isSolved = false;
-  
-    const newServiceProviderComplaint = new ServiceProviderComplaint({
-      serviceProvider_name,
-      serviceProvider_id,
-      serviceProvider_email,
-      description,
-      isSolved,
-    });
-  
-    newServiceProviderComplaint
-      .save()
-      .then(() => res.send(newServiceProviderComplaint))
-      .catch((err) => res.status(404).json("Error: " + err));
-  
-    // const schema = Joi.object({
-    //   serviceProvider_id: Joi.string().min(6).required(),
-    //   serviceProvider_name: Joi.string().min(6).required(),
-    //   serviceProvider_email: Joi.string().min(6).required(),
-    //   description: Joi.string().required(),
-    // });
-  
-    // const { error } = schema.validate({
-    //   serviceProvider_id: req.body.serviceProvider_id,
-    //   serviceProvider_name: req.body.serviceProvider_name,
-    //   serviceProvider_email: req.body.serviceProvider_email,
-    //   description: req.body.description,
-    // });
-    // if (error) return res.status(400).send(error.details[0].message);
-    // console.log("validation pass");
-  
-    // const complaint = new ServiceProviderComplaint({
-    //   serviceProvider_id: req.body.serviceProvider_id,
-    //   serviceProvider_name: req.body.serviceProvider_name,
-    //   serviceProvider_email: req.body.serviceProvider_email,
-    //   description: req.body.description,
-    //   isSolved: false,
-    // });
-    // await complaint.save();
-  
-    // res.send(complaint);
+  const newServiceProviderComplaint = new ServiceProviderComplaint({
+    serviceProvider_name,
+    serviceProvider_id,
+    serviceProvider_email,
+    description,
+    isSolved,
   });
+
+  newServiceProviderComplaint
+    .save()
+    .then(() => res.send(newServiceProviderComplaint))
+    .catch((err) => res.status(404).json("Error: " + err));
+
+  // const schema = Joi.object({
+  //   serviceProvider_id: Joi.string().min(6).required(),
+  //   serviceProvider_name: Joi.string().min(6).required(),
+  //   serviceProvider_email: Joi.string().min(6).required(),
+  //   description: Joi.string().required(),
+  // });
+
+  // const { error } = schema.validate({
+  //   serviceProvider_id: req.body.serviceProvider_id,
+  //   serviceProvider_name: req.body.serviceProvider_name,
+  //   serviceProvider_email: req.body.serviceProvider_email,
+  //   description: req.body.description,
+  // });
+  // if (error) return res.status(400).send(error.details[0].message);
+  // console.log("validation pass");
+
+  // const complaint = new ServiceProviderComplaint({
+  //   serviceProvider_id: req.body.serviceProvider_id,
+  //   serviceProvider_name: req.body.serviceProvider_name,
+  //   serviceProvider_email: req.body.serviceProvider_email,
+  //   description: req.body.description,
+  //   isSolved: false,
+  // });
+  // await complaint.save();
+
+  // res.send(complaint);
+});
 
 router.post("/edit/:id", async (req, res) => {
+  console.log("backend");
   ServiceProvider.findById(req.params.id)
     .then(async (serviceProvider) => {
       serviceProvider.username = req.body.username;
@@ -190,14 +190,19 @@ router.post("/edit/:id", async (req, res) => {
       serviceProvider
         .save()
         .then(() => res.json("Service Provider Profile Updated..."))
-        .catch((err) => res.status(404).json("Error: " + err));
+        .catch((err) => {
+          console.log(err);
+          res.status(404).json("Error: " + err);
+        });
     })
     .catch((err) => res.status(404).json("Error: " + err));
 });
 
-router.route("/").post((req, res) => {
-  ServiceProvider.find()
-    .then((serviceProviders) => res.json(serviceProviders))
+router.route("/profile/:id").post((req, res) => {
+  Profile.find({ serviceProviderId: req.params.id.toString() })
+    .limit(1)
+    .sort({ $natural: -1 })
+    .then((profile) => res.json(profile))
     .catch((err) => res.status(404).json("Error: " + err));
 });
 
@@ -207,11 +212,9 @@ router.route("/:id").post((req, res) => {
     .catch((err) => res.status(404).json("Error: " + err));
 });
 
-router.route("/profile/:id").post((req, res) => {
-  Profile.find({ serviceProviderId: req.params.id.toString() })
-    .limit(1)
-    .sort({ $natural: -1 })
-    .then((profile) => res.json(profile))
+router.route("/").post((req, res) => {
+  ServiceProvider.find()
+    .then((serviceProviders) => res.json(serviceProviders))
     .catch((err) => res.status(404).json("Error: " + err));
 });
 

@@ -57,6 +57,33 @@ export default class Signup extends Component {
   }
 
   componentDidMount() {
+    const user = auth.getCurrentUser();
+
+    axios
+      .post(`${apiUrl}/serviceProvider/${user._id}`)
+      .then((response) => {
+        console.log(response.data);
+        this.setState({
+          serviceProviderDetails: response.data,
+        });
+        this.setState({ username: this.state.serviceProviderDetails.username });
+        this.setState({ skill: this.state.serviceProviderDetails.skills });
+        this.setState({ location: this.state.serviceProviderDetails.location });
+        this.setState({
+          description: this.state.serviceProviderDetails.description,
+        });
+        this.setState({ email: this.state.serviceProviderDetails.email });
+        this.setState({
+          contactNumber: this.state.serviceProviderDetails.contactNumber,
+        });
+        this.setState({
+          merchantId: this.state.serviceProviderDetails.merchantId,
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
     axios
       .post(`${apiUrl}/skill`)
       .then((response) => {
@@ -148,7 +175,8 @@ export default class Signup extends Component {
     };
 
     const user = auth.getCurrentUser();
-
+    console.log(serviceProvider);
+    console.log(`${apiUrl}/serviceProvider/edit/${user._id}`);
     axios
       .post(`${apiUrl}/serviceProvider/edit/${user._id}`, serviceProvider)
       .then((res) => {

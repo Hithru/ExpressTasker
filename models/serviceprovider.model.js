@@ -19,7 +19,6 @@ const serviceProviderSchema = new Schema(
     rating: { type: Number, required: true, min: 0, max: 5 },
     contactNumber: { type: Number, required: true },
     merchantId: { type: String },
-    profilePicture: { type: String, required: true },
     email: { type: String, required: true, minlength: 5, maxlength: 50 },
     password: { type: String, required: true, minlength: 5, maxlength: 1024 },
     isVerified: { type: Boolean, required: true },
