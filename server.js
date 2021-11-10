@@ -56,6 +56,8 @@ app.use("/search", searchRouter);
 app.use("/conversations", conversationRouter);
 app.use("/messages", messageRouter);
 
-app.listen(port, () => {
+const server = app.listen(port, () => {
   console.log(`Server is running on port: ${port}`);
 });
+
+module.exports = server;
