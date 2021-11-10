@@ -14,7 +14,7 @@ describe("/Customer", () => {
   describe("/signup ", () => {
     describe("/ POST", () => {
       it("should return 200 when customer signup Correctly", async () => {
-        agent
+        await agent
           .post("/customer/signup")
           .send({
             username: "Hithru De Alwis",
@@ -26,7 +26,7 @@ describe("/Customer", () => {
       });
 
       it("should return 400 when validation error happen", async () => {
-        agent
+        await agent
           .post("/customer/signup")
           .send({
             username: "Hit",
