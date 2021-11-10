@@ -24,19 +24,19 @@ router.route("/").post((req, res) => {
     .catch((err) => res.status(404).json("Error: " + err));
 });
 
-router.route("/edit/:id").post((req, res) => {
-  Skill.findById(req.params.id)
-    .then((skill) => {
-      skill.skillname = req.body.skillname;
-      skill.rating = Number(req.body.rating);
-      skill.isVerifed = req.body.isVerifed;
+// router.route("/edit/:id").post((req, res) => {
+//   Skill.findById(req.params.id)
+//     .then((skill) => {
+//       skill.skillname = req.body.skillname;
+//       skill.rating = Number(req.body.rating);
+//       skill.isVerifed = req.body.isVerifed;
 
-      skill
-        .save()
-        .then(() => res.json("Skill Updated..."))
-        .catch((err) => res.status(404).json("Error: " + err));
-    })
-    .catch((err) => res.status(404).json("Error: " + err));
-});
+//       skill
+//         .save()
+//         .then(() => res.json("Skill Updated..."))
+//         .catch((err) => res.status(404).json("Error: " + err));
+//     })
+//     .catch((err) => res.status(404).json("Error: " + err));
+// });
 
 module.exports = router;
