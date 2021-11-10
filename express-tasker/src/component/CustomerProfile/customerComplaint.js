@@ -15,9 +15,9 @@ export default class CustomerComplaint extends Component {
       customerDetails: [],
     };
   }
-  componentDidMount() {
+  async componentDidMount() {
     const user = auth.getCurrentUser();
-    axios
+    await axios
       .post(`${apiUrl}/customer/${user._id}`)
       .then((response) => {
         console.log(response.data);
@@ -36,21 +36,25 @@ export default class CustomerComplaint extends Component {
     });
   }
 
-  onSubmit(e) {
+  async onSubmit(e) {
     e.preventDefault();
 
     const customerComplaint = {
-      customer_id: this.state.customerDetails.username,
-      customer_name: this.state.customerDetails._id,
+      customer_id: this.state.customerDetails._id,
+      customer_name: this.state.customerDetails.username,
       customer_email: this.state.customerDetails.email,
       description: this.state.description,
     };
-
-    axios
-      .post(`${apiUrl}/customer/createComplaint`, customerComplaint)
+    console.log(customerComplaint);
+    console.log(`${apiUrl}/customer/createcomplaint`);
+    await axios
+      .post(`${apiUrl}/customer/createcomplaint`, customerComplaint)
       .then((res) => {
         console.log(res.data);
         window.location = "/";
+      })
+      .catch((error) => {
+        console.log(error);
       });
   }
 

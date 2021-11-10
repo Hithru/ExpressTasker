@@ -14,7 +14,7 @@ beforeEach(async () => {
 afterAll(async () => await db.close());
 
 describe("/Review", () => {
-  describe("/createReview ", () => {
+  describe("/createRating ", () => {
     describe("/ POST", () => {
       //No Token
       it("should return 401 when token is not set", async () => {
@@ -85,7 +85,7 @@ describe("/Review", () => {
           });
 
         await agent
-          .post("/review/createReview")
+          .post("/rating/createRating")
           .send({
             order_id: orderData._id,
             customer_id: customerDecoded._id,
@@ -93,7 +93,6 @@ describe("/Review", () => {
             serviceProvider_id: serviceDecoded._id,
             serviceProvider_name: serviceDecoded.username,
             rating: 5,
-            review: "Very Good Seller",
           })
           .expect(401);
       });
@@ -168,7 +167,7 @@ describe("/Review", () => {
           });
 
         await agent
-          .post("/review/createReview")
+          .post("/rating/createRating")
           .send({
             order_id: orderData._id,
             customer_id: customerDecoded._id,
@@ -176,9 +175,8 @@ describe("/Review", () => {
             serviceProvider_id: serviceDecoded._id,
             serviceProvider_name: serviceDecoded.username,
             rating: 5,
-            review: "Very Good Seller",
           })
-          .set("x-auth-token", serviceToken)
+          .set("x-auth-token", token)
           .expect(403);
       });
 
@@ -252,7 +250,7 @@ describe("/Review", () => {
           });
 
         await agent
-          .post("/review/createReview")
+          .post("/rating/createRating")
           .send({
             order_id: orderData._id,
             customer_id: customerDecoded._id,
@@ -260,14 +258,13 @@ describe("/Review", () => {
             serviceProvider_id: serviceDecoded._id,
             serviceProvider_name: serviceDecoded.username,
             rating: 5,
-            review: "Very Good Seller",
           })
           .set("x-auth-token", {})
           .expect(400);
       });
 
       //Correct Data
-      it("should return 200 when valid data to review send with token set", async () => {
+      it("should return 200 when valid data to rating send with token set", async () => {
         let token;
         await agent
           .post("/customer/signup")
@@ -335,7 +332,7 @@ describe("/Review", () => {
           });
 
         await agent
-          .post("/review/createReview")
+          .post("/rating/createRating")
           .send({
             order_id: orderData._id,
             customer_id: customerDecoded._id,
@@ -343,9 +340,8 @@ describe("/Review", () => {
             serviceProvider_id: serviceDecoded._id,
             serviceProvider_name: serviceDecoded.username,
             rating: 5,
-            review: "Very Good Seller",
           })
-          .set("x-auth-token", token)
+          .set("x-auth-token", serviceToken)
           .expect(200);
       });
 
@@ -418,7 +414,7 @@ describe("/Review", () => {
           });
 
         await agent
-          .post("/review/createReview")
+          .post("/rating/createRating")
           .send({
             order_id: orderData._id,
             customer_id: customerDecoded._id,
@@ -426,9 +422,8 @@ describe("/Review", () => {
             serviceProvider_id: serviceDecoded._id,
             serviceProvider_name: serviceDecoded.username,
             rating: "No Rating",
-            review: "Very Good Seller",
           })
-          .set("x-auth-token", token)
+          .set("x-auth-token", serviceToken)
           .expect(400);
       });
     });

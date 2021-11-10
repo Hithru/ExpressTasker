@@ -53,10 +53,10 @@ router.post("/signup", async (req, res) => {
   // if (error) return res.status(400).send(error.details[0].message);
   // console.log("validation pass");
 
-  // let service_provider =await ServiceProvider.findOne({ email: req.body.email });
+  let service_provider =await ServiceProvider.findOne({ email: req.body.email });
 
-  // if (service_provider) return res.status(400).send("User already registered.");
-  // console.log("user exist pass");
+  if (service_provider) return res.status(400).send("User already registered.");
+  console.log("user exist pass");
 
   const username = req.body.username;
   const skills = req.body.skill;
@@ -93,8 +93,8 @@ router.post("/signup", async (req, res) => {
 
   // serviceProvider
   //   .save()
-  //   .then(() => res.json("Service Provider signup successfully..."))
-  //   .catch((err) => res.status(404).json("Error: " + err));
+    // .then(() => res.json("Service Provider signup successfully..."))
+    // .catch((err) => res.status(404).json("Error: " + err));
 
   const token = serviceProvider.generateAuthToken();
   res
@@ -111,7 +111,7 @@ router
       next(new Error('No file uploaded!'));
       return;
     }
-   
+   console.log(req.file.path);
     const serviceProviderName = req.body.serviceProviderName;
     const serviceProviderId = req.body.serviceProviderId;
     const profilePicture = req.file.path;
@@ -179,6 +179,10 @@ router
   });
 
 router.post("/edit/:id", async (req, res) => {
+  let service_provider =await ServiceProvider.findOne({ email: req.body.email });
+
+  if (service_provider) return res.status(400).send("User already registered.");
+
   ServiceProvider.findById(req.params.id)
     .then(async (serviceProvider) => {
       serviceProvider.username = req.body.username;
