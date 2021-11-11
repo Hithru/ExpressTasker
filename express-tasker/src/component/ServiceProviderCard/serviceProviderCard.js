@@ -106,9 +106,7 @@ class ServiceProviderCard extends Component {
             <h5 class="hrate">Description :</h5>
           </div>
           <p>{this.state.serviceProviderDetails.description}</p>
-          <div className="rate">
-            <h5 class="hrate">Hourly rate : Rs . 500</h5>
-          </div>
+
           <div className="rate">
             <h5 class="location">
               Location : {this.state.serviceProviderDetails.location}
