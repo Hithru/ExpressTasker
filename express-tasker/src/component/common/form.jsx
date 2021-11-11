@@ -92,9 +92,21 @@ class Form extends Component {
       />
     );
   }
-  renderInput(name, label, type = "text") {
+  renderInput(name, label, type = "text", min = "") {
     const { data, errors } = this.state;
-
+    if (type === "datetime-local") {
+      return (
+        <Input
+          type={type}
+          name={name}
+          min={min}
+          value={data[name]}
+          label={label}
+          onChange={this.handleChange}
+          error={errors[name]}
+        />
+      );
+    }
     return (
       <Input
         type={type}
