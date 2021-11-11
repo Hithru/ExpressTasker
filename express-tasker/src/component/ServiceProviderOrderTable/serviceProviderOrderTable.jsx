@@ -83,13 +83,13 @@ export default class ServiceProviderOrderTable extends Component {
                         {item.status === "Pending" && (
                           <div>
                             <button
-                              className={`${classes.btn} btn-primary`}
+                              className={`${classes.btn} btn-primary rounded`}
                               onClick={() => this.handleAccept(item._id)}
                             >
                               Accept
                             </button>
                             <button
-                              className={`${classes.btn} btn-danger`}
+                              className={`${classes.btn} btn-danger rounded`}
                               onClick={() => this.handleCancel(item._id)}
                             >
                               Reject
@@ -99,14 +99,14 @@ export default class ServiceProviderOrderTable extends Component {
                         {item.status === "Open" && (
                           <div>
                             <button
-                              className={`${classes.btn} btn-success`}
+                              className={`${classes.btn} btn-success rounded`}
                               onClick={() => this.handleComplete(item._id)}
                             >
                               Mark Complete
                             </button>
 
                             <button
-                              className={`${classes.btn} btn-danger`}
+                              className={`${classes.btn} btn-danger rounded`}
                               onClick={() => this.handleCancel(item._id)}
                             >
                               Cancel
@@ -116,17 +116,17 @@ export default class ServiceProviderOrderTable extends Component {
                         {item.status === "Reviewing" && (
                           <div>
                             <button
-                              className={`${classes.btn} btn-info`}
+                              className={`${classes.btn} bg-lightBlue-900 active:bg-lightBlue-900 hover:bg-lightBlue-900 rounded`}
                               disabled
                             >
-                              Under Review
+                              Under Reviewing
                             </button>
                           </div>
                         )}
                         {item.status === "Rating" && (
                           <div>
                             <button
-                              className={`${classes.btn} btn-success`}
+                              className={`${classes.btn} btn-success rounded`}
                               onClick={() => this.handleComplete(item._id)}
                             >
                               Mark Complete
@@ -135,7 +135,7 @@ export default class ServiceProviderOrderTable extends Component {
                         )}
                         {item.status === "Closed" && (
                           <button
-                            className={`${classes.btn} btn-warning`}
+                            className={`${classes.btn} bg-orange-500 active:bg-orange-200 hover:bg-orange-200  rounded`}
                             disabled
                           >
                             Finished
@@ -143,7 +143,7 @@ export default class ServiceProviderOrderTable extends Component {
                         )}
                         {item.status === "Canceled" && (
                           <button
-                            className={`${classes.btn} btn-secondary`}
+                            className={`${classes.btn} btn-secondary rounded`}
                             disabled
                           >
                             Canceled

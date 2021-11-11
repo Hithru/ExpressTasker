@@ -4,7 +4,7 @@ import { getCustomerOrders, cancelOrder } from "../../services/orderService";
 import Pagination from "../common/pagination";
 import { paginate } from "../../utils/paginate";
 import classes from "./customerOrderTable.module.css";
-import "./customerOrderTable.module.css";
+import "./customerOrderTable.css";
 export default class CustomerOrderTable extends Component {
   constructor(props) {
     super(props);
@@ -71,7 +71,7 @@ export default class CustomerOrderTable extends Component {
                         {item.status === "Pending" && (
                           <div>
                             <button
-                              className={`${classes.btn} btn-danger`}
+                              className={`${classes.btn} btn-danger rounded`}
                               onClick={() => this.handleCancel(item._id)}
                             >
                               Cancel
@@ -81,14 +81,14 @@ export default class CustomerOrderTable extends Component {
                         {item.status === "Open" && (
                           <div>
                             <button
-                              className={`${classes.btn} btn-success`}
+                              className={`${classes.btn} btn-success rounded`}
                               onClick={() => this.handleComplete(item._id)}
                             >
                               Mark Complete
                             </button>
 
                             <button
-                              className={`${classes.btn} btn-danger`}
+                              className={`${classes.btn} btn-danger rounded`}
                               onClick={() => this.handleCancel(item._id)}
                             >
                               Cancel
@@ -98,7 +98,7 @@ export default class CustomerOrderTable extends Component {
                         {item.status === "Reviewing" && (
                           <div>
                             <button
-                              className={`${classes.btn} btn-success`}
+                              className={`${classes.btn} btn-success rounded`}
                               onClick={() => this.handleComplete(item._id)}
                             >
                               Mark Complete
@@ -108,7 +108,7 @@ export default class CustomerOrderTable extends Component {
                         {item.status === "Rating" && (
                           <div>
                             <button
-                              className={`${classes.btn} btn-info`}
+                              className={`${classes.btn} bg-lightBlue-900 active:bg-lightBlue-900 hover:bg-lightBlue-900 rounded `}
                               disabled
                             >
                               Under Rating
@@ -117,7 +117,7 @@ export default class CustomerOrderTable extends Component {
                         )}
                         {item.status === "Closed" && (
                           <button
-                            className={`${classes.btn} btn-warning`}
+                            className={`${classes.btn} bg-orange-500 active:bg-orange-200 hover:bg-orange-200  rounded`}
                             disabled
                           >
                             Finished
