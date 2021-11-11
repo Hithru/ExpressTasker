@@ -6,6 +6,7 @@ const Joi = require("joi");
 
 router.post("/createOrder", authCustomer, async (req, res) => {
   console.log("data came to backend");
+  console.log(req.body);
   const schema = Joi.object({
     customer_id: Joi.string().min(6).required(),
     customer_name: Joi.string().min(6).required(),
@@ -32,7 +33,7 @@ router.post("/createOrder", authCustomer, async (req, res) => {
     startTime: req.body.startTime,
   });
   await order.save();
-
+  console.log(order);
   res.send(order);
 });
 

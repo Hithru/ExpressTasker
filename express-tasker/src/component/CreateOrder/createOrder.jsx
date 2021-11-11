@@ -52,10 +52,7 @@ export default class CreateOrder extends Form {
 
   doSubmit = async () => {
     try {
-      console.log("work one");
       const response = await order.createOrder(this.state.data);
-      console.log("work here");
-
       window.location = "/customer-orders";
     } catch (ex) {
       if (ex.response && ex.response.status === 400) {
@@ -66,13 +63,23 @@ export default class CreateOrder extends Form {
     }
   };
 
+  disablePastDate = () => {
+    const today = new Date();
+    const dd = String(today.getDate() + 1).padStart(2, "0");
+    const mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
+    const yyyy = today.getFullYear();
+    return yyyy + "-" + mm + "-" + dd + "T00:00";
+  };
+
   render() {
+    const pastDate = this.disablePastDate();
+
     return (
       <div>
         <div className="signup-window">
           <div className="signup-form">
             <h2>Order Request</h2>
-            <form className="signup-form">
+            <div className="signup-form">
               <div className="email">
                 <label>Customer Name</label>
                 <input
@@ -89,11 +96,16 @@ export default class CreateOrder extends Form {
                   disabled
                 />
               </div>
-            </form>
-            <form onSubmit={this.doSubmit} className="signup-form">
+            </div>
+            <form onSubmit={this.handleSubmit} className="signup-form">
               {this.renderInput("description", "Description")}
-              {this.renderInput("amount", "Amount")}
-              {this.renderInput("startTime", "StarTime", "datetime-local")}
+              {this.renderInput("amount", "Amount", "number")}
+              {this.renderInput(
+                "startTime",
+                "StarTime",
+                "datetime-local",
+                pastDate
+              )}
               {this.renderButton("Create Request")}
             </form>
           </div>

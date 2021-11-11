@@ -25,7 +25,6 @@ import Messenger from "./component/Messenger/Messenger";
 
 export default (
   <Switch>
-    <Route exact path="/" component={LandingPage} />
     <Route path="/customer-signup" exact component={CustomerSignup} />
     <Route
       path="/service-provider-signup"
@@ -48,16 +47,12 @@ export default (
       exact
       component={EditServiceProviderProfile}
     />
-     <Route
+    <Route
       path="/service-provider-complaint"
       exact
       component={ServiceProviderComplaint}
     />
-    <Route
-      path="/customer-complaint"
-      exact
-      component={CustomerComplaint}
-    />
+    <Route path="/customer-complaint" exact component={CustomerComplaint} />
     <Route path="/search">
       {!auth.getCurrentUser() ? <LandingPage /> : <Search />}
     </Route>
@@ -82,5 +77,7 @@ export default (
     <Route path="/customer-review/:id" component={CustomerReview} />
     <Route path="/create-order/:id/:name" component={CreateOrder} />
     <Route path="/messenger" component={Messenger} />
+    <Route exact path="/" component={LandingPage} />
+    <Route path="/" component={LandingPage} />
   </Switch>
 );

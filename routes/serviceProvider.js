@@ -139,8 +139,8 @@ router.post("/createComplaint", async (req, res) => {
   const isSolved = false;
 
   const newServiceProviderComplaint = new ServiceProviderComplaint({
-    serviceProvider_name,
     serviceProvider_id,
+    serviceProvider_name,
     serviceProvider_email,
     description,
     isSolved,
