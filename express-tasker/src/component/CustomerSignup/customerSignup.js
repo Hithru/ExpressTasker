@@ -2,6 +2,7 @@ import React from "react";
 import Joi from "joi-browser";
 import Form from "../common/form";
 import user from "../../services/customerService";
+
 import auth from "../../services/customerAuth";
 import LandingPage_Reviews from "../LandingPage/LandingPage_Reviews";
 
@@ -71,8 +72,8 @@ export default class CustomerSignUp extends Form {
               {this.renderInput("email", "Email")}
               {this.renderInput("password", "Password", "password")}
               {this.renderInput("username", "UserName")}
-
               {this.renderSelect("location", "Location", this.state.location)}
+
               {this.renderButton("Register")}
             </form>
           </div>
