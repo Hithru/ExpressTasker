@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import Joi from "joi-browser";
 import Input from "./input";
 import Select from "./select";
+import ToolTip from "@material-ui/core/Tooltip";
+import HelpIcon from "@material-ui/icons/Help";
+import { Typography } from "@material-ui/core";
 
 import "./../CustomerSignup/customerSignup.css";
 
@@ -65,7 +68,24 @@ class Form extends Component {
       <Select
         name={name}
         value={data[name]}
-        label={label}
+        label={
+          <div>
+            {label}
+            <ToolTip
+              title={
+                <React.Fragment>
+                  <Typography color="inherit">
+                    Select the district you belongs to
+                  </Typography>
+                  <br></br>
+                  <em>{"Ex:- Colombo, Gampaha, Kandy"}</em>
+                </React.Fragment>
+              }
+            >
+              <HelpIcon />
+            </ToolTip>
+          </div>
+        }
         options={options}
         onChange={this.handleChange}
         error={errors[name]}
