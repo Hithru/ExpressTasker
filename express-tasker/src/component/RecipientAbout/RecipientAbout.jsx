@@ -85,6 +85,15 @@ const RecipientAbout = ({
       <div>
         <div className="cardUserName">{recipient?.username}</div>
         <div className="cardLocation">{recipient?.location}</div>
+        <div className="ratingSection">
+          <div className="cardRating">{recipient?.rating}</div>
+          <Rating
+            name="half-rating-read"
+            precision={0.1}
+            value={recipient != null ? recipient.rating : 0}
+            readOnly
+          />
+        </div>
       </div>
     );
   };
