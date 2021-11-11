@@ -3,6 +3,9 @@ import "./serviceProviderSignup.css";
 import auth from "../../services/customerAuth";
 import axios from "axios";
 import { Checkbox } from "@material-ui/core";
+import ToolTip from "@material-ui/core/Tooltip";
+import HelpIcon from "@material-ui/icons/Help";
+import { Typography } from "@material-ui/core";
 import { apiUrl } from "../../config.json";
 
 export default class Signup extends Component {
@@ -191,8 +194,25 @@ export default class Signup extends Component {
                 })}
               </form>
             </div>
+
             <div className="email">
-              <label>Location </label>
+              <label>
+                Location
+                <ToolTip
+                  title={
+                    <React.Fragment>
+                      <Typography color="inherit">
+                        Select the district you belongs to
+                      </Typography>
+                      <br></br>
+                      <em>{"Ex:- Colombo, Gampaha, Kandy"}</em>
+                    </React.Fragment>
+                  }
+                >
+                  <HelpIcon />
+                </ToolTip>
+              </label>
+
               <select
                 ref="userInput"
                 required
