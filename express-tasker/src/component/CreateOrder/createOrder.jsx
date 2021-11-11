@@ -92,7 +92,7 @@ export default class CreateOrder extends Form {
             </form>
             <form onSubmit={this.doSubmit} className="signup-form">
               {this.renderInput("description", "Description")}
-              {this.renderInput("amount", "Amount")}
+              {this.renderInput("amount", "Amount", "number")}
               {this.renderInput("startTime", "StarTime", "datetime-local")}
               {this.renderButton("Create Request")}
             </form>
