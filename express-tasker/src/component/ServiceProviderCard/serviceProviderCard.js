@@ -1,11 +1,9 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
 import axios from "axios";
-// import "../ServiceProviderProfile/ServiceProviderProfile.css";
 import contact from "../ServiceProviderProfile/contact.png";
 import auth from "../../services/customerAuth";
 import { apiUrl } from "../../config.json";
-import { ControlPointDuplicateOutlined } from "@material-ui/icons";
 import "./serviceprovidercard.css";
 import VerifiedUserIcon from "@material-ui/icons/VerifiedUser";
 

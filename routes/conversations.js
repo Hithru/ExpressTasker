@@ -26,6 +26,7 @@ router.post("/:userId", async (req, res) => {
   }
 });
 
+//getting specific conversation for both customer and serviceProvider
 router.post("/isThereConversation/:userId/:receiverId", async (req, res) => {
   try {
     const conversation = await Conversation.find({

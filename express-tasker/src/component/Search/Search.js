@@ -1,14 +1,11 @@
 import "./SearchPage.css";
 import { makeStyles } from "@material-ui/core/styles";
-import TouchRipple from "@material-ui/core/ButtonBase/TouchRipple";
 import { useEffect, useRef, useState } from "react";
 import Card from "@material-ui/core/Card";
-import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import { Box, ButtonGroup, TableRow } from "@material-ui/core";
-import { blue, purple, red } from "@material-ui/core/colors";
 import { TextField } from "@material-ui/core";
 import Rating from "@material-ui/lab/Rating";
 import { Switch } from "@material-ui/core";

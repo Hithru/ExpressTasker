@@ -9,7 +9,7 @@ import { useEffect, useRef, useState } from "react";
 import { AnnouncementRounded } from "@material-ui/icons";
 import { io } from "socket.io-client";
 import PaymentForm from "../PaymentForm/PaymentForm";
-import { Button } from "react-scroll";
+
 const axios = require("axios").default;
 
 const Messenger = () => {

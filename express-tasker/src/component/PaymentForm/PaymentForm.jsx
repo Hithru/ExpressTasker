@@ -55,30 +55,6 @@ const PaymentForm = ({
     }
   };
 
-  const submitPayment = () => {
-    return (
-      <div>
-        <input type="hidden" name="merchant_id" value="1218171"></input>
-        <input
-          type="hidden"
-          name="return_url"
-          value="http://localhost:3000/messenger"
-        ></input>
-        <input type="hidden" name="cancel_url" value="/messenger"></input>
-        <input type="hidden" name="notify_url" value="/messenger"></input>
-        <input type="text" name="items" value=""></input>
-        <input type="text" name="currency" value="LKR"></input>
-        <input type="text" name="first_name" value={customer.username}></input>
-        <input type="text" name="last_name" value=""></input>
-        <input type="text" name="email" value={customer.email}></input>
-        <input type="text" name="phone" value=""></input>
-        <input type="text" name="address" value=""></input>
-        <input type="text" name="city" value={customer.location}></input>
-        <input type="hidden" name="country" value="Sri Lanka"></input>
-      </div>
-    );
-  };
-
   var payment = {
     sandbox: true, // if the account is sandbox or real
     merchant_id: service_provider?.merchantId, // Replace your Merchant ID

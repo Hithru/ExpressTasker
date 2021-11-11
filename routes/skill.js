@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const Skill = require("../models/skill.model");
 
+//Adding a new service provider skill
 router.route("/add").post((req, res) => {
   const skillname = req.body.skillname;
   const rating = 0;
@@ -18,25 +19,11 @@ router.route("/add").post((req, res) => {
     .catch((err) => res.status(404).json("Error: " + err));
 });
 
+//Getting all the skils
 router.route("/").post((req, res) => {
   Skill.find()
     .then((skills) => res.json(skills))
     .catch((err) => res.status(404).json("Error: " + err));
 });
-
-// router.route("/edit/:id").post((req, res) => {
-//   Skill.findById(req.params.id)
-//     .then((skill) => {
-//       skill.skillname = req.body.skillname;
-//       skill.rating = Number(req.body.rating);
-//       skill.isVerifed = req.body.isVerifed;
-
-//       skill
-//         .save()
-//         .then(() => res.json("Skill Updated..."))
-//         .catch((err) => res.status(404).json("Error: " + err));
-//     })
-//     .catch((err) => res.status(404).json("Error: " + err));
-// });
 
 module.exports = router;

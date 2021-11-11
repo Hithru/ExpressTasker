@@ -2,7 +2,6 @@ import "./conversation.css";
 
 import { apiUrl } from "../../config.json";
 import { useEffect, useRef, useState } from "react";
-import { getServiceProviderOrders } from "../../services/orderService";
 import Avatar from "@material-ui/core/Avatar";
 const axios = require("axios").default;
 

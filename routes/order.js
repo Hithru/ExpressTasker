@@ -4,6 +4,7 @@ const authCustomer = require("../middleware/authCustomer");
 const authServiceProvider = require("../middleware/authServiceProvider");
 const Joi = require("joi");
 
+//Create Order by Customer
 router.post("/createOrder", authCustomer, async (req, res) => {
   console.log("data came to backend");
   console.log(req.body);
@@ -37,6 +38,7 @@ router.post("/createOrder", authCustomer, async (req, res) => {
   res.send(order);
 });
 
+//Getting all orders Belong to specific customer
 router.post("/customer", authCustomer, async (req, res) => {
   console.log(req.body.customer_id);
   const orders = await Order.find({ customer_id: req.body.customer_id }).sort(
@@ -47,6 +49,7 @@ router.post("/customer", authCustomer, async (req, res) => {
   res.send(orders);
 });
 
+//Getting specific order details
 router.post("/details", async (req, res) => {
   console.log(req.body.order_id);
   const order = await Order.find({ _id: req.body.order_id });
@@ -55,6 +58,7 @@ router.post("/details", async (req, res) => {
   res.send(order);
 });
 
+//Getting All orders belong to service Provider
 router.post("/serviceProvider", authServiceProvider, async (req, res) => {
   console.log(req.body.serviceProvider_id);
   const orders = await Order.find({
@@ -88,6 +92,7 @@ router.post("/commonUnclosedOrders", async (req, res) => {
   res.send(orders);
 });
 
+//Cancel a specific order
 router.post("/cancel", async (req, res) => {
   console.log(req.body.order_id);
   const order = await Order.findByIdAndUpdate(req.body.order_id, {
@@ -100,6 +105,7 @@ router.post("/cancel", async (req, res) => {
   res.send(order);
 });
 
+//Accepting a specific order
 router.post("/accept", async (req, res) => {
   console.log(req.body.order_id);
   const order = await Order.findByIdAndUpdate(req.body.order_id, {
@@ -112,6 +118,7 @@ router.post("/accept", async (req, res) => {
   res.send(order);
 });
 
+//Order status change after customer review
 router.post("/review", async (req, res) => {
   console.log(req.body.order_id);
   const keep_order = await Order.find({
@@ -133,6 +140,7 @@ router.post("/review", async (req, res) => {
   }
 });
 
+//Order status change after service provider rating
 router.post("/rating", async (req, res) => {
   console.log(req.body.order_id);
   const keep_order = await Order.find({

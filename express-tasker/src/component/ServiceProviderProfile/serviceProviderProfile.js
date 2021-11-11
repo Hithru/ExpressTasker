@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
 import "./ServiceProviderProfile.css";
-import profilepicture from "./profile.jpg";
 import auth from "../../services/serviceProviderAuth";
 import contact from "./contact.png";
 import { apiUrl } from "../../config.json";
@@ -17,7 +16,7 @@ class ServiceProviderProfile extends Component {
       serviceProviderDetails: [],
       profilePhotoDetails: [],
       profilePicture: "",
-      secureUrl:"",
+      secureUrl: "",
       profilepicture:
         "https://www.pngkey.com/png/full/72-729716_user-avatar-png-graphic-free-download-icon.png",
     };
@@ -68,7 +67,7 @@ class ServiceProviderProfile extends Component {
       this.state.serviceProviderDetails.username
     );
     formData.append("serviceProviderId", this.state.serviceProviderDetails._id);
-    formData.append("file", this.state.profilePicture,"file");
+    formData.append("file", this.state.profilePicture, "file");
 
     axios
       .post(`${apiUrl}/serviceProvider/addProfilePicture`, formData)
@@ -80,22 +79,6 @@ class ServiceProviderProfile extends Component {
         window.location = "/service-provider-profile";
       });
   }
-
-  // imageHandler = (e) => {
-  //   const reader = new FileReader();
-  //   reader.onload = () => {
-  //     if (reader.readyState === 2) {
-  //       this.setState({
-  //         profilepicture: reader.result,
-  //       });
-  //     }
-  //   };
-  //   reader.readAsDataURL(e.target.files[0]);
-
-  //   axios
-  //     .post(`${apiUrl}/serviceProvider/addProfilePicture`, profilepicture)
-  //     .then((res) => console.log(res.data));
-  // };
 
   render() {
     const { profilepicture } = this.state.profilePicture;
@@ -111,10 +94,8 @@ class ServiceProviderProfile extends Component {
                 {this.state.profilePhotoDetails.map((value) => {
                   return (
                     <div>
-                      
                       <img
                         id="profilepic"
-                        // src={this.state.secureUrl}
                         src={
                           true
                             ? value.profilePicture
@@ -127,13 +108,6 @@ class ServiceProviderProfile extends Component {
                     </div>
                   );
                 })}
-
-                {/* <input type="file" name="image-upload" id="input" accept="image/*" onChange={this.imageHandler}/>
-                            <div className="label">
-                                <label htmlFor="input" className="image-upload">
-                                <i id="upload" className="fa fa-upload"></i>
-                                </label>
-                            </div> */}
 
                 <form
                   onSubmit={this.onSubmit}
@@ -181,7 +155,6 @@ class ServiceProviderProfile extends Component {
             <h5 class="hrate">Description :</h5>
           </div>
           <p>{this.state.serviceProviderDetails.description}</p>
-          {/* <div className="rate"><h5 class="hrate">Hourly rate : Rs.500</h5></div> */}
           <div className="rate">
             <h5 class="location">
               Location : {this.state.serviceProviderDetails.location}

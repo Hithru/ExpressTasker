@@ -1,12 +1,10 @@
-const express = require("express");
 const router = require("express").Router();
 const { Customer } = require("../models/customer.model");
-const ServiceProvider = require("../models/serviceprovider.model");
 const authServiceProvider = require("../middleware/authServiceProvider");
 const { Rating } = require("../models/rating.model");
-const mongoose = require("mongoose");
 const Joi = require("joi");
 
+//Create New rating and update customer Rating
 router.post("/createRating", authServiceProvider, async (req, res) => {
   console.log("data came to backend");
   console.log(req.body);
@@ -43,20 +41,14 @@ router.post("/createRating", authServiceProvider, async (req, res) => {
 
   customerRatings.forEach(function (arrayItem) {
     sumRating += arrayItem.rating;
-    // console.log(arrayItem.rating);
   });
 
-  // console.log(customerRatings);
-  // console.log(numberOfRatings);
-  // console.log(sumRating);
   const finalNewRating = (sumRating / numberOfRatings).toFixed(1);
 
   const customer = await Customer.findByIdAndUpdate(req.body.customer_id, {
     rating: finalNewRating,
   });
 
-  // console.log(finalNewRating);
-  // console.log(customer);
   res.send(rating);
 });
 

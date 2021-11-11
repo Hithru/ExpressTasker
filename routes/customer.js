@@ -1,11 +1,11 @@
-const express = require("express");
 const router = require("express").Router();
 const { Customer } = require("../models/customer.model");
 const { CustomerComplaint } = require("../models/customerComplaint.model");
-const authCustomer = require("../middleware/authCustomer");
+
 const bcrypt = require("bcrypt");
 const Joi = require("joi");
 
+//Customer Signup
 router.post("/signup", async (req, res) => {
   const schema = Joi.object({
     username: Joi.string().min(6).required(),
@@ -50,12 +50,14 @@ router.post("/signup", async (req, res) => {
     .send("well Done");
 });
 
+//Getting a customer with id in body
 router.route("/get-customer").post((req, res) => {
   Customer.find({ _id: req.body.user_id }).then((data) => {
     res.send(data[0]);
   });
 });
 
+//Customer Complaint Creation
 router.route("/createcomplaint").post((req, res) => {
   console.log("data came to backend");
   console.log(req.body);
@@ -79,6 +81,7 @@ router.route("/createcomplaint").post((req, res) => {
     .catch((err) => res.status(404).json("Error: " + err));
 });
 
+//Getting a specific
 router.post("/:id", async (req, res) => {
   Customer.findById(req.params.id)
     .then((customer) => res.json(customer))

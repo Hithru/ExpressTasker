@@ -2,11 +2,10 @@ const Joi = require("joi");
 const bcrypt = require("bcrypt");
 const ServiceProvider = require("../models/serviceprovider.model");
 const { Customer } = require("../models/customer.model");
-const mongoose = require("mongoose");
 const express = require("express");
 const router = express.Router();
-const jwt = require("jsonwebtoken");
 
+//Customer Login
 router.post("/customer", async (req, res) => {
   const schema = Joi.object({
     email: Joi.string().min(6).required().email(),
@@ -29,6 +28,7 @@ router.post("/customer", async (req, res) => {
   res.send(token);
 });
 
+//Service Provider Login
 router.post("/serviceProvider", async (req, res) => {
   const schema = Joi.object({
     email: Joi.string().min(6).required().email(),
