@@ -6,7 +6,7 @@ const config = require("config");
 
 // Pass supertest agent for each test
 const agent = request.agent(app);
-console.log(agent);
+
 // Setup connection to the database
 beforeAll(async () => await db.connect());
 beforeEach(async () => await db.clear());
@@ -77,13 +77,8 @@ describe("/Customer", () => {
 
         const customerDecoded = jwt.verify(token, config.get("jwtPrivateKey"));
 
-        await agent
-        .post(`/customer/${customerDecoded._id}`)
-        .expect(200);
-
-    });
-
-
+        await agent.post(`/customer/${customerDecoded._id}`).expect(200);
+      });
     });
   });
 });

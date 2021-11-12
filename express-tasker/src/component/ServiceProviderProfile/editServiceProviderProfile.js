@@ -62,7 +62,6 @@ export default class Signup extends Component {
     axios
       .post(`${apiUrl}/serviceProvider/${user._id}`)
       .then((response) => {
-        console.log(response.data);
         this.setState({
           serviceProviderDetails: response.data,
         });
@@ -175,8 +174,7 @@ export default class Signup extends Component {
     };
 
     const user = auth.getCurrentUser();
-    console.log(serviceProvider);
-    console.log(`${apiUrl}/serviceProvider/edit/${user._id}`);
+
     axios
       .post(`${apiUrl}/serviceProvider/edit/${user._id}`, serviceProvider)
       .then((res) => {

@@ -61,7 +61,6 @@ class LandingPage_TaskCards extends Component {
         const lst = response.data;
         setState1(lst);
         setLoadingStateFalse();
-        console.log(this.state.loading);
       })
       .catch(function (error) {
         console.log(error);
@@ -111,7 +110,6 @@ class LandingPage_TaskCards extends Component {
           </div>
           <div class="skills">
             {this.renderSkillSet(this.getSkillRows(card.skills.slice(0, 5), 2))}
-            {console.log(this.getSkillRows(card.skills.slice(0, 3), 2))}
           </div>
         </div>
       );
@@ -143,7 +141,6 @@ class LandingPage_TaskCards extends Component {
   };
 
   renderSkillSet = (skills) => {
-    console.log(skills);
     if (typeof skills !== "undefined") {
       return (
         <div
@@ -160,7 +157,6 @@ class LandingPage_TaskCards extends Component {
   };
 
   renderSkillChip = (skill) => {
-    console.log(skill);
     if (typeof skill !== "undefined") {
       return (
         <Chip

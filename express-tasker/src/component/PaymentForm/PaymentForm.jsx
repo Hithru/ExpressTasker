@@ -37,8 +37,7 @@ const PaymentForm = ({
         customer_id: customer_id,
         service_provider_id: service_provider_id,
       });
-      console.log("Hi");
-      console.log(res.data);
+
       setUnclosedOrders(res.data);
     } catch (err) {
       console.log(err);
@@ -48,7 +47,7 @@ const PaymentForm = ({
   const getServiceProvider = async (user_id) => {
     try {
       const res = await axios.post(apiUrl + "/serviceProvider/" + user_id);
-      console.log(res.data);
+
       setServiceProvider(res.data);
     } catch (err) {
       console.log(err);

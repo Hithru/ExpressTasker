@@ -5,7 +5,7 @@ const jwt = require("jsonwebtoken");
 const config = require("config");
 // Pass supertest agent for each test
 const agent = request.agent(app);
-console.log(agent);
+
 // Setup connection to the database
 beforeAll(async () => await db.connect());
 beforeEach(async () => {

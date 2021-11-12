@@ -23,7 +23,6 @@ const Message = ({ message, own, currentUser }) => {
         user_id: user_id,
       });
       setSenderName(res.data.username);
-      console.log(senderName);
     } catch (err) {
       console.log(err);
     }

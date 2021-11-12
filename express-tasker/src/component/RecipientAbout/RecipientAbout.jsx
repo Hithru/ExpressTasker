@@ -33,8 +33,6 @@ const RecipientAbout = ({
       if (typeof res.data != "object") {
         setRecipient(null);
       }
-
-      console.log(res);
     } catch (err) {
       console.log(err);
     }
@@ -43,7 +41,7 @@ const RecipientAbout = ({
   const getServiceProvider = async (user_id) => {
     try {
       const res = await axios.post(apiUrl + "/serviceProvider/" + user_id);
-      console.log(res);
+
       setRecipient(res.data);
     } catch (err) {
       console.log(err);
@@ -124,7 +122,7 @@ const RecipientAbout = ({
         {conversation != null ? "Recipient Info" : ""}
       </div>
       {recipient == null && conversation != null ? <CircularProgress /> : ""}
-      {console.log(recipient)}
+
       {recipient != null ? (
         <div className="infoCard">
           {isRecipientServiceProvider

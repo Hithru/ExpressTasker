@@ -18,7 +18,6 @@ export default class Signup extends Component {
     axios
       .post(`${apiUrl}/customer/${user._id}`)
       .then((response) => {
-        console.log(response.data);
         this.setState({
           customerDetails: response.data,
         });

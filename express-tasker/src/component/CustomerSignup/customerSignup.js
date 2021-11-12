@@ -50,7 +50,7 @@ export default class CustomerSignUp extends Form {
   doSubmit = async () => {
     try {
       const response = await user.register(this.state.data);
-      console.log("work");
+
       auth.loginWithJwt(response.headers["x-auth-token"]);
       window.location = "/";
     } catch (ex) {

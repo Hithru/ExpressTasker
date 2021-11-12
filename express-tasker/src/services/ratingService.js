@@ -4,9 +4,6 @@ import { apiUrl } from "../config.json";
 const apiCreateEndpoint = apiUrl + "/rating/createRating";
 
 export function createRating(rating) {
-  console.log("data came service");
-  console.log(rating);
-
   return http.post(apiCreateEndpoint, {
     order_id: rating.order_id,
     serviceProvider_id: rating.serviceProvider_id,

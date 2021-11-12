@@ -23,9 +23,8 @@ export default class ServiceProviderOrderTable extends Component {
   }
 
   async componentDidMount() {
-    console.log("user");
     const user = auth.getCurrentUser();
-    console.log(user);
+
     const ordersArray = await getServiceProviderOrders(user._id);
     const orders = ordersArray.data;
     this.setState({ user, orders });

@@ -6,8 +6,6 @@ const Joi = require("joi");
 
 //Create Order by Customer
 router.post("/createOrder", authCustomer, async (req, res) => {
-  console.log("data came to backend");
-  console.log(req.body);
   const schema = Joi.object({
     customer_id: Joi.string().min(6).required(),
     customer_name: Joi.string().min(6).required(),
@@ -21,7 +19,6 @@ router.post("/createOrder", authCustomer, async (req, res) => {
 
   const { error } = schema.validate(req.body);
   if (error) return res.status(400).send(error.details[0].message);
-  console.log("validation pass");
 
   const order = new Order({
     customer_id: req.body.customer_id,
@@ -34,38 +31,32 @@ router.post("/createOrder", authCustomer, async (req, res) => {
     startTime: req.body.startTime,
   });
   await order.save();
-  console.log(order);
+
   res.send(order);
 });
 
 //Getting all orders Belong to specific customer
 router.post("/customer", authCustomer, async (req, res) => {
-  console.log(req.body.customer_id);
   const orders = await Order.find({ customer_id: req.body.customer_id }).sort(
     "-status"
   );
 
-  console.log(orders);
   res.send(orders);
 });
 
 //Getting specific order details
 router.post("/details", async (req, res) => {
-  console.log(req.body.order_id);
   const order = await Order.find({ _id: req.body.order_id });
 
-  console.log(order);
   res.send(order);
 });
 
 //Getting All orders belong to service Provider
 router.post("/serviceProvider", authServiceProvider, async (req, res) => {
-  console.log(req.body.serviceProvider_id);
   const orders = await Order.find({
     serviceProvider_id: req.body.serviceProvider_id,
   }).sort("-status");
 
-  console.log(orders);
   res.send(orders);
 });
 
@@ -94,7 +85,6 @@ router.post("/commonUnclosedOrders", async (req, res) => {
 
 //Cancel a specific order
 router.post("/cancel", async (req, res) => {
-  console.log(req.body.order_id);
   const order = await Order.findByIdAndUpdate(req.body.order_id, {
     status: "Canceled",
   });
@@ -107,7 +97,6 @@ router.post("/cancel", async (req, res) => {
 
 //Accepting a specific order
 router.post("/accept", async (req, res) => {
-  console.log(req.body.order_id);
   const order = await Order.findByIdAndUpdate(req.body.order_id, {
     status: "Open",
   });
@@ -120,11 +109,10 @@ router.post("/accept", async (req, res) => {
 
 //Order status change after customer review
 router.post("/review", async (req, res) => {
-  console.log(req.body.order_id);
   const keep_order = await Order.find({
     _id: req.body.order_id,
   });
-  console.log(keep_order[0].status);
+
   if (keep_order[0].status === "Reviewing") {
     const order = await Order.findByIdAndUpdate(req.body.order_id, {
       status: "Closed",
@@ -142,11 +130,10 @@ router.post("/review", async (req, res) => {
 
 //Order status change after service provider rating
 router.post("/rating", async (req, res) => {
-  console.log(req.body.order_id);
   const keep_order = await Order.find({
     _id: req.body.order_id,
   });
-  console.log(keep_order[0].status);
+
   if (keep_order[0].status === "Rating") {
     const order = await Order.findByIdAndUpdate(req.body.order_id, {
       status: "Closed",
@@ -183,7 +170,6 @@ router.post("/paymentListen", async (req, res) => {
   );
   if (md5sig == checking_value) {
     res.send("OK");
-    console.log("Payment OK");
   }
 });
 

@@ -184,10 +184,7 @@ export default class Signup extends Component {
                 {this.state.skills.map(function (skillname) {
                   return (
                     <div>
-                      <Checkbox
-                        value={skillname}
-                        // onChange={this.onChangeSkills}
-                      />
+                      <Checkbox value={skillname} />
                       {skillname}
                     </div>
                   );

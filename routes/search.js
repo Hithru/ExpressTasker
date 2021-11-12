@@ -24,7 +24,7 @@ router.route("/service").post((req, res) => {
     ],
   }).then((data) => {
     service_providers = data;
-    // console.log(service_providers);
+
     area_service_providers = getAreaServiceProviders(
       service_providers,
       location
@@ -32,7 +32,7 @@ router.route("/service").post((req, res) => {
     const desc_rating_list = sort(area_service_providers).desc(
       (service_provider) => service_provider.rating
     );
-    console.log(desc_rating_list);
+
     res.send(desc_rating_list);
   });
   const getAreaServiceProviders = (service_providers, location) => {

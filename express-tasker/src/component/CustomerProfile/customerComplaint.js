@@ -20,7 +20,6 @@ export default class CustomerComplaint extends Component {
     await axios
       .post(`${apiUrl}/customer/${user._id}`)
       .then((response) => {
-        console.log(response.data);
         this.setState({
           customerDetails: response.data,
         });
@@ -45,12 +44,10 @@ export default class CustomerComplaint extends Component {
       customer_email: this.state.customerDetails.email,
       description: this.state.description,
     };
-    console.log(customerComplaint);
-    console.log(`${apiUrl}/customer/createcomplaint`);
+
     await axios
       .post(`${apiUrl}/customer/createcomplaint`, customerComplaint)
       .then((res) => {
-        console.log(res.data);
         window.location = "/";
       })
       .catch((error) => {

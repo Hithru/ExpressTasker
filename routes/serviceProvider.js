@@ -34,7 +34,6 @@ router.post("/signup", async (req, res) => {
   });
 
   if (service_provider) return res.status(400).send("User already registered.");
-  console.log("user exist pass");
 
   const username = req.body.username;
   const skills = req.body.skill;
@@ -64,7 +63,6 @@ router.post("/signup", async (req, res) => {
     isVerified,
   });
 
-  console.log(serviceProvider);
   const salt = await bcrypt.genSalt(10);
   serviceProvider.password = await bcrypt.hash(serviceProvider.password, salt);
   await serviceProvider.save();
@@ -85,7 +83,7 @@ router
       next(new Error("No file uploaded!"));
       return;
     }
-    console.log(req.file.path);
+
     const serviceProviderName = req.body.serviceProviderName;
     const serviceProviderId = req.body.serviceProviderId;
     const profilePicture = req.file.path;
@@ -104,7 +102,6 @@ router
 
 //Service Provider Create Complaint
 router.post("/createComplaint", async (req, res) => {
-  console.log("data came to backend");
   const serviceProvider_id = req.body.serviceProvider_id;
   const serviceProvider_name = req.body.serviceProvider_name;
   const serviceProvider_email = req.body.serviceProvider_email;
@@ -145,7 +142,6 @@ router.post("/edit/:id", async (req, res) => {
         .save()
         .then(() => res.json("Service Provider Profile Updated..."))
         .catch((err) => {
-          console.log(err);
           res.status(404).json("Error: " + err);
         });
     })

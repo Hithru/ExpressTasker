@@ -22,7 +22,6 @@ class ServiceProviderCard extends Component {
     axios
       .post(`${apiUrl}/serviceProvider/${id}`)
       .then((response) => {
-        console.log(response.data);
         this.setState({
           serviceProviderDetails: response.data,
         });
@@ -44,7 +43,7 @@ class ServiceProviderCard extends Component {
           "/" +
           service_provider_id
       ); //get conversaton list specific to user and service provider
-      console.log(res_1.data.length);
+
       if (res_1.data.length <= 0) {
         const res_2 = await axios.post(apiUrl + "/conversations/", {
           senderId: user_id,

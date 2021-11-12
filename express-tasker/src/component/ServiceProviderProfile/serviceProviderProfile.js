@@ -84,7 +84,7 @@ class ServiceProviderProfile extends Component {
     const { profilepicture } = this.state.profilePicture;
     const skillArray = [this.state.serviceProviderDetails.skills];
     const s = skillArray[0];
-    console.log(this.state.secureUrl);
+
     return (
       <div className="App">
         <section className="container-banner">

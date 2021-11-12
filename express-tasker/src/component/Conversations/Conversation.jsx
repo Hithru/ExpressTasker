@@ -28,7 +28,6 @@ const Conversation = ({ conversation, currentUser, currentChat }) => {
         user_id: user_id,
       });
       setSecondParty(res.data);
-      console.log(res);
     } catch (err) {
       console.log(err);
     }
@@ -36,7 +35,7 @@ const Conversation = ({ conversation, currentUser, currentChat }) => {
   const getServiceProvider = async (user_id) => {
     try {
       const res = await axios.post(apiUrl + "/serviceProvider/" + user_id);
-      console.log(res);
+
       setSecondParty(res.data);
     } catch (err) {
       console.log(err);

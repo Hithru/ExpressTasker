@@ -20,7 +20,6 @@ export default class ServiceProviderComplaint extends Component {
     axios
       .post(`${apiUrl}/serviceProvider/${user._id}`)
       .then((response) => {
-        console.log(response.data);
         this.setState({
           serviceProviderDetails: response.data,
         });
@@ -45,8 +44,6 @@ export default class ServiceProviderComplaint extends Component {
       serviceProvider_email: this.state.serviceProviderDetails.email,
       description: this.state.description,
     };
-
-    console.log(serviceProviderComplaint);
 
     axios
       .post(

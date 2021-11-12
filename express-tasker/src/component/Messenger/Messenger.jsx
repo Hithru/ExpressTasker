@@ -43,9 +43,7 @@ const Messenger = () => {
 
   useEffect(() => {
     socket.current.emit("addUser", user._id);
-    socket.current.on("getUsers", (users) => {
-      console.log(users);
-    });
+    socket.current.on("getUsers", (users) => {});
   }, [user]);
 
   useEffect(() => {
@@ -77,7 +75,6 @@ const Messenger = () => {
           `https://expresstasker.herokuapp.com/serviceProvider/${receiverId}`
         )
         .then((response) => {
-          console.log(response.data);
           setServiceProvider(response.data);
         })
         .catch((error) => {
@@ -155,7 +152,6 @@ const Messenger = () => {
                   currentUser={user}
                   currentChat={currentChat}
                 />
-                {console.log(currentChat)}
               </div>
             ))}
           </div>

@@ -138,12 +138,10 @@ const Search = () => {
 
   const handleLocationChange = (event) => {
     setLocation(event.target.value);
-    // console.log(event.target.value);
   };
 
   const handleUseDefaultLocation = (event) => {
     setUseDefaultLocation(event.target.checked);
-    // console.log(event.target.checked);
   };
   const handleSearchTermChange = (event) => {
     setSearchTerm(event.target.value);
@@ -167,13 +165,12 @@ const Search = () => {
     control_var = 0;
     if (search_term.length <= 0) {
       setServiceProviders([]);
-      console.log("hi");
+
       setIsLoading(false);
       setOpen(true);
     } else {
       if (search_critiria == 0) {
         searchService(use_default_location, search_term, location);
-        console.log(0); //Search for a service should be implemented
       } else if (search_critiria == 1) {
         searchServiceProvider(search_term);
       } else {
@@ -185,7 +182,6 @@ const Search = () => {
 
   const searchService = (use_default_location, search_term, location) => {
     if (use_default_location) {
-      // console.log(user);
       axios
         .post(apiUrl + "/search/service", {
           service: search_term,
@@ -208,7 +204,7 @@ const Search = () => {
         })
         .then(function (response) {
           const lst = response.data;
-          // console.log(response.data);
+
           setServiceProviders(lst);
           setIsLoading(false);
           handleScroll();
@@ -252,7 +248,6 @@ const Search = () => {
         user_id: user_id,
       })
       .then(function (response) {
-        // console.log(response.data);
         const lst = response.data;
         user = lst;
       })
@@ -285,7 +280,6 @@ const Search = () => {
 
   const locationDropDown = () => {
     if (!use_default_location) {
-      console.log(use_default_location);
       return (
         <Select
           className={classes.dropdown}

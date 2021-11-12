@@ -6,8 +6,6 @@ const Joi = require("joi");
 
 //Create New rating and update customer Rating
 router.post("/createRating", authServiceProvider, async (req, res) => {
-  console.log("data came to backend");
-  console.log(req.body);
   const schema = Joi.object({
     order_id: Joi.string().min(6).required(),
     customer_id: Joi.string().min(6).required(),
@@ -19,7 +17,6 @@ router.post("/createRating", authServiceProvider, async (req, res) => {
 
   const { error } = schema.validate(req.body);
   if (error) return res.status(400).send(error.details[0].message);
-  console.log("validation pass");
 
   const rating = new Rating({
     order_id: req.body.order_id,

@@ -16,12 +16,10 @@ router.post("/signup", async (req, res) => {
 
   const { error } = schema.validate(req.body);
   if (error) return res.status(400).send(error.details[0].message);
-  console.log("validation pass");
 
   let customer = await Customer.findOne({ email: req.body.email });
 
   if (customer) return res.status(400).send("User already registered.");
-  console.log("user exist pass");
 
   const username = req.body.username;
   const email = req.body.email.toLowerCase();
@@ -37,7 +35,6 @@ router.post("/signup", async (req, res) => {
     password,
   });
 
-  console.log(customer);
   const salt = await bcrypt.genSalt(10);
   customer.password = await bcrypt.hash(customer.password, salt);
   await customer.save();
@@ -59,8 +56,6 @@ router.route("/get-customer").post((req, res) => {
 
 //Customer Complaint Creation
 router.route("/createcomplaint").post((req, res) => {
-  console.log("data came to backend");
-  console.log(req.body);
   const customer_id = req.body.customer_id;
   const customer_name = req.body.customer_name;
   const customer_email = req.body.customer_email;

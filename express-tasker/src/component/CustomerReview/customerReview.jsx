@@ -24,7 +24,7 @@ export default class CustomerReview extends Component {
       const order_id = this.props.match.params.id;
 
       const { data: order } = await getOrder(order_id);
-      console.log(order);
+
       const serviceProvider_id = order[0].serviceProvider_id;
       const serviceProvider_name = order[0].serviceProvider_name;
       const customer_id = order[0].customer_id;
@@ -64,7 +64,7 @@ export default class CustomerReview extends Component {
   handleChange = ({ currentTarget: input }) => {
     const data = { ...this.state.data };
     data[input.name] = input.value;
-    console.log(data);
+
     this.setState({ data });
   };
 

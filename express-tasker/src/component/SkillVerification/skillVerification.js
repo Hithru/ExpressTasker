@@ -22,7 +22,6 @@ export default class SkillVerificationRequest extends Component {
     axios
       .post(`${apiUrl}/serviceProvider/${user._id}`)
       .then((response) => {
-        console.log(response.data);
         this.setState({
           serviceProviderDetails: response.data,
         });
@@ -58,8 +57,6 @@ export default class SkillVerificationRequest extends Component {
     formData.append("description", this.state.description);
     formData.append("attachments", this.state.attachments);
 
-    console.log(formData);
-
     const skillVerification = {
       serviceProviderName: this.state.serviceProviderDetails.username,
       serviceProviderId: this.state.serviceProviderDetails._id,
@@ -69,14 +66,11 @@ export default class SkillVerificationRequest extends Component {
     };
 
     axios.post(`${apiUrl}/skillVerification/send`, formData).then((res) => {
-      console.log(res.data);
       window.location = "/service-provider-profile";
     });
   }
 
   render() {
-    // const skillArray=[this.state.serviceProviderDetails.skills]
-
     return (
       <div className="signup-window">
         <div className="signup-form">
@@ -104,7 +98,6 @@ export default class SkillVerificationRequest extends Component {
                 required
                 className="form-control"
                 filename="attachments"
-                // value={this.state.attachments}
                 onChange={this.onChangeAttachments}
               />
             </div>
